@@ -1,5 +1,6 @@
 import fr from "../../../assets/fr.png";
 import bee from "../../../assets/bee.png";
+import increase from "../../../assets/increase.png";
 
 const Main = () => {
   return (
@@ -26,7 +27,7 @@ const Main = () => {
           <div className="errend-wrapper">
             <div className="circle circle-yellow"></div>
             <div className="errend-txt">General improvements</div>
-            <img src={fr} alt="feature request" className="errend-img" />
+            <img src={increase} alt="feature request" className="errend-img" />
           </div>
         </section>
         <section className="section-three">

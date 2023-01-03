@@ -5,7 +5,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   return (
     <>
-      <main>
+      <main className="main-form">
         <div className="form-wrapper">
           <h1 className="txt-300">
             Fill in the information to login
@@ -20,7 +20,9 @@ const LoginForm = () => {
               Password
             </label>
             <input id="password" type="password" required />
-            <button type="submit">Log in</button>
+            <button type="submit" onClick={() => navigate("/dashboard")}>
+              Log in
+            </button>
           </form>
           <p className="txt-200">
             Don't have an account? Create one{" "}
