@@ -1,6 +1,6 @@
-@use "./style/_mixins.scss" as m;
-@use "./pages/homepage/style/homepage";
-@use "./pages/login/style/login";
+@use "./style/mixins" as m;
+@use "./pages/loggedout/homepage/style/homepage";
+@use "./pages/loggedout/login/style/login";
 
 * {
   margin: 0;

@@ -1,4 +1,4 @@
-import logo from "../../assets/improveMeLogo.png";
+import logo from "../../../assets/improveMeLogo.png";
 import { FiInstagram } from "react-icons/fi";
 import { AiOutlineFacebook } from "react-icons/ai";
 import { TfiTwitter } from "react-icons/tfi";

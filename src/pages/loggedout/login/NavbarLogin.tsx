@@ -1,4 +1,4 @@
-import logo from "../../assets/improveMeLogo.png";
+import logo from "../../../assets/improveMeLogo.png";
 
 const NavbarLogin = () => {
   return (

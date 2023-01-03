@@ -1,5 +1,5 @@
-import fr from "../../assets/fr.png";
-import bee from "../../assets/bee.png";
+import fr from "../../../assets/fr.png";
+import bee from "../../../assets/bee.png";
 
 const Main = () => {
   return (

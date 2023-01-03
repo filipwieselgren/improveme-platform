@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import logo from "../../assets/ImproveMe.png";
+import logo from "../../../assets/ImproveMe.png";
 
 const LoginForm = () => {
   const navigate = useNavigate();
