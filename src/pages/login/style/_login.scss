@@ -1,0 +1,75 @@
+.navbar-login {
+  padding: 3rem;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3em;
+  width: fit-content;
+
+  h1 {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+  }
+  .improveme-face {
+    width: 4rem;
+    margin-left: 10px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .form-label {
+      margin-top: 1rem;
+      font-weight: 300;
+      margin-bottom: 0.2rem;
+    }
+
+    input {
+      padding: 0.5rem;
+    }
+
+    button {
+      background-color: #f8fafb;
+      cursor: pointer;
+      width: 50%;
+      padding: 1rem 2rem;
+      box-shadow: 1px 1px 2px #333;
+      border-radius: 5px;
+      border: none;
+      margin-top: 1.5rem;
+      align-self: center;
+
+      &:hover {
+        box-shadow: 0.5px 0.5px 2px #333;
+        cursor: pointer;
+      }
+
+      &:active {
+        -webkit-box-shadow: inset 0px 0px 4px #c1c1c1;
+        -moz-box-shadow: inset 0px 0px 4px #c1c1c1;
+        box-shadow: inset 0px 0px 4px #c1c1c1;
+        outline: none;
+      }
+    }
+  }
+
+  p {
+    margin-top: 2rem;
+  }
+
+  .create-account {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

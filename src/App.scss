@@ -1,5 +1,6 @@
 @use "./style/_mixins.scss" as m;
 @use "./pages/homepage/style/homepage";
+@use "./pages/login/style/login";
 
 * {
   margin: 0;
@@ -37,4 +38,9 @@ a {
 
 .txt-400 {
   @include m.txt-400;
+}
+
+.nav-logo {
+  width: 12rem;
+  margin-left: 2rem;
 }
