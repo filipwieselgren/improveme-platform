@@ -32,3 +32,37 @@ li {
 .txt-400 {
   @include m.txt-400;
 }
+
+.home-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem;
+
+  img {
+    width: 12rem;
+    margin-left: 2rem;
+  }
+
+  button {
+    padding: 0.8rem 4rem;
+    background-color: #f8fafb00;
+    cursor: pointer;
+    box-shadow: 1px 1px 2px #333;
+    border-radius: 5px;
+    border: solid 0.5px;
+    margin-right: 8rem;
+
+    &:hover {
+      box-shadow: 0.5px 0.5px 2px #333;
+      cursor: pointer;
+    }
+
+    &:active {
+      -webkit-box-shadow: inset 0px 0px 4px #c1c1c1;
+      -moz-box-shadow: inset 0px 0px 4px #c1c1c1;
+      box-shadow: inset 0px 0px 4px #c1c1c1;
+      outline: none;
+    }
+  }
+}
