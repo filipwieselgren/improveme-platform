@@ -81,6 +81,7 @@
 
         .errend-txt {
           margin: 0.5rem;
+          font-weight: 300;
         }
 
         .errend-img {
@@ -132,6 +133,10 @@ footer {
         font-weight: 200;
         font-size: 1.2rem;
       }
+    }
+
+    .react-icon {
+      font-size: 1.8rem;
     }
   }
 }
