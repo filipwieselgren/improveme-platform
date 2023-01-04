@@ -7,10 +7,7 @@ app.use(cors());
 const sectionModel = require("../models/Section.js");
 
 router.post("/section", async (req, res) => {
-  const section = {
-    section: "part2",
-  };
-  const createPart = new sectionModel(section);
+  const createPart = new sectionModel(req.body);
 
   await createPart.save();
 

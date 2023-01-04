@@ -10,6 +10,7 @@ import BugReports from "../../pages/loggedin/bugreports/BugReports";
 import CreatePart from "../buttons/CreatePart";
 import { useEffect, useState } from "react";
 import IErrends from "../../models/IErrends";
+import CreatePartForm from "../wrappers/CreatePartForm";
 
 const LoggedinMain = () => {
   const navigate = useNavigate();
@@ -20,17 +21,21 @@ const LoggedinMain = () => {
     getGeneralImprovements: [],
   });
 
+  const [createPart, setCreatePart] = useState<boolean>(false);
+
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/errend")
       .then((res) => res.json())
       .then((data) => setErrend(data));
   }, []);
 
-  console.log(errend);
-
+  const tooglePart = () => {
+    setCreatePart(!createPart);
+  };
   return (
     <>
       <div className="wrapper">
+        {createPart ? <CreatePartForm tooglePart={tooglePart} /> : <></>}
         <nav className="side-nav">
           <img
             src={face}
@@ -66,9 +71,10 @@ const LoggedinMain = () => {
         </nav>
         <div className="topnav-wrapper">
           <nav className="top-nav"></nav>
+
           <main className="main-wrapper">
             <div className="create-part-btn-wrapper">
-              <CreatePart />
+              <CreatePart tooglePart={tooglePart} />
             </div>
             {location.pathname === "/dashboard" ? (
               <Dashboard errend={errend} />

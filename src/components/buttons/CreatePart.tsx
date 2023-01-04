@@ -1,9 +1,10 @@
-const CreatePart = () => {
-  const handleCreatePart = () => {
-    console.log("CreatePart");
-  };
+interface ICreatePart {
+  tooglePart(): void;
+}
+
+const CreatePart = (props: ICreatePart) => {
   return (
-    <button className="create-part-btn" onClick={handleCreatePart}>
+    <button className="create-part-btn" onClick={() => props.tooglePart()}>
       + Create Part
     </button>
   );
