@@ -8,10 +8,25 @@ import FeatureRequests from "../../pages/loggedin/featurerequests/FeatureRequest
 import GeneralImprovements from "../../pages/loggedin/generalimprovements/GeneralImprovements";
 import BugReports from "../../pages/loggedin/bugreports/BugReports";
 import CreatePart from "../buttons/CreatePart";
+import { useEffect, useState } from "react";
+import IErrends from "../../models/IErrends";
 
 const LoggedinMain = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [errend, setErrend] = useState<IErrends>({
+    getBugReports: [],
+    getFeatureRequests: [],
+    getGeneralImprovements: [],
+  });
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/v1/errend")
+      .then((res) => res.json())
+      .then((data) => setErrend(data));
+  }, []);
+
+  console.log(errend);
 
   return (
     <>
@@ -56,7 +71,7 @@ const LoggedinMain = () => {
               <CreatePart />
             </div>
             {location.pathname === "/dashboard" ? (
-              <Dashboard />
+              <Dashboard errend={errend} />
             ) : location.pathname === "/feature-requests" ? (
               <FeatureRequests />
             ) : location.pathname === "/general-improvements" ? (

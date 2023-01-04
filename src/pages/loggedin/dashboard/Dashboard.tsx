@@ -3,8 +3,46 @@ import PageTitle from "../../../components/wrappers/PageTitle";
 import bee from "../../../assets/bee.png";
 import fr from "../../../assets/fr.png";
 import gi from "../../../assets/increase.png";
+import IErrends from "../../../models/IErrends";
+import IFeatureRequest from "../../../models/IFeatureRequest";
+import { useEffect, useState } from "react";
+import { IBugReport } from "../../../models/IBugReport";
+import IGeneralImprovements from "../../../models/IGeneralImprovements";
 
-const Dashboard = () => {
+interface IDashboard {
+  errend: IErrends;
+}
+
+const Dashboard = (props: IDashboard) => {
+  const [fixedFeaturesRequests, setFixedFeaturesRequests] = useState<any>([]);
+  const [fixedBugReports, setFixedBugReports] = useState<any>([]);
+  const [fixedGeneralImprovements, setFixedGeneralImprovements] = useState<any>(
+    []
+  );
+
+  useEffect(() => {
+    const getFixedFeaturesRequests = props.errend.getFeatureRequests.filter(
+      (fr: any) => fr.status === "done"
+    );
+
+    const getFixedBugReports = props.errend.getBugReports.filter(
+      (br: IBugReport) => br.status === "done"
+    );
+
+    const getFixedGeneralImprovements =
+      props.errend.getGeneralImprovements.filter(
+        (gi: IGeneralImprovements) => gi.status === "done"
+      );
+
+    setFixedFeaturesRequests(getFixedFeaturesRequests);
+    setFixedBugReports(getFixedBugReports);
+    setFixedGeneralImprovements(getFixedGeneralImprovements);
+  }, [
+    props.errend.getBugReports,
+    props.errend.getFeatureRequests,
+    props.errend.getGeneralImprovements,
+  ]);
+
   return (
     <div className="dashboard-wrapper">
       <PageTitle text={"Welcome Filip"} />
@@ -13,9 +51,21 @@ const Dashboard = () => {
           <h4>You have fixed</h4>
         </div>
         <div className="cards-dashboard">
-          <PartCard img={fr} title={"200"} info={"Feature Requests"} />
-          <PartCard img={gi} title={"54"} info={"General Improvements"} />
-          <PartCard img={bee} title={"223"} info={"Bug Reports"} />
+          <PartCard
+            img={fr}
+            title={fixedFeaturesRequests.length}
+            info={"Feature Requests"}
+          />
+          <PartCard
+            img={gi}
+            title={fixedGeneralImprovements.length}
+            info={"General Improvements"}
+          />
+          <PartCard
+            img={bee}
+            title={fixedBugReports.length}
+            info={"Bug Reports"}
+          />
         </div>
       </div>
 
