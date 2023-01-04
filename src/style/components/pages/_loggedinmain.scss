@@ -1,0 +1,65 @@
+.nav-logo {
+  width: 12rem;
+  margin-left: 2rem;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.side-nav {
+  height: 100vh;
+  border-right: 0.1px solid #333;
+  padding: 2rem;
+  flex-wrap: nowrap;
+  width: fit-content;
+  background-color: rgba(254, 225, 188, 0.62);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+
+  .face {
+    width: 5rem;
+    cursor: pointer;
+  }
+
+  .list-wrapper {
+    padding-top: 2rem;
+
+    .li-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 5rem;
+      cursor: pointer;
+      img {
+        width: 3rem;
+        margin: auto 0;
+      }
+      li {
+        font-size: 1.2rem;
+        font-weight: 300;
+        padding-top: 0.5rem;
+      }
+    }
+  }
+}
+
+.topnav-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.top-nav {
+  height: 50px;
+  box-shadow: 0 1px 5px rgb(51, 51, 51);
+}
+
+.main-wrapper {
+  height: 100%;
+  padding: 4rem 10%;
+}

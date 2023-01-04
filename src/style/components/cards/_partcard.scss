@@ -1,0 +1,31 @@
+.card-border {
+  border: 0.5px solid #333;
+  border-radius: 5px;
+  height: 75px;
+  flex-grow: 1;
+  max-width: 30%;
+  min-width: 30%;
+
+  .title-card-wrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding-top: 1rem;
+
+    .card-img {
+      width: 2rem;
+      position: absolute;
+      left: 5%;
+    }
+
+    .card-title {
+      font-size: 2rem;
+      font-weight: 200;
+    }
+  }
+
+  .card-info {
+    text-align: center;
+    padding: 1rem 0;
+  }
+}

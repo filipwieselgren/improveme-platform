@@ -54,7 +54,7 @@ const CreatePartForm = (props: ICreatePartForm) => {
 
         {success ? (
           <div className="success-wrapper">
-            <h3>Your sections has been created</h3>
+            <h3>Your section has been created</h3>
 
             <img src={logo} alt="Logo image" />
           </div>
