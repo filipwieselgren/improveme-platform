@@ -56,12 +56,14 @@
     }
 
     .submit-section {
-      padding: 0.8rem 4rem;
+      // padding: 0.8rem 4rem;
       background-color: #ffffff;
       cursor: pointer;
       box-shadow: 1px 1px 2px #333;
       border-radius: 5px;
       border: none;
+      width: 40%;
+      height: 30px;
 
       &:hover {
         box-shadow: 0.5px 0.5px 2px #333;

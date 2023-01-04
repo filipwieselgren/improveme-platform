@@ -11,6 +11,7 @@ import CreatePart from "../buttons/CreatePart";
 import { useEffect, useState } from "react";
 import IErrends from "../../models/IErrends";
 import CreatePartForm from "../wrappers/CreatePartForm";
+import { VscTriangleLeft } from "react-icons/vsc";
 
 const LoggedinMain = () => {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ const LoggedinMain = () => {
   });
 
   const [createPart, setCreatePart] = useState<boolean>(false);
+  const [menu, setMenu] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/errend")
@@ -32,11 +34,18 @@ const LoggedinMain = () => {
   const tooglePart = () => {
     setCreatePart(!createPart);
   };
+
+  const openMenu = () => {
+    setMenu(!menu);
+  };
   return (
     <>
       <div className="wrapper">
         {createPart ? <CreatePartForm tooglePart={tooglePart} /> : <></>}
-        <nav className="side-nav">
+        <nav className={menu ? "menu-open side-nav" : "side-nav"}>
+          <div className="closenav-wrapper" onClick={openMenu}>
+            <VscTriangleLeft />
+          </div>
           <img
             src={face}
             alt="face"
@@ -70,9 +79,15 @@ const LoggedinMain = () => {
           </div>
         </nav>
         <div className="topnav-wrapper">
-          <nav className="top-nav"></nav>
+          <nav className="top-nav">
+            <div className="open-menu" onClick={openMenu}>
+              <div className="line"></div>
+              <div className="line"></div>
+              <div className="line"></div>
+            </div>
+          </nav>
 
-          <main className="main-wrapper">
+          <main className="loggedin-main-wrapper">
             <div className="create-part-btn-wrapper">
               <CreatePart tooglePart={tooglePart} />
             </div>

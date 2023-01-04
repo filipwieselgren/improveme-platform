@@ -64,7 +64,6 @@ const CreatePartForm = (props: ICreatePartForm) => {
             <input
               type="text"
               id="create-part"
-              placeholder="e.g. Features Requests"
               onChange={(e) => createSection(e)}
             />
             <button className="submit-section" onClick={(e) => sendFetch(e)}>
