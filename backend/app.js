@@ -8,8 +8,10 @@ app.use(cors());
 app.use(express.json());
 
 const allErrends = require("./routes/AllErrendsRoute.js");
+const postSection = require("./routes/Sections");
 
 app.use("/api/v1", allErrends);
+app.use("/api/v1", postSection);
 
 const port = 8000;
 app.listen(port, () => {
