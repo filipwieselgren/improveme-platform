@@ -7,6 +7,7 @@ import Dashboard from "../../pages/loggedin/dashboard/Dashboard";
 import FeatureRequests from "../../pages/loggedin/featurerequests/FeatureRequests";
 import GeneralImprovements from "../../pages/loggedin/generalimprovements/GeneralImprovements";
 import BugReports from "../../pages/loggedin/bugreports/BugReports";
+import CreatePart from "../buttons/CreatePart";
 
 const LoggedinMain = () => {
   const navigate = useNavigate();
@@ -51,6 +52,9 @@ const LoggedinMain = () => {
         <div className="topnav-wrapper">
           <nav className="top-nav"></nav>
           <main className="main-wrapper">
+            <div className="create-part-btn-wrapper">
+              <CreatePart />
+            </div>
             {location.pathname === "/dashboard" ? (
               <Dashboard />
             ) : location.pathname === "/feature-requests" ? (
