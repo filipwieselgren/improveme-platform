@@ -9,11 +9,10 @@ import IGeneralImprovements from "../../models/IGeneralImprovements";
 interface ITicketList {
   errend: IFeatureRequest[] | IGeneralImprovements[];
   errendTxt: string;
-  AssignedFr(email: string, errandId: string): void;
+  patchList(email: string, errandId: string, endpoint: string): void;
 }
 
 const TicketList = (props: ITicketList) => {
-  const [toggleDropDown, setToggleDropDown] = useState(false);
   const [user, setUser] = useState<IUser[]>(users);
   const [email, setEmail] = useState<string>("");
 
@@ -32,9 +31,6 @@ const TicketList = (props: ITicketList) => {
     },
   ]);
 
-  const handleDropDown = () => {
-    setToggleDropDown(!toggleDropDown);
-  };
   return (
     <>
       <table>
@@ -75,7 +71,13 @@ const TicketList = (props: ITicketList) => {
                         <>
                           <div
                             key={u.id}
-                            onClick={() => props.AssignedFr(u.email, e._id)}
+                            onClick={() =>
+                              props.patchList(
+                                u.email,
+                                e._id,
+                                "assignfeaturerequest"
+                              )
+                            }
                           >
                             {u.email}
                           </div>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import gi from "../../../assets/increase-color.png";
 import TicketList from "../../../components/lists/TicketList";
 import PageTitle from "../../../components/wrappers/PageTitle";
@@ -6,7 +7,7 @@ import IFeatureRequest from "../../../models/IFeatureRequest";
 
 interface IProp {
   errend: IErrends;
-  AssignedFr(email: string, errandId: string): void;
+  patchList(email: string, errandId: string, endpoint: string): void;
 }
 
 const GeneralImprovements = (props: IProp) => {
@@ -18,7 +19,7 @@ const GeneralImprovements = (props: IProp) => {
         <TicketList
           errend={props.errend.getGeneralImprovements}
           errendTxt={"Improvement"}
-          AssignedFr={props.AssignedFr}
+          patchList={props.patchList}
         />
       </div>
     </div>

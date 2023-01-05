@@ -36,11 +36,16 @@ const LoggedinMain = () => {
     },
   ]);
 
+  const [assignedTo, setAssignedTo] = useState({
+    email: "",
+    id: "",
+    endpoint: "",
+  });
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/errend")
       .then((res) => res.json())
       .then((data) => setErrend(data));
-  }, []);
+  }, [assignedTo]);
 
   useEffect(() => {
     fetch("http://localhost:8080/api/v1/section")
@@ -48,23 +53,32 @@ const LoggedinMain = () => {
       .then((data) => setParts(data));
   }, []);
 
+  const patchList = async (
+    email: string,
+    errandId: string,
+    endpoint: string
+  ) => {
+    await fetch(`http://localhost:8000/api/v1/${endpoint}/${errandId}`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        mode: "no-cors",
+      },
+      body: JSON.stringify({ assignedTo: email }),
+    });
+    setAssignedTo({
+      email: "",
+      id: "",
+      endpoint: "",
+    });
+  };
+
   const AssignedFr = async (email: string, errandId: string) => {
     console.log("trigger");
     const assignedTo = {
       assignedTo: email,
     };
-    await fetch(
-      `http://localhost:8000/api/v1/assignfeaturerequest/${errandId}`,
-      {
-        method: "PATCH",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          mode: "no-cors",
-        },
-        body: JSON.stringify(assignedTo),
-      }
-    );
   };
 
   const tooglePart = () => {
@@ -149,10 +163,10 @@ const LoggedinMain = () => {
               <FeatureRequests
                 parts={parts}
                 errend={errend}
-                AssignedFr={AssignedFr}
+                patchList={patchList}
               />
             ) : location.pathname === "/general-improvements" ? (
-              <GeneralImprovements errend={errend} AssignedFr={AssignedFr} />
+              <GeneralImprovements errend={errend} patchList={patchList} />
             ) : location.pathname === "/bug-reports" ? (
               <BugReports />
             ) : (

@@ -21,16 +21,16 @@ const Dashboard = (props: IDashboard) => {
 
   useEffect(() => {
     const getFixedFeaturesRequests = props.errend.getFeatureRequests.filter(
-      (fr: IFeatureRequest) => fr.status === "done"
+      (fr: IFeatureRequest) => fr.status === "Done"
     );
 
     const getFixedBugReports = props.errend.getBugReports.filter(
-      (br: IBugReport) => br.status === "done"
+      (br: IBugReport) => br.status === "Done"
     );
 
     const getFixedGeneralImprovements =
       props.errend.getGeneralImprovements.filter(
-        (gi: IGeneralImprovements) => gi.status === "done"
+        (gi: IGeneralImprovements) => gi.status === "Done"
       );
 
     setFixedFeaturesRequests(getFixedFeaturesRequests.length);

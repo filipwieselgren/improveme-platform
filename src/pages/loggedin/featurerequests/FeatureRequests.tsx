@@ -5,11 +5,12 @@ import PageTitle from "../../../components/wrappers/PageTitle";
 import TicketList from "../../../components/lists/TicketList";
 import IErrends from "../../../models/IErrends";
 import IFeatureRequest from "../../../models/IFeatureRequest";
+import { useEffect, useState } from "react";
 
 interface IProp {
   parts: IParts[];
   errend: IErrends;
-  AssignedFr(email: string, errandId: string): void;
+  patchList(email: string, errandId: string, endpoint: string): void;
 }
 
 const FeatureRequests = (props: IProp) => {
@@ -22,7 +23,7 @@ const FeatureRequests = (props: IProp) => {
           <TicketList
             errend={props.errend.getFeatureRequests}
             errendTxt={"Request"}
-            AssignedFr={props.AssignedFr}
+            patchList={props.patchList}
           />
         </div>
       </div>
