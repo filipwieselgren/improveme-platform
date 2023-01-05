@@ -18,6 +18,7 @@ table {
 .td {
   text-align: center;
   padding: 1rem 0;
+  margin: auto 0;
 }
 
 .td-checkbox {
@@ -44,6 +45,15 @@ table {
   cursor: pointer;
 }
 
+.status {
+  min-width: 50px;
+  max-width: 50px;
+}
+
+.email {
+  min-width: 100px;
+  max-width: 100px;
+}
 .done {
   background-color: rgba(119, 189, 86, 0.62);
 }
@@ -63,8 +73,9 @@ table {
 
 .dropdown {
   position: relative;
-  display: flex;
-  justify-content: center;
+
+  text-align: center;
+  width: 100%;
 }
 
 .dropdown-content {
