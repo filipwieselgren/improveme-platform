@@ -1,4 +1,5 @@
 interface IFeatureRequest {
+  _id: string;
   description: string;
   solvesWhat: string;
   part: string;

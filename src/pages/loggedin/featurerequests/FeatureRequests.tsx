@@ -17,7 +17,10 @@ const FeatureRequests = (props: IProp) => {
         <PageTitle text={"Feature Requests"} img={fr} />
         <div className="second-title-wrapper">
           <h4>Approved</h4>
-          <TicketList errend={props.errend} errendTxt={"Request"} />
+          <TicketList
+            errend={props.errend.getFeatureRequests}
+            errendTxt={"Request"}
+          />
         </div>
       </div>
     </>

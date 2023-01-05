@@ -1,4 +1,5 @@
 export interface IBugReport {
+  _id: string;
   description: string;
   background: string;
   part: string;

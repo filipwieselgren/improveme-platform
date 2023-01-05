@@ -1,6 +1,30 @@
+table {
+  //   border-collapse: collapse;
+  width: 100%;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  font-weight: 200;
+  max-height: 5vh;
+  overflow: scroll;
+
+  tr > th {
+    font-weight: 300;
+  }
+}
+
 .td {
   text-align: center;
-  padding: 1.5rem 0;
+  padding: 1rem 0;
+}
+
+.td-checkbox {
+  .checkbox {
+    border-radius: 10px;
+  }
+}
+.td-id {
+  width: 5px;
+  overflow: scroll;
 }
 .tr-main {
   border-top: 1px solid;
@@ -27,20 +51,6 @@
 
 .issue {
   background-color: rgba(197, 107, 102, 0.62);
-}
-
-table {
-  //   border-collapse: collapse;
-  width: 100%;
-  margin-top: 2rem;
-  font-size: 1.5rem;
-  font-weight: 200;
-  max-height: 5vh;
-  overflow: scroll;
-
-  tr > th {
-    font-weight: 300;
-  }
 }
 
 .dropbtn {

@@ -127,7 +127,7 @@ const LoggedinMain = () => {
             ) : location.pathname === "/feature-requests" ? (
               <FeatureRequests parts={parts} errend={errend} />
             ) : location.pathname === "/general-improvements" ? (
-              <GeneralImprovements />
+              <GeneralImprovements errend={errend} />
             ) : location.pathname === "/bug-reports" ? (
               <BugReports />
             ) : (

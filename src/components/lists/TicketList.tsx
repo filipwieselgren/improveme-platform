@@ -3,9 +3,11 @@ import { BsTrash } from "react-icons/bs";
 import { useState } from "react";
 import { IUser } from "../../models/IUser";
 import { users } from "../../data/user";
+import IFeatureRequest from "../../models/IFeatureRequest";
+import IGeneralImprovements from "../../models/IGeneralImprovements";
 
 interface ITicketList {
-  errend: IErrends;
+  errend: IFeatureRequest[] | IGeneralImprovements[];
   errendTxt: string;
 }
 
@@ -36,34 +38,34 @@ const TicketList = (props: ITicketList) => {
       <table>
         <tr className="tr-title">
           <th></th>
-          <th>Id</th>
           <th>Section</th>
           <th>{props.errendTxt}</th>
           <th>Assigned to</th>
           <th>Status</th>
           <th></th>
         </tr>
-        {props.errend.getFeatureRequests.map((fr) => {
-          return fr.approved === true ? (
+        {props.errend.map((e) => {
+          return e.approved === true ? (
             <tr
+              key={e._id}
               className={
-                fr.status === "Done"
+                e.status === "Done"
                   ? "tr-main done"
-                  : fr.status === "In progress"
+                  : e.status === "In progress"
                   ? "tr-main in-progress"
                   : "tr-main issue"
               }
+              id={e._id}
             >
-              <td className="td">
-                <input type="checkbox" />
+              <td className="td td-checkbox">
+                <input type="checkbox" className="checkbox" value={e._id} />
               </td>
-              <td className="td">{1}</td>
-              <td className="td">{fr.part}</td>
-              <td className="td request">{fr.description}</td>
+              <td className="td">{e.part}</td>
+              <td className="td request">{e.description}</td>
               <td className="td email">
                 <div className="dropdown">
                   <button className="dropbtn">
-                    {fr.assignedTo === "" ? "Not assigned" : fr.assignedTo}
+                    {e.assignedTo === "" ? "Not assigned" : e.assignedTo}
                   </button>
                   <select className="dropdown-content">
                     <option value=""></option>
@@ -82,7 +84,7 @@ const TicketList = (props: ITicketList) => {
               </td>
               <td className="td status">
                 <div className="dropdown">
-                  <button className="dropbtn">{fr.status}</button>
+                  <button className="dropbtn">{e.status}</button>
                   <select className="dropdown-content">
                     <option value=""></option>
                     {statusOptions.map((s) => {

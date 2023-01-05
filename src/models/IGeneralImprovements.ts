@@ -1,4 +1,5 @@
 interface IGeneralImprovements {
+  _id: string;
   description: string;
   reason: string;
   part: string;
