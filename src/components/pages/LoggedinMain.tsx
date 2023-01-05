@@ -42,6 +42,7 @@ const LoggedinMain = () => {
     endpoint: "",
     status: "",
   });
+
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/errend")
       .then((res) => res.json())
@@ -77,11 +78,25 @@ const LoggedinMain = () => {
     });
   };
 
-  const AssignedFr = async (email: string, errandId: string) => {
+  const deleteRequest = async (id: string, endpoint: string) => {
     console.log("trigger");
-    const assignedTo = {
-      assignedTo: email,
-    };
+
+    await fetch(`http://localhost:8000/api/v1/${endpoint}/${id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        mode: "no-cors",
+      },
+      body: JSON.stringify({ _id: id }),
+    });
+
+    setPatch({
+      email: "",
+      id: "",
+      endpoint: "",
+      status: "",
+    });
   };
 
   const tooglePart = () => {
@@ -167,9 +182,14 @@ const LoggedinMain = () => {
                 parts={parts}
                 errend={errend}
                 patchList={patchList}
+                deleteRequest={deleteRequest}
               />
             ) : location.pathname === "/general-improvements" ? (
-              <GeneralImprovements errend={errend} patchList={patchList} />
+              <GeneralImprovements
+                errend={errend}
+                patchList={patchList}
+                deleteRequest={deleteRequest}
+              />
             ) : location.pathname === "/bug-reports" ? (
               <BugReports />
             ) : (

@@ -16,6 +16,7 @@ interface ITicketList {
     endpoint: string
   ): void;
   endpoint: string;
+  deleteRequest(id: string, endpoint: string): void;
 }
 
 const TicketList = (props: ITicketList) => {
@@ -96,7 +97,9 @@ const TicketList = (props: ITicketList) => {
               </td>
               <td className="td status">
                 <div className="dropdown">
-                  <button className="dropbtn">{e.status}</button>
+                  <button className="dropbtn">
+                    {e.status === "" ? "Not started" : e.status}
+                  </button>
                   <div className="dropdown-content">
                     {statusOptions.map((s) => {
                       return (
@@ -120,7 +123,10 @@ const TicketList = (props: ITicketList) => {
                   </div>
                 </div>
               </td>
-              <td className="td delete">
+              <td
+                className="td delete"
+                onClick={() => props.deleteRequest(e._id, props.endpoint)}
+              >
                 <BsTrash />
               </td>
             </tr>

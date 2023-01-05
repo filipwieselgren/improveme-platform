@@ -13,6 +13,7 @@ interface IProp {
     errandId: string,
     endpoint: string
   ): void;
+  deleteRequest(id: string, endpoint: string): void;
 }
 
 const GeneralImprovements = (props: IProp) => {
@@ -26,6 +27,7 @@ const GeneralImprovements = (props: IProp) => {
           errendTxt={"Improvement"}
           patchList={props.patchList}
           endpoint={""}
+          deleteRequest={props.deleteRequest}
         />
       </div>
     </div>

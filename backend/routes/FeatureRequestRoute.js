@@ -13,41 +13,37 @@ router.patch("/featurerequest/:id", async (req, res) => {
   const assignedTo = req.body.assignedTo;
   const status = req.body.status;
   console.log("status:", status);
-  const findRequest = await FeatureRequestModel.findByIdAndUpdate(
+  const updateRequest = await FeatureRequestModel.findByIdAndUpdate(
     {
       _id: user_id,
     },
     { $set: { assignedTo, status: status } }
   );
 
-  res.status(200).send(findRequest);
+  res.status(200).send(updateRequest);
 });
 
-router.patch("/statusfeaturerequest/:id", async (req, res) => {
+router.delete("/featurerequest/:id", async (req, res) => {
   const user_id = req.params.id;
-  const status = req.body.assignedTo;
-  const findRequest = await FeatureRequestModel.findByIdAndUpdate(
-    {
-      _id: user_id,
-    },
-    { $set: { status } }
-  );
+  const deleteRequest = await FeatureRequestModel.findByIdAndDelete({
+    _id: user_id,
+  });
 
-  console.log("findRequest:", findRequest);
-  res.status(200).send(findRequest);
+  res.status(204).send(deleteRequest);
 });
-router.patch("/approvefeaturerequest/:id", async (req, res) => {
-  const user_id = req.params.id;
-  const approved = true;
-  const findRequest = await FeatureRequestModel.findByIdAndUpdate(
-    {
-      _id: user_id,
-    },
-    { $set: { approved } }
-  );
 
-  console.log("findRequest:", findRequest);
-  res.status(200).send(findRequest);
-});
+// router.patch("/approvefeaturerequest/:id", async (req, res) => {
+//   const user_id = req.params.id;
+//   const approved = true;
+//   const findRequest = await FeatureRequestModel.findByIdAndUpdate(
+//     {
+//       _id: user_id,
+//     },
+//     { $set: { approved } }
+//   );
+
+//   console.log("findRequest:", findRequest);
+//   res.status(200).send(findRequest);
+// });
 
 module.exports = router;
