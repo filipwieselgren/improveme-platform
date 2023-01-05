@@ -16,6 +16,8 @@ import { IParts } from "../../models/IPart";
 import bug from "../../assets/bug.png";
 import increaseColor from "../../assets/increase-color.png";
 import activeFr from "../../assets/newFeature.png";
+import IFeatureRequest from "../../models/IFeatureRequest";
+import IGeneralImprovements from "../../models/IGeneralImprovements";
 
 const LoggedinMain = () => {
   const navigate = useNavigate();
@@ -45,6 +47,25 @@ const LoggedinMain = () => {
       .then((res) => res.json())
       .then((data) => setParts(data));
   }, []);
+
+  const AssignedFr = async (email: string, errandId: string) => {
+    console.log("trigger");
+    const assignedTo = {
+      assignedTo: email,
+    };
+    await fetch(
+      `http://localhost:8000/api/v1/assignfeaturerequest/${errandId}`,
+      {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          mode: "no-cors",
+        },
+        body: JSON.stringify(assignedTo),
+      }
+    );
+  };
 
   const tooglePart = () => {
     setCreatePart(!createPart);
@@ -125,9 +146,13 @@ const LoggedinMain = () => {
             {location.pathname === "/dashboard" ? (
               <Dashboard errend={errend} />
             ) : location.pathname === "/feature-requests" ? (
-              <FeatureRequests parts={parts} errend={errend} />
+              <FeatureRequests
+                parts={parts}
+                errend={errend}
+                AssignedFr={AssignedFr}
+              />
             ) : location.pathname === "/general-improvements" ? (
-              <GeneralImprovements errend={errend} />
+              <GeneralImprovements errend={errend} AssignedFr={AssignedFr} />
             ) : location.pathname === "/bug-reports" ? (
               <BugReports />
             ) : (

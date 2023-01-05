@@ -4,10 +4,12 @@ import fr from "../../../assets/newFeature.png";
 import PageTitle from "../../../components/wrappers/PageTitle";
 import TicketList from "../../../components/lists/TicketList";
 import IErrends from "../../../models/IErrends";
+import IFeatureRequest from "../../../models/IFeatureRequest";
 
 interface IProp {
   parts: IParts[];
   errend: IErrends;
+  AssignedFr(email: string, errandId: string): void;
 }
 
 const FeatureRequests = (props: IProp) => {
@@ -20,6 +22,7 @@ const FeatureRequests = (props: IProp) => {
           <TicketList
             errend={props.errend.getFeatureRequests}
             errendTxt={"Request"}
+            AssignedFr={props.AssignedFr}
           />
         </div>
       </div>

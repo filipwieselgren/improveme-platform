@@ -15,8 +15,6 @@ router.get("/errend", async (req, res) => {
 
   const errend = { getFeatureRequests, getBugReports, getGeneralImprovements };
 
-  console.log("errend:", errend);
-
   res.status(200).send(errend);
 });
 

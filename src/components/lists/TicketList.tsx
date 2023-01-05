@@ -1,6 +1,6 @@
 import IErrends from "../../models/IErrends";
 import { BsTrash } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IUser } from "../../models/IUser";
 import { users } from "../../data/user";
 import IFeatureRequest from "../../models/IFeatureRequest";
@@ -9,11 +9,13 @@ import IGeneralImprovements from "../../models/IGeneralImprovements";
 interface ITicketList {
   errend: IFeatureRequest[] | IGeneralImprovements[];
   errendTxt: string;
+  AssignedFr(email: string, errandId: string): void;
 }
 
 const TicketList = (props: ITicketList) => {
   const [toggleDropDown, setToggleDropDown] = useState(false);
   const [user, setUser] = useState<IUser[]>(users);
+  const [email, setEmail] = useState<string>("");
 
   const [statusOptions, setStatusOptions] = useState([
     {
@@ -67,37 +69,34 @@ const TicketList = (props: ITicketList) => {
                   <button className="dropbtn">
                     {e.assignedTo === "" ? "Not assigned" : e.assignedTo}
                   </button>
-                  <select className="dropdown-content">
-                    <option value=""></option>
+                  <div className="dropdown-content">
                     {user.map((u) => {
                       return (
                         <>
-                          <option key={u.id} value={u.email}>
+                          <div
+                            key={u.id}
+                            onClick={() => props.AssignedFr(u.email, e._id)}
+                          >
                             {u.email}
-                          </option>
-                          ;
+                          </div>
                         </>
                       );
                     })}
-                  </select>
+                  </div>
                 </div>
               </td>
               <td className="td status">
                 <div className="dropdown">
                   <button className="dropbtn">{e.status}</button>
-                  <select className="dropdown-content">
-                    <option value=""></option>
+                  <div className="dropdown-content">
                     {statusOptions.map((s) => {
                       return (
                         <>
-                          <option key={s.id} value={s.option}>
-                            {s.option}
-                          </option>
-                          ;
+                          <div key={s.id}>{s.option}</div>
                         </>
                       );
                     })}
-                  </select>
+                  </div>
                 </div>
               </td>
               <td className="td delete">
