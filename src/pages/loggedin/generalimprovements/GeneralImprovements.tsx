@@ -7,7 +7,12 @@ import IFeatureRequest from "../../../models/IFeatureRequest";
 
 interface IProp {
   errend: IErrends;
-  patchList(email: string, errandId: string, endpoint: string): void;
+  patchList(
+    assignedTo: string,
+    status: string,
+    errandId: string,
+    endpoint: string
+  ): void;
 }
 
 const GeneralImprovements = (props: IProp) => {
@@ -20,6 +25,7 @@ const GeneralImprovements = (props: IProp) => {
           errend={props.errend.getGeneralImprovements}
           errendTxt={"Improvement"}
           patchList={props.patchList}
+          endpoint={""}
         />
       </div>
     </div>

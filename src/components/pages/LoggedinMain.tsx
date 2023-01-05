@@ -36,16 +36,17 @@ const LoggedinMain = () => {
     },
   ]);
 
-  const [assignedTo, setAssignedTo] = useState({
+  const [patch, setPatch] = useState({
     email: "",
     id: "",
     endpoint: "",
+    status: "",
   });
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/errend")
       .then((res) => res.json())
       .then((data) => setErrend(data));
-  }, [assignedTo]);
+  }, [patch]);
 
   useEffect(() => {
     fetch("http://localhost:8080/api/v1/section")
@@ -54,7 +55,8 @@ const LoggedinMain = () => {
   }, []);
 
   const patchList = async (
-    email: string,
+    assignedTo: string,
+    status: string,
     errandId: string,
     endpoint: string
   ) => {
@@ -65,12 +67,13 @@ const LoggedinMain = () => {
         "Content-Type": "application/json",
         mode: "no-cors",
       },
-      body: JSON.stringify({ assignedTo: email }),
+      body: JSON.stringify({ assignedTo: assignedTo, status: status }),
     });
-    setAssignedTo({
+    setPatch({
       email: "",
       id: "",
       endpoint: "",
+      status: "",
     });
   };
 

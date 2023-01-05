@@ -9,7 +9,13 @@ import IGeneralImprovements from "../../models/IGeneralImprovements";
 interface ITicketList {
   errend: IFeatureRequest[] | IGeneralImprovements[];
   errendTxt: string;
-  patchList(email: string, errandId: string, endpoint: string): void;
+  patchList(
+    assignedTo: string,
+    status: string,
+    errandId: string,
+    endpoint: string
+  ): void;
+  endpoint: string;
 }
 
 const TicketList = (props: ITicketList) => {
@@ -19,7 +25,7 @@ const TicketList = (props: ITicketList) => {
   const [statusOptions, setStatusOptions] = useState([
     {
       id: "1",
-      option: "-",
+      option: "Not started",
     },
     {
       id: "2",
@@ -74,8 +80,9 @@ const TicketList = (props: ITicketList) => {
                             onClick={() =>
                               props.patchList(
                                 u.email,
+                                e.status,
                                 e._id,
-                                "assignfeaturerequest"
+                                props.endpoint
                               )
                             }
                           >
@@ -94,7 +101,19 @@ const TicketList = (props: ITicketList) => {
                     {statusOptions.map((s) => {
                       return (
                         <>
-                          <div key={s.id}>{s.option}</div>
+                          <div
+                            key={s.id}
+                            onClick={() =>
+                              props.patchList(
+                                e.assignedTo,
+                                s.option,
+                                e._id,
+                                props.endpoint
+                              )
+                            }
+                          >
+                            {s.option}{" "}
+                          </div>
                         </>
                       );
                     })}

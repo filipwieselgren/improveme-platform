@@ -7,17 +7,19 @@ const { ObjectId } = require("mongodb");
 
 const FeatureRequestModel = require("../models/FeatureRequest");
 
-router.patch("/assignfeaturerequest/:id", async (req, res) => {
+router.patch("/featurerequest/:id", async (req, res) => {
   const user_id = req.params.id;
+
   const assignedTo = req.body.assignedTo;
+  const status = req.body.status;
+  console.log("status:", status);
   const findRequest = await FeatureRequestModel.findByIdAndUpdate(
     {
       _id: user_id,
     },
-    { $set: { assignedTo } }
+    { $set: { assignedTo, status: status } }
   );
 
-  console.log("findRequest:", findRequest);
   res.status(200).send(findRequest);
 });
 

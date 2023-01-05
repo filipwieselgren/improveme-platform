@@ -10,7 +10,12 @@ import { useEffect, useState } from "react";
 interface IProp {
   parts: IParts[];
   errend: IErrends;
-  patchList(email: string, errandId: string, endpoint: string): void;
+  patchList(
+    assignedTo: string,
+    status: string,
+    errandId: string,
+    endpoint: string
+  ): void;
 }
 
 const FeatureRequests = (props: IProp) => {
@@ -24,6 +29,7 @@ const FeatureRequests = (props: IProp) => {
             errend={props.errend.getFeatureRequests}
             errendTxt={"Request"}
             patchList={props.patchList}
+            endpoint={"featurerequest"}
           />
         </div>
       </div>
