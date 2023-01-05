@@ -8,6 +8,7 @@
 @use "./style/components/wrappers/pagetitle";
 @use "./style/components/wrappers/createpartform";
 @use "./pages/loggedin/featurerequests/style/featurerequests";
+@use "./style/components/lists/ticketlist";
 
 * {
   margin: 0;

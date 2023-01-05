@@ -1,0 +1,85 @@
+.td {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+.tr-main {
+  border-top: 1px solid;
+  margin-top: 1rem;
+
+  .delete {
+    cursor: pointer;
+  }
+}
+
+.request,
+.email,
+.status {
+  cursor: pointer;
+}
+
+.done {
+  background-color: rgba(119, 189, 86, 0.62);
+}
+
+.in-progress {
+  background-color: rgba(235, 214, 119, 0.62);
+}
+
+.issue {
+  background-color: rgba(197, 107, 102, 0.62);
+}
+
+table {
+  //   border-collapse: collapse;
+  width: 100%;
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  font-weight: 200;
+  max-height: 5vh;
+  overflow: scroll;
+
+  tr > th {
+    font-weight: 300;
+  }
+}
+
+.dropbtn {
+  border: none;
+  background-color: transparent;
+}
+
+.dropdown {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f100;
+  min-width: 160px;
+  //   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border: none;
+}
+
+.dropdown-content option {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.status:hover .dropdown-content {
+  display: block;
+  cursor: pointer;
+}
+.email:hover .dropdown-content {
+  display: block;
+  cursor: pointer;
+}
