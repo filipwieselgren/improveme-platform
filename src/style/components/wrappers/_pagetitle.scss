@@ -1,7 +1,15 @@
 .page-title-wrapper {
   margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .title-img {
+    width: 4rem;
+  }
 
   h3 {
     font-weight: 300;
+    padding-top: 8px;
   }
 }

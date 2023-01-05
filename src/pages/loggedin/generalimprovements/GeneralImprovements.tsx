@@ -1,5 +1,12 @@
+import gi from "../../../assets/increase-color.png";
+import PageTitle from "../../../components/wrappers/PageTitle";
+
 const GeneralImprovements = () => {
-  return <div>GeneralImprovements</div>;
+  return (
+    <div>
+      <PageTitle text={"General Improvements"} img={gi} />
+    </div>
+  );
 };
 
 export default GeneralImprovements;

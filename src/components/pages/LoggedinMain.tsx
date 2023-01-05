@@ -12,6 +12,10 @@ import { useEffect, useState } from "react";
 import IErrends from "../../models/IErrends";
 import CreatePartForm from "../wrappers/CreatePartForm";
 import { VscTriangleLeft } from "react-icons/vsc";
+import { IParts } from "../../models/IPart";
+import bug from "../../assets/bug.png";
+import increaseColor from "../../assets/increase-color.png";
+import activeFr from "../../assets/newFeature.png";
 
 const LoggedinMain = () => {
   const navigate = useNavigate();
@@ -24,11 +28,22 @@ const LoggedinMain = () => {
 
   const [createPart, setCreatePart] = useState<boolean>(false);
   const [menu, setMenu] = useState(false);
+  const [parts, setParts] = useState<IParts[]>([
+    {
+      section: "",
+    },
+  ]);
 
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/errend")
       .then((res) => res.json())
       .then((data) => setErrend(data));
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/v1/section")
+      .then((res) => res.json())
+      .then((data) => setParts(data));
   }, []);
 
   const tooglePart = () => {
@@ -38,6 +53,7 @@ const LoggedinMain = () => {
   const openMenu = () => {
     setMenu(!menu);
   };
+
   return (
     <>
       <div className="wrapper">
@@ -58,22 +74,37 @@ const LoggedinMain = () => {
                 className="li-wrapper"
                 onClick={() => navigate("/feature-requests")}
               >
-                <img src={fr} alt="feature request" />
-                <li>Feature requests</li>
+                <img
+                  src={
+                    location.pathname === "/feature-requests" ? activeFr : fr
+                  }
+                  alt="feature request"
+                />
+                <li className="side-li">Feature requests</li>
               </div>
               <div
                 className="li-wrapper"
                 onClick={() => navigate("/general-improvements")}
               >
-                <img src={increase} alt="general improvemennts" />
-                <li>General improvments</li>
+                <img
+                  src={
+                    location.pathname === "/general-improvements"
+                      ? increaseColor
+                      : increase
+                  }
+                  alt="general improvemennts"
+                />
+                <li className="side-li">General improvments</li>
               </div>
               <div
                 className="li-wrapper"
                 onClick={() => navigate("/bug-reports")}
               >
-                <img src={bee} alt="bee" />
-                <li>Bug reports</li>
+                <img
+                  src={location.pathname === "/bug-reports" ? bug : bee}
+                  alt="bee"
+                />
+                <li className="side-li">Bug reports</li>
               </div>
             </ul>
           </div>
@@ -94,7 +125,7 @@ const LoggedinMain = () => {
             {location.pathname === "/dashboard" ? (
               <Dashboard errend={errend} />
             ) : location.pathname === "/feature-requests" ? (
-              <FeatureRequests />
+              <FeatureRequests parts={parts} />
             ) : location.pathname === "/general-improvements" ? (
               <GeneralImprovements />
             ) : location.pathname === "/bug-reports" ? (

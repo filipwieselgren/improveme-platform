@@ -1,6 +1,6 @@
 interface IPartCard {
   img: string;
-  title: string;
+  title: string | number;
   info: string;
 }
 

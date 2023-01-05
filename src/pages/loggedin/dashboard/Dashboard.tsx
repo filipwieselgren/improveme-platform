@@ -14,15 +14,14 @@ interface IDashboard {
 }
 
 const Dashboard = (props: IDashboard) => {
-  const [fixedFeaturesRequests, setFixedFeaturesRequests] = useState<any>([]);
-  const [fixedBugReports, setFixedBugReports] = useState<any>([]);
-  const [fixedGeneralImprovements, setFixedGeneralImprovements] = useState<any>(
-    []
-  );
+  const [fixedFeaturesRequests, setFixedFeaturesRequests] = useState<number>(0);
+  const [fixedBugReports, setFixedBugReports] = useState<number>(0);
+  const [fixedGeneralImprovements, setFixedGeneralImprovements] =
+    useState<number>(0);
 
   useEffect(() => {
     const getFixedFeaturesRequests = props.errend.getFeatureRequests.filter(
-      (fr: any) => fr.status === "done"
+      (fr: IFeatureRequest) => fr.status === "done"
     );
 
     const getFixedBugReports = props.errend.getBugReports.filter(
@@ -34,9 +33,9 @@ const Dashboard = (props: IDashboard) => {
         (gi: IGeneralImprovements) => gi.status === "done"
       );
 
-    setFixedFeaturesRequests(getFixedFeaturesRequests);
-    setFixedBugReports(getFixedBugReports);
-    setFixedGeneralImprovements(getFixedGeneralImprovements);
+    setFixedFeaturesRequests(getFixedFeaturesRequests.length);
+    setFixedBugReports(getFixedBugReports.length);
+    setFixedGeneralImprovements(getFixedGeneralImprovements.length);
   }, [
     props.errend.getBugReports,
     props.errend.getFeatureRequests,
@@ -45,7 +44,7 @@ const Dashboard = (props: IDashboard) => {
 
   return (
     <div className="dashboard-wrapper">
-      <PageTitle text={"Welcome Filip"} />
+      <PageTitle text={"Welcome Filip"} img={""} />
       <div className="card-wrapper-dashboard">
         <div className="second-title-wrapper">
           <h4>You have fixed</h4>
@@ -53,19 +52,15 @@ const Dashboard = (props: IDashboard) => {
         <div className="cards-dashboard">
           <PartCard
             img={fr}
-            title={fixedFeaturesRequests.length}
+            title={fixedFeaturesRequests}
             info={"Feature Requests"}
           />
           <PartCard
             img={gi}
-            title={fixedGeneralImprovements.length}
+            title={fixedGeneralImprovements}
             info={"General Improvements"}
           />
-          <PartCard
-            img={bee}
-            title={fixedBugReports.length}
-            info={"Bug Reports"}
-          />
+          <PartCard img={bee} title={fixedBugReports} info={"Bug Reports"} />
         </div>
       </div>
 
