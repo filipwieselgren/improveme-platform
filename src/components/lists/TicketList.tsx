@@ -5,6 +5,7 @@ import { IUser } from "../../models/IUser";
 import { users } from "../../data/user";
 import IFeatureRequest from "../../models/IFeatureRequest";
 import IGeneralImprovements from "../../models/IGeneralImprovements";
+import { BsCaretDown } from "react-icons/bs";
 
 interface ITicketList {
   errend: IFeatureRequest[] | IGeneralImprovements[];
@@ -22,6 +23,8 @@ interface ITicketList {
 const TicketList = (props: ITicketList) => {
   const [user, setUser] = useState<IUser[]>(users);
   const [email, setEmail] = useState<string>("");
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [showStatusDropdown, setShowStatusDropdown] = useState(false);
 
   const [statusOptions, setStatusOptions] = useState([
     {
@@ -38,6 +41,24 @@ const TicketList = (props: ITicketList) => {
     },
   ]);
 
+  const [isOpen, setIsOpen] = useState<number | null>(null);
+  const [isStausOpen, setIsStatusOpen] = useState<number | null>(null);
+
+  const toggle = (i: number) => {
+    if (isOpen === i) {
+      return setIsOpen(null);
+    }
+
+    setIsOpen(i);
+  };
+  const toggleStatus = (i: number) => {
+    if (isStausOpen === i) {
+      return setIsStatusOpen(null);
+    }
+
+    setIsStatusOpen(i);
+  };
+
   return (
     <>
       <table>
@@ -49,7 +70,7 @@ const TicketList = (props: ITicketList) => {
           <th>Status</th>
           <th></th>
         </tr>
-        {props.errend.map((e) => {
+        {props.errend.map((e, i) => {
           return e.approved === true ? (
             <tr
               key={e._id}
@@ -67,12 +88,19 @@ const TicketList = (props: ITicketList) => {
               </td>
               <td className="td">{e.part}</td>
               <td className="td request">{e.description}</td>
-              <td className="td email">
+              <td className="td email" onClick={() => toggle(i)}>
                 <div className="dropdown">
                   <button className="dropbtn">
                     {e.assignedTo === "" ? "Not assigned" : e.assignedTo}
                   </button>
-                  <div className="dropdown-content">
+                  <BsCaretDown className="arrow-down" />
+                  <div
+                    className={
+                      isOpen === i
+                        ? "dropdown-content show-email"
+                        : "dropdown-content noshow-email"
+                    }
+                  >
                     {user.map((u) => {
                       return (
                         <>
@@ -95,16 +123,24 @@ const TicketList = (props: ITicketList) => {
                   </div>
                 </div>
               </td>
-              <td className="td status">
+              <td className="td status" onClick={() => toggleStatus(i)}>
                 <div className="dropdown">
                   <button className="dropbtn">
                     {e.status === "" ? "Not started" : e.status}
                   </button>
-                  <div className="dropdown-content">
+                  <BsCaretDown className="arrow-down" />
+                  <div
+                    className={
+                      isStausOpen === i
+                        ? "dropdown-content show-status"
+                        : "dropdown-content noshow-status"
+                    }
+                  >
                     {statusOptions.map((s) => {
                       return (
                         <>
                           <div
+                            className="option"
                             key={s.id}
                             onClick={() =>
                               props.patchList(
