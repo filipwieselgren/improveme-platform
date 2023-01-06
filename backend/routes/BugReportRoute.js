@@ -1,0 +1,47 @@
+const express = require("express");
+const router = express.Router();
+const app = express();
+const cors = require("cors");
+app.use(cors());
+
+const BugReportModel = require("../models/BugReport.js");
+
+router.patch("/bugreport/:id", async (req, res) => {
+  const user_id = req.params.id;
+
+  const assignedTo = req.body.assignedTo;
+  const status = req.body.status;
+  const updateBugReport = await BugReportModel.findByIdAndUpdate(
+    {
+      _id: user_id,
+    },
+    { $set: { assignedTo, status: status } }
+  );
+
+  res.status(200).send(updateBugReport);
+});
+
+router.delete("/bugreport/:id", async (req, res) => {
+  const user_id = req.params.id;
+  const deleteBugReport = await BugReportModel.findByIdAndDelete({
+    _id: user_id,
+  });
+
+  res.status(204).send(deleteBugReport);
+});
+
+// router.patch("/approvefeaturerequest/:id", async (req, res) => {
+//   const user_id = req.params.id;
+//   const approved = true;
+//   const findRequest = await FeatureRequestModel.findByIdAndUpdate(
+//     {
+//       _id: user_id,
+//     },
+//     { $set: { approved } }
+//   );
+
+//   console.log("findRequest:", findRequest);
+//   res.status(200).send(findRequest);
+// });
+
+module.exports = router;

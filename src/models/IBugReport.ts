@@ -6,6 +6,7 @@ export interface IBugReport {
   reproduce: string;
   files: File | undefined;
   email: string;
+  approved: Boolean;
   status: string;
   assignedTo: string;
 }

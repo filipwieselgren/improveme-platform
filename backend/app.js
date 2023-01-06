@@ -11,11 +11,13 @@ const allErrends = require("./routes/AllErrendsRoute.js");
 const postSection = require("./routes/SectionsRoute.js");
 const patchFeatureRequest = require("./routes/FeatureRequestRoute.js");
 const patchGeneralImprovement = require("./routes/GeneralImprovementRoute.js");
+const patchBugReport = require("./routes/BugReportRoute.js");
 
 app.use("/api/v1", allErrends);
 app.use("/api/v1", postSection);
 app.use("/api/v1", patchFeatureRequest);
 app.use("/api/v1", patchGeneralImprovement);
+app.use("/api/v1", patchBugReport);
 
 const port = 8000;
 app.listen(port, () => {

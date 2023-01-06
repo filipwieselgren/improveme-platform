@@ -191,7 +191,11 @@ const LoggedinMain = () => {
                 deleteRequest={deleteRequest}
               />
             ) : location.pathname === "/bug-reports" ? (
-              <BugReports />
+              <BugReports
+                errend={errend}
+                patchList={patchList}
+                deleteRequest={deleteRequest}
+              />
             ) : (
               <></>
             )}

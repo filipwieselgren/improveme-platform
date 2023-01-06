@@ -6,9 +6,10 @@ import { users } from "../../data/user";
 import IFeatureRequest from "../../models/IFeatureRequest";
 import IGeneralImprovements from "../../models/IGeneralImprovements";
 import { BsCaretDown } from "react-icons/bs";
+import { IBugReport } from "../../models/IBugReport";
 
 interface ITicketList {
-  errend: IFeatureRequest[] | IGeneralImprovements[];
+  errend: IFeatureRequest[] | IGeneralImprovements[] | IBugReport[];
   errendTxt: string;
   patchList(
     assignedTo: string,
