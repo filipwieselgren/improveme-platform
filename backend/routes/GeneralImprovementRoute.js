@@ -4,30 +4,30 @@ const app = express();
 const cors = require("cors");
 app.use(cors());
 
-const FeatureRequestModel = require("../models/FeatureRequest");
+const GeneralImprovementModel = require("../models/GeneralImprovement.js");
 
-router.patch("/featurerequest/:id", async (req, res) => {
+router.patch("/generalimprovement/:id", async (req, res) => {
   const user_id = req.params.id;
 
   const assignedTo = req.body.assignedTo;
   const status = req.body.status;
-  const updateRequest = await FeatureRequestModel.findByIdAndUpdate(
+  const updateImprovement = await GeneralImprovementModel.findByIdAndUpdate(
     {
       _id: user_id,
     },
     { $set: { assignedTo, status: status } }
   );
 
-  res.status(200).send(updateRequest);
+  res.status(200).send(updateImprovement);
 });
 
-router.delete("/featurerequest/:id", async (req, res) => {
+router.delete("/generalimprovement/:id", async (req, res) => {
   const user_id = req.params.id;
-  const deleteRequest = await FeatureRequestModel.findByIdAndDelete({
+  const deleteImprovement = await GeneralImprovementModel.findByIdAndDelete({
     _id: user_id,
   });
 
-  res.status(204).send(deleteRequest);
+  res.status(204).send(deleteImprovement);
 });
 
 // router.patch("/approvefeaturerequest/:id", async (req, res) => {

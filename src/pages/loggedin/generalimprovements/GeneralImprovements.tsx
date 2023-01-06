@@ -26,7 +26,7 @@ const GeneralImprovements = (props: IProp) => {
           errend={props.errend.getGeneralImprovements}
           errendTxt={"Improvement"}
           patchList={props.patchList}
-          endpoint={""}
+          endpoint={"generalimprovement"}
           deleteRequest={props.deleteRequest}
         />
       </div>

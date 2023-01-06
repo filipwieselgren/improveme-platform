@@ -5,7 +5,7 @@ interface ICreatePart {
 const CreatePart = (props: ICreatePart) => {
   return (
     <button className="create-part-btn" onClick={() => props.tooglePart()}>
-      + Create Part
+      + Create Section
     </button>
   );
 };
