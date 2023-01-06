@@ -47,7 +47,7 @@ const Dashboard = (props: IDashboard) => {
       <PageTitle text={"Welcome Filip"} img={""} />
       <div className="card-wrapper-dashboard">
         <div className="second-title-wrapper">
-          <h4>Your team have fixed</h4>
+          <h4>Your team has fixed</h4>
         </div>
         <div className="cards-dashboard">
           <PartCard

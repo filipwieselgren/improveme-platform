@@ -15,7 +15,8 @@ interface ITicketList {
     assignedTo: string,
     status: string,
     errandId: string,
-    endpoint: string
+    endpoint: string,
+    section: string
   ): void;
   endpoint: string;
   deleteRequest(id: string, endpoint: string): void;
@@ -112,7 +113,8 @@ const TicketList = (props: ITicketList) => {
                                 u.email,
                                 e.status,
                                 e._id,
-                                props.endpoint
+                                props.endpoint,
+                                e.part
                               )
                             }
                           >
@@ -148,7 +150,8 @@ const TicketList = (props: ITicketList) => {
                                 e.assignedTo,
                                 s.option,
                                 e._id,
-                                props.endpoint
+                                props.endpoint,
+                                e.part
                               )
                             }
                           >

@@ -47,3 +47,35 @@ a {
 .txt-400 {
   @include m.txt-400;
 }
+
+.unapproved-h4 {
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+}
+.section-card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+
+  .section-card-border {
+    width: 200px;
+    border: 0.5px solid;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px #333;
+    cursor: pointer;
+
+    .section-title {
+      width: 100%;
+      text-align: center;
+      padding: 1rem 0 0 0;
+      font-weight: 300;
+    }
+
+    .amout {
+      text-align: center;
+      font-weight: 200;
+      padding: 1rem;
+    }
+  }
+}

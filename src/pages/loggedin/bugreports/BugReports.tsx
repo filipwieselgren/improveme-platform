@@ -9,7 +9,8 @@ interface IProp {
     assignedTo: string,
     status: string,
     errandId: string,
-    endpoint: string
+    endpoint: string,
+    section: string
   ): void;
   deleteRequest(id: string, endpoint: string): void;
 }

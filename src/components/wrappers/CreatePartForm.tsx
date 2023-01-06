@@ -5,23 +5,35 @@ import logo from "../../assets/ImproveMe.png";
 
 interface ICreatePartForm {
   tooglePart(): void;
+  setRenderPage: React.Dispatch<
+    React.SetStateAction<{
+      render: string;
+    }>
+  >;
 }
 
 const CreatePartForm = (props: ICreatePartForm) => {
   const [section, setSection] = useState<IParts>({
     section: "",
+    featureRequest: [],
+    bugs: [],
+    genralImprovments: [],
   });
 
   const [success, setSuccess] = useState<boolean>(false);
+
   const createSection = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSection({
       section: e.target.value,
+      featureRequest: [],
+      bugs: [],
+      genralImprovments: [],
     });
   };
 
-  const sendFetch = async (e: React.FormEvent<HTMLButtonElement>) => {
+  const sendSectionFetch = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log("test");
+
     if (section.section.length > 0) {
       await fetch("http://localhost:8000/api/v1/section", {
         method: "POST",
@@ -33,13 +45,12 @@ const CreatePartForm = (props: ICreatePartForm) => {
         body: JSON.stringify(section),
       });
       setSuccess(true);
+      props.setRenderPage({ render: "" });
       return;
     }
 
     console.log("No value");
   };
-
-  console.log("section:", section);
 
   return (
     <div className="CreatePartForm-wrapper">
@@ -66,7 +77,10 @@ const CreatePartForm = (props: ICreatePartForm) => {
               id="create-part"
               onChange={(e) => createSection(e)}
             />
-            <button className="submit-section" onClick={(e) => sendFetch(e)}>
+            <button
+              className="submit-section"
+              onClick={(e) => sendSectionFetch(e)}
+            >
               Create Section
             </button>
           </form>

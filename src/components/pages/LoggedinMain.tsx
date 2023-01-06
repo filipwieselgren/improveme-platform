@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import IErrends from "../../models/IErrends";
 import CreatePartForm from "../wrappers/CreatePartForm";
 import { VscTriangleLeft } from "react-icons/vsc";
-import { IParts } from "../../models/IPart";
+import { IGetParts, IParts } from "../../models/IPart";
 import bug from "../../assets/bug.png";
 import increaseColor from "../../assets/increase-color.png";
 import activeFr from "../../assets/newFeature.png";
@@ -30,9 +30,13 @@ const LoggedinMain = () => {
 
   const [createPart, setCreatePart] = useState<boolean>(false);
   const [menu, setMenu] = useState(false);
-  const [parts, setParts] = useState<IParts[]>([
+  const [parts, setParts] = useState<IGetParts[]>([
     {
+      _id: "",
       section: "",
+      featureRequest: [],
+      bugs: [],
+      genralImprovments: [],
     },
   ]);
 
@@ -43,6 +47,10 @@ const LoggedinMain = () => {
     status: "",
   });
 
+  const [renderPage, setRenderPage] = useState({
+    render: "",
+  });
+
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/errend")
       .then((res) => res.json())
@@ -50,16 +58,20 @@ const LoggedinMain = () => {
   }, [patch]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/section")
+    console.log("get");
+    fetch("http://localhost:8000/api/v1/section")
       .then((res) => res.json())
-      .then((data) => setParts(data));
-  }, []);
+      .then((data) => {
+        setParts(data);
+      });
+  }, [renderPage]);
 
   const patchList = async (
     assignedTo: string,
     status: string,
     errandId: string,
-    endpoint: string
+    endpoint: string,
+    section: string
   ) => {
     await fetch(`http://localhost:8000/api/v1/${endpoint}/${errandId}`, {
       method: "PATCH",
@@ -68,7 +80,11 @@ const LoggedinMain = () => {
         "Content-Type": "application/json",
         mode: "no-cors",
       },
-      body: JSON.stringify({ assignedTo: assignedTo, status: status }),
+      body: JSON.stringify({
+        assignedTo: assignedTo,
+        status: status,
+        section: section,
+      }),
     });
     setPatch({
       email: "",
@@ -110,7 +126,14 @@ const LoggedinMain = () => {
   return (
     <>
       <div className="wrapper">
-        {createPart ? <CreatePartForm tooglePart={tooglePart} /> : <></>}
+        {createPart ? (
+          <CreatePartForm
+            tooglePart={tooglePart}
+            setRenderPage={setRenderPage}
+          />
+        ) : (
+          <></>
+        )}
         <nav className={menu ? "menu-open side-nav" : "side-nav"}>
           <div className="closenav-wrapper" onClick={openMenu}>
             <VscTriangleLeft />
@@ -186,6 +209,7 @@ const LoggedinMain = () => {
               />
             ) : location.pathname === "/general-improvements" ? (
               <GeneralImprovements
+                parts={parts}
                 errend={errend}
                 patchList={patchList}
                 deleteRequest={deleteRequest}
