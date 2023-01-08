@@ -18,6 +18,8 @@ import increaseColor from "../../assets/increase-color.png";
 import activeFr from "../../assets/newFeature.png";
 import IFeatureRequest from "../../models/IFeatureRequest";
 import IGeneralImprovements from "../../models/IGeneralImprovements";
+import { IBugReport } from "../../models/IBugReport";
+import { idText } from "typescript";
 
 const LoggedinMain = () => {
   const navigate = useNavigate();
@@ -26,6 +28,9 @@ const LoggedinMain = () => {
     getBugReports: [],
     getFeatureRequests: [],
     getGeneralImprovements: [],
+    getCountFeatureRequests: [],
+    getCountBugReports: [],
+    getCountGeneralImprovements: [],
   });
 
   const [createPart, setCreatePart] = useState<boolean>(false);
@@ -58,7 +63,6 @@ const LoggedinMain = () => {
   }, [patch]);
 
   useEffect(() => {
-    console.log("get");
     fetch("http://localhost:8000/api/v1/section")
       .then((res) => res.json())
       .then((data) => {
@@ -94,24 +98,44 @@ const LoggedinMain = () => {
     });
   };
 
-  const deleteRequest = async (id: string, endpoint: string) => {
+  const deleteRequest = async (
+    errend: IFeatureRequest | IGeneralImprovements | IBugReport,
+    endpoint: string
+  ) => {
     console.log("trigger");
 
-    await fetch(`http://localhost:8000/api/v1/${endpoint}/${id}`, {
+    await fetch(`http://localhost:8000/api/v1/${endpoint}/${errend._id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         mode: "no-cors",
       },
-      body: JSON.stringify({ _id: id }),
+      body: JSON.stringify({ _id: errend._id }),
     });
-
+    if (errend.status === "Done") {
+      postToStatistic(errend, endpoint);
+    }
     setPatch({
       email: "",
       id: "",
       endpoint: "",
       status: "",
+    });
+  };
+
+  const postToStatistic = async (
+    errend: IFeatureRequest | IGeneralImprovements | IBugReport,
+    endpoint: string
+  ) => {
+    await fetch(`http://localhost:8000/api/v1/${endpoint}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        mode: "no-cors",
+      },
+      body: JSON.stringify(errend),
     });
   };
 
@@ -199,7 +223,7 @@ const LoggedinMain = () => {
               <CreatePart tooglePart={tooglePart} />
             </div>
             {location.pathname === "/dashboard" ? (
-              <Dashboard errend={errend} />
+              <Dashboard errend={errend} parts={parts} />
             ) : location.pathname === "/feature-requests" ? (
               <FeatureRequests
                 parts={parts}

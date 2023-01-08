@@ -6,6 +6,9 @@ interface IErrends {
   getBugReports: IBugReport[];
   getFeatureRequests: IFeatureRequest[];
   getGeneralImprovements: IGeneralImprovements[];
+  getCountFeatureRequests: IFeatureRequest[];
+  getCountBugReports: IBugReport[];
+  getCountGeneralImprovements: IGeneralImprovements[];
 }
 
 export default IErrends;

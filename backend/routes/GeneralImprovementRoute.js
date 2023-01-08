@@ -5,6 +5,7 @@ const cors = require("cors");
 app.use(cors());
 
 const GeneralImprovementModel = require("../models/GeneralImprovement.js");
+const CountGeneralImprovementModel = require("../models/CountGeneralImprovement");
 
 router.patch("/generalimprovement/:id", async (req, res) => {
   const user_id = req.params.id;
@@ -28,6 +29,16 @@ router.delete("/generalimprovement/:id", async (req, res) => {
   });
 
   res.status(204).send(deleteImprovement);
+});
+
+router.post("/generalimprovement", async (req, res) => {
+  const countGeneralImprovementModel = new CountGeneralImprovementModel(
+    req.body
+  );
+
+  await countGeneralImprovementModel.save();
+
+  res.status(201).send(countGeneralImprovementModel);
 });
 
 // router.patch("/approvefeaturerequest/:id", async (req, res) => {

@@ -21,3 +21,19 @@ export interface IGetParts {
   bugs: IBugReport[];
   genralImprovments: IGeneralImprovements[];
 }
+
+export interface showParts {
+  part: string;
+  requests: [
+    {
+      _id: string;
+      description: string;
+      solvesWhat: string;
+      part: string;
+      email: string;
+      approved: boolean;
+      status: string;
+      assignedTo: string;
+    }
+  ];
+}

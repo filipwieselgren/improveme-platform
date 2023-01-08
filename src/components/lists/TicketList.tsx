@@ -19,7 +19,10 @@ interface ITicketList {
     section: string
   ): void;
   endpoint: string;
-  deleteRequest(id: string, endpoint: string): void;
+  deleteRequest(
+    errend: IFeatureRequest | IGeneralImprovements | IBugReport,
+    endpoint: string
+  ): void;
 }
 
 const TicketList = (props: ITicketList) => {
@@ -165,7 +168,7 @@ const TicketList = (props: ITicketList) => {
               </td>
               <td
                 className="td delete"
-                onClick={() => props.deleteRequest(e._id, props.endpoint)}
+                onClick={() => props.deleteRequest(e, props.endpoint)}
               >
                 <BsTrash />
               </td>

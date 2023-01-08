@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import gi from "../../../assets/increase-color.png";
 import MapCard from "../../../components/cards/MapCard";
 import TicketList from "../../../components/lists/TicketList";
 import PageTitle from "../../../components/wrappers/PageTitle";
+import { IBugReport } from "../../../models/IBugReport";
 import IErrends from "../../../models/IErrends";
 import IFeatureRequest from "../../../models/IFeatureRequest";
-import { IGetParts } from "../../../models/IPart";
+import IGeneralImprovements from "../../../models/IGeneralImprovements";
+import { IGetParts, showParts } from "../../../models/IPart";
 
 interface IProp {
   parts: IGetParts[];
@@ -17,10 +19,60 @@ interface IProp {
     endpoint: string,
     section: string
   ): void;
-  deleteRequest(id: string, endpoint: string): void;
+  deleteRequest(
+    errend: IFeatureRequest | IGeneralImprovements | IBugReport,
+    endpoint: string
+  ): void;
 }
 
 const GeneralImprovements = (props: IProp) => {
+  const [section, setSection] = useState<showParts[]>([
+    {
+      part: "",
+      requests: [
+        {
+          _id: "",
+          description: "",
+          solvesWhat: "",
+          part: "",
+          email: "",
+          approved: false,
+          status: "",
+          assignedTo: "",
+        },
+      ],
+    },
+  ]);
+
+  useEffect(() => {
+    groupByPart(props.errend.getGeneralImprovements);
+  }, []);
+
+  const groupByPart = (
+    items: {
+      _id: string;
+      description: string;
+      solvesWhat: string;
+      part: string;
+      email: string;
+      approved: boolean;
+      status: string;
+      assignedTo: string;
+    }[]
+  ) => {
+    const groups: showParts[] = [];
+
+    items.forEach((item) => {
+      const group = groups.find((g) => g.part === item.part);
+      if (group) {
+        group.requests.push(item);
+      } else {
+        groups.push({ part: item.part, requests: [item] });
+      }
+    });
+
+    setSection(groups);
+  };
   return (
     <div>
       <PageTitle text={"General Improvements"} img={gi} />
@@ -34,7 +86,7 @@ const GeneralImprovements = (props: IProp) => {
           deleteRequest={props.deleteRequest}
         />
         <h4 className="unapproved-h4">Unapproved</h4>
-        <MapCard parts={props.parts} errend={props.errend.getFeatureRequests} />
+        <MapCard parts={section} errend={props.errend.getFeatureRequests} />
       </div>
     </div>
   );

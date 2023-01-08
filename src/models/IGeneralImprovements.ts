@@ -1,7 +1,7 @@
 interface IGeneralImprovements {
   _id: string;
   description: string;
-  reason: string;
+  solvesWhat: string;
   part: string;
   email: string;
   approved: boolean;

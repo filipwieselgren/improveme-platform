@@ -7,13 +7,26 @@ app.use(cors());
 const FeatureRequestModel = require("../models/FeatureRequest.js");
 const BugReportModel = require("../models/BugReport.js");
 const GeneralImprovmentModel = require("../models/GeneralImprovement.js");
+const CountFeatureRequestModel = require("../models/CountFeatureRequest");
+const CountBugReportModel = require("../models/CountBugReport");
+const CountGeneralImprovementModel = require("../models/CountGeneralImprovement");
 
 router.get("/errend", async (req, res) => {
   const getFeatureRequests = await FeatureRequestModel.find();
   const getBugReports = await BugReportModel.find();
   const getGeneralImprovements = await GeneralImprovmentModel.find();
+  const getCountFeatureRequests = await CountFeatureRequestModel.find();
+  const getCountBugReports = await CountBugReportModel.find();
+  const getCountGeneralImprovements = await CountGeneralImprovementModel.find();
 
-  const errend = { getFeatureRequests, getBugReports, getGeneralImprovements };
+  const errend = {
+    getFeatureRequests,
+    getBugReports,
+    getGeneralImprovements,
+    getCountFeatureRequests,
+    getCountBugReports,
+    getCountGeneralImprovements,
+  };
 
   res.status(200).send(errend);
 });

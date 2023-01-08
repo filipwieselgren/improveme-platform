@@ -5,6 +5,7 @@ const cors = require("cors");
 app.use(cors());
 
 const FeatureRequestModel = require("../models/FeatureRequest");
+const CountFeatureRequestModel = require("../models/CountFeatureRequest");
 
 router.patch("/featurerequest/:id", async (req, res) => {
   const user_id = req.params.id;
@@ -30,6 +31,13 @@ router.delete("/featurerequest/:id", async (req, res) => {
   res.status(204).send(deleteRequest);
 });
 
+router.post("/featurerequest", async (req, res) => {
+  const countFeatureRequest = new CountFeatureRequestModel(req.body);
+
+  await countFeatureRequest.save();
+
+  res.status(201).send(countFeatureRequest);
+});
 // router.patch("/approvefeaturerequest/:id", async (req, res) => {
 //   const user_id = req.params.id;
 //   const approved = true;

@@ -5,7 +5,7 @@ const cors = require("cors");
 app.use(cors());
 
 const BugReportModel = require("../models/BugReport.js");
-
+const CountBugReportModel = require("../models/CountBugReport");
 router.patch("/bugreport/:id", async (req, res) => {
   const user_id = req.params.id;
 
@@ -28,6 +28,14 @@ router.delete("/bugreport/:id", async (req, res) => {
   });
 
   res.status(204).send(deleteBugReport);
+});
+
+router.post("/bugreport", async (req, res) => {
+  const countBugReportModel = new CountBugReportModel(req.body);
+
+  await countBugReportModel.save();
+
+  res.status(201).send(countBugReportModel);
 });
 
 // router.patch("/approvefeaturerequest/:id", async (req, res) => {

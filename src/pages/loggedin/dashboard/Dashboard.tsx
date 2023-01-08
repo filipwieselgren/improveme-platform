@@ -8,9 +8,13 @@ import IFeatureRequest from "../../../models/IFeatureRequest";
 import { useEffect, useState } from "react";
 import { IBugReport } from "../../../models/IBugReport";
 import IGeneralImprovements from "../../../models/IGeneralImprovements";
+import { IGetParts } from "../../../models/IPart";
+import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS } from "chart.js/auto";
 
 interface IDashboard {
   errend: IErrends;
+  parts: IGetParts[];
 }
 
 const Dashboard = (props: IDashboard) => {
@@ -19,27 +23,56 @@ const Dashboard = (props: IDashboard) => {
   const [fixedGeneralImprovements, setFixedGeneralImprovements] =
     useState<number>(0);
 
+  // const [data, setData] = useState({
+  //   labels: props.parts.map((part) => part._id),
+  //   datasets: [
+  //     {
+  //       label: "User Gained",
+  //       data: props.parts.map((part) => part.featureRequest.length),
+  //     },
+  //   ],
+  // });
+
   useEffect(() => {
+    // Count fixed Features Requests
     const getFixedFeaturesRequests = props.errend.getFeatureRequests.filter(
       (fr: IFeatureRequest) => fr.status === "Done"
     );
+    const fixedFeaturesRequests = getFixedFeaturesRequests.concat(
+      props.errend.getCountFeatureRequests
+    );
+
+    // Count fixed Bug Reports
+
+    console.log(props.errend.getCountBugReports);
 
     const getFixedBugReports = props.errend.getBugReports.filter(
       (br: IBugReport) => br.status === "Done"
     );
+
+    const fixedBugReports = getFixedBugReports.concat(
+      props.errend.getCountBugReports
+    );
+
+    // Count fixed General Improvements
 
     const getFixedGeneralImprovements =
       props.errend.getGeneralImprovements.filter(
         (gi: IGeneralImprovements) => gi.status === "Done"
       );
 
-    setFixedFeaturesRequests(getFixedFeaturesRequests.length);
-    setFixedBugReports(getFixedBugReports.length);
-    setFixedGeneralImprovements(getFixedGeneralImprovements.length);
+    const fixedGeneralImprovements = getFixedGeneralImprovements.concat(
+      props.errend.getCountGeneralImprovements
+    );
+
+    setFixedFeaturesRequests(fixedFeaturesRequests.length);
+    setFixedBugReports(fixedBugReports.length);
+    setFixedGeneralImprovements(fixedGeneralImprovements.length);
   }, [
     props.errend.getBugReports,
     props.errend.getFeatureRequests,
     props.errend.getGeneralImprovements,
+    props.errend.getCountFeatureRequests,
   ]);
 
   return (
@@ -53,19 +86,32 @@ const Dashboard = (props: IDashboard) => {
           <PartCard
             img={fr}
             title={fixedFeaturesRequests}
-            info={"Feature Requests"}
+            info={
+              fixedFeaturesRequests === 1
+                ? "Feature Request"
+                : "Feature Requests"
+            }
           />
           <PartCard
             img={gi}
             title={fixedGeneralImprovements}
-            info={"General Improvements"}
+            info={
+              fixedGeneralImprovements === 1
+                ? "General Improvement"
+                : "General Improvements"
+            }
           />
-          <PartCard img={bee} title={fixedBugReports} info={"Bug Reports"} />
+          <PartCard
+            img={bee}
+            title={fixedBugReports}
+            info={fixedBugReports === 1 ? "Bug Report" : "Bug Reports"}
+          />
         </div>
       </div>
 
       <div className="top-three-wrapper">
         <h4>Top 3 parts that receives the most</h4>
+        {/* <Bar data={data} /> */}
       </div>
     </div>
   );

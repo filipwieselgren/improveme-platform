@@ -2,6 +2,9 @@ import PageTitle from "../../../components/wrappers/PageTitle";
 import br from "../../../assets/bug.png";
 import TicketList from "../../../components/lists/TicketList";
 import IErrends from "../../../models/IErrends";
+import { IBugReport } from "../../../models/IBugReport";
+import IFeatureRequest from "../../../models/IFeatureRequest";
+import IGeneralImprovements from "../../../models/IGeneralImprovements";
 
 interface IProp {
   errend: IErrends;
@@ -12,7 +15,10 @@ interface IProp {
     endpoint: string,
     section: string
   ): void;
-  deleteRequest(id: string, endpoint: string): void;
+  deleteRequest(
+    errend: IFeatureRequest | IGeneralImprovements | IBugReport,
+    endpoint: string
+  ): void;
 }
 
 const BugReports = (props: IProp) => {

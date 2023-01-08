@@ -2,26 +2,36 @@ import { useLocation } from "react-router-dom";
 import { IBugReport } from "../../models/IBugReport";
 import IFeatureRequest from "../../models/IFeatureRequest";
 import IGeneralImprovements from "../../models/IGeneralImprovements";
-import { IGetParts, IParts } from "../../models/IPart";
+import { IGetParts, IParts, showParts } from "../../models/IPart";
 
 interface IMapCard {
-  parts: IGetParts[];
+  parts: showParts[];
   errend: IFeatureRequest[] | IGeneralImprovements[] | IBugReport[];
 }
 
 const MapCard = (props: IMapCard) => {
   const location = useLocation();
+
+  const showRequests = (p: any) => {
+    console.log(p);
+  };
+
   return (
     <div className="section-card-wrapper">
-      {props.parts.map((p, i) => {
+      {props.parts.map((p: any, i: number) => {
         return (
-          <div key={i} className="section-card-border">
-            <div className="section-title">{p.section}</div>
+          <div
+            key={i}
+            className="section-card-border"
+            onClick={() => showRequests(p)}
+          >
+            <div className="section-title">{p.part}</div>
             <div className="amout">
+              {p.requests.length}{" "}
               {location.pathname === "/feature-requests" ? (
-                `${p.featureRequest.length} Feature Requests`
+                "Feature Requests"
               ) : location.pathname === "/general-improvements" ? (
-                `${p.genralImprovments.length} General Improvements`
+                "General Improvements"
               ) : (
                 <></>
               )}
