@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { IBugReport } from "../../models/IBugReport";
 import IFeatureRequest from "../../models/IFeatureRequest";
@@ -12,26 +13,26 @@ interface IMapCard {
 const MapCard = (props: IMapCard) => {
   const location = useLocation();
 
-  const showRequests = (p: any) => {
-    console.log(p);
-  };
-
   return (
     <div className="section-card-wrapper">
-      {props.parts.map((p: any, i: number) => {
+      {props.parts.map((p: showParts, i: number) => {
         return (
-          <div
-            key={i}
-            className="section-card-border"
-            onClick={() => showRequests(p)}
-          >
+          <div key={i} className="section-card-border">
             <div className="section-title">{p.part}</div>
             <div className="amout">
-              {p.requests.length}{" "}
+              {p.requests.filter((r) => r.approved === false).length}
               {location.pathname === "/feature-requests" ? (
-                "Feature Requests"
+                ` Feature ${
+                  p.requests.filter((r) => r.approved === false).length < 2
+                    ? "Request"
+                    : "Requests"
+                }`
               ) : location.pathname === "/general-improvements" ? (
-                "General Improvements"
+                ` General ${
+                  p.requests.filter((r) => r.approved === false).length < 2
+                    ? "Improvement"
+                    : "Improvements"
+                }`
               ) : (
                 <></>
               )}
