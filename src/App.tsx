@@ -5,6 +5,7 @@ import LoggedinMain from "./components/pages/LoggedinMain";
 import FeatureRequests from "./pages/loggedin/featurerequests/FeatureRequests";
 import Homepage from "./pages/loggedout/homepage/Homepage";
 import Login from "./pages/loggedout/login/Login";
+import Register from "./pages/loggedout/register/Register";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/register" element={<Register />}></Route>
         <Route path="/dashboard" element={<LoggedinMain />}></Route>
         <Route path="/feature-requests" element={<LoggedinMain />}></Route>
         <Route path="/general-improvements" element={<LoggedinMain />}></Route>

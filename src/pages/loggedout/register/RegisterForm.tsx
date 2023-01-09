@@ -8,7 +8,7 @@ const LoginForm = () => {
       <main className="main-form">
         <div className="form-wrapper">
           <h1 className="txt-300">
-            Fill in the information to login
+            Fill in the information to create an account
             <img src={logo} alt="improveMe face" className="improveme-face" />
           </h1>
           <form>
@@ -21,18 +21,9 @@ const LoginForm = () => {
             </label>
             <input id="password" type="password" required />
             <button type="submit" onClick={() => navigate("/dashboard")}>
-              Log in
+              Create account
             </button>
           </form>
-          <p className="txt-200">
-            Don't have an account? Create one{" "}
-            <span
-              className="create-account txt-400"
-              onClick={() => navigate("/register")}
-            >
-              here
-            </span>
-          </p>
         </div>
       </main>
     </>

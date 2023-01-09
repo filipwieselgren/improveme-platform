@@ -1,10 +1,9 @@
 table {
-  //   border-collapse: collapse;
-  width: 100%;
-  margin-top: 2rem;
+  min-width: max-content;
+  min-width: 100%;
+  // margin-top: 2rem;
   font-size: 1.2rem;
   font-weight: 200;
-  max-height: 5vh;
   overflow: scroll;
 
   tr > th {
@@ -15,10 +14,15 @@ table {
   }
 }
 
+th {
+  position: sticky;
+  top: 0px;
+  padding-bottom: 10px;
+}
+
 .td {
   text-align: center;
   padding: 1rem 0;
-  margin: auto 0;
 }
 
 .td-checkbox {
@@ -30,13 +34,9 @@ table {
   width: 5px;
   overflow: scroll;
 }
-.tr-main {
-  border-top: 1px solid;
-  margin-top: 1rem;
 
-  .delete {
-    cursor: pointer;
-  }
+.delete {
+  cursor: pointer;
 }
 
 .request,
@@ -51,6 +51,11 @@ table {
 }
 
 .email {
+  min-width: 50px;
+  max-width: 50px;
+}
+
+.request {
   min-width: 100px;
   max-width: 100px;
 }
