@@ -20,6 +20,7 @@ import IFeatureRequest from "../../models/IFeatureRequest";
 import IGeneralImprovements from "../../models/IGeneralImprovements";
 import { IBugReport } from "../../models/IBugReport";
 import SectionList from "../lists/SectionList";
+import { BsPersonCircle } from "react-icons/bs";
 
 const LoggedinMain = () => {
   const navigate = useNavigate();
@@ -253,6 +254,8 @@ const LoggedinMain = () => {
               <div className="line"></div>
               <div className="line"></div>
             </div>
+
+            <BsPersonCircle className="profile-nav" />
           </nav>
 
           <main className="loggedin-main-wrapper">
