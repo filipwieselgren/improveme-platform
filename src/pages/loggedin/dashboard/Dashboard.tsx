@@ -1,8 +1,8 @@
 import PartCard from "../../../components/cards/PartCard";
 import PageTitle from "../../../components/wrappers/PageTitle";
-import bee from "../../../assets/bee.png";
-import fr from "../../../assets/fr.png";
-import gi from "../../../assets/increase.png";
+import bee from "../../../assets/bug.png";
+import fr from "../../../assets/newFeature.png";
+import gi from "../../../assets/increase-color.png";
 import IErrends from "../../../models/IErrends";
 import IFeatureRequest from "../../../models/IFeatureRequest";
 import { useEffect, useState } from "react";

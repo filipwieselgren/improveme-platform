@@ -37,7 +37,7 @@ const LoginForm = () => {
 
     setTimeout(() => {
       navigate("/login");
-    }, 2000);
+    }, 3000);
   };
 
   return (
