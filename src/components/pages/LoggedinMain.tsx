@@ -12,13 +12,14 @@ import { useEffect, useState } from "react";
 import IErrends from "../../models/IErrends";
 import CreatePartForm from "../wrappers/CreatePartForm";
 import { VscTriangleLeft } from "react-icons/vsc";
-import { IGetParts, IParts } from "../../models/IPart";
+import { IGetParts, IParts, IShowParts } from "../../models/IPart";
 import bug from "../../assets/bug.png";
 import increaseColor from "../../assets/increase-color.png";
 import activeFr from "../../assets/newFeature.png";
 import IFeatureRequest from "../../models/IFeatureRequest";
 import IGeneralImprovements from "../../models/IGeneralImprovements";
 import { IBugReport } from "../../models/IBugReport";
+import SectionList from "../lists/SectionList";
 
 const LoggedinMain = () => {
   const navigate = useNavigate();
@@ -57,6 +58,23 @@ const LoggedinMain = () => {
     render: "",
   });
 
+  const [showSectionList, setShowSectionList] = useState(false);
+  const [sectionList, setSectionList] = useState<IShowParts>({
+    part: "",
+    requests: [
+      {
+        _id: "",
+        description: "",
+        solvesWhat: "",
+        part: "",
+        email: "",
+        approved: false,
+        status: "",
+        assignedTo: "",
+      },
+    ],
+  });
+
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/errend")
       .then((res) => res.json())
@@ -76,7 +94,8 @@ const LoggedinMain = () => {
     status: string,
     errandId: string,
     endpoint: string,
-    section: string
+    section: string,
+    approved: Boolean
   ) => {
     await fetch(`http://localhost:8000/api/v1/${endpoint}/${errandId}`, {
       method: "PATCH",
@@ -89,6 +108,7 @@ const LoggedinMain = () => {
         assignedTo: assignedTo,
         status: status,
         section: section,
+        approved: approved,
       }),
     });
     setPatch({
@@ -146,7 +166,11 @@ const LoggedinMain = () => {
     setMenu(!menu);
   };
 
-  console.log("errend:", errend.featureRequestSections);
+  const showRequests = (requests: IShowParts) => {
+    setShowSectionList(!showSectionList);
+
+    setSectionList(requests);
+  };
 
   return (
     <>
@@ -155,6 +179,18 @@ const LoggedinMain = () => {
           <CreatePartForm
             tooglePart={tooglePart}
             setRenderPage={setRenderPage}
+          />
+        ) : (
+          <></>
+        )}
+        {showSectionList ? (
+          <SectionList
+            sectionList={sectionList}
+            setShowSectionList={setShowSectionList}
+            showSectionList={showSectionList}
+            patchList={patchList}
+            deleteRequest={deleteRequest}
+            patch={patch}
           />
         ) : (
           <></>
@@ -232,6 +268,7 @@ const LoggedinMain = () => {
                 patchList={patchList}
                 deleteRequest={deleteRequest}
                 setRenderPage={setRenderPage}
+                showRequests={showRequests}
               />
             ) : location.pathname === "/general-improvements" ? (
               <GeneralImprovements
@@ -240,6 +277,7 @@ const LoggedinMain = () => {
                 patchList={patchList}
                 deleteRequest={deleteRequest}
                 setRenderPage={setRenderPage}
+                showRequests={showRequests}
               />
             ) : location.pathname === "/bug-reports" ? (
               <BugReports

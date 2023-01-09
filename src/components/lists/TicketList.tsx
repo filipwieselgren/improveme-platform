@@ -16,7 +16,8 @@ interface ITicketList {
     status: string,
     errandId: string,
     endpoint: string,
-    section: string
+    section: string,
+    approved: Boolean
   ): void;
   endpoint: string;
   deleteRequest(
@@ -114,7 +115,8 @@ const TicketList = (props: ITicketList) => {
                                 e.status,
                                 e._id,
                                 props.endpoint,
-                                e.part
+                                e.part,
+                                e.approved
                               )
                             }
                           >
@@ -151,7 +153,8 @@ const TicketList = (props: ITicketList) => {
                                 s.option,
                                 e._id,
                                 props.endpoint,
-                                e.part
+                                e.part,
+                                e.approved
                               )
                             }
                           >

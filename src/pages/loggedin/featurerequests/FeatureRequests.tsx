@@ -18,7 +18,8 @@ interface IProp {
     status: string,
     errandId: string,
     endpoint: string,
-    section: string
+    section: string,
+    approved: boolean
   ): void;
   deleteRequest(
     errend: IFeatureRequest | IGeneralImprovements | IBugReport,
@@ -29,6 +30,7 @@ interface IProp {
       render: string;
     }>
   >;
+  showRequests(requests: IShowParts): void;
 }
 
 const FeatureRequests = (props: IProp) => {
@@ -45,10 +47,12 @@ const FeatureRequests = (props: IProp) => {
             endpoint={"featurerequest"}
             deleteRequest={props.deleteRequest}
           />
-
           <h4 className="unapproved-h4">Unapproved</h4>
 
-          <MapCard errend={props.errend.featureRequestSections} />
+          <MapCard
+            errend={props.errend.featureRequestSections}
+            showRequests={props.showRequests}
+          />
         </div>
       </div>
     </>

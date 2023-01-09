@@ -7,6 +7,7 @@ import { IGetParts, IParts, IShowParts } from "../../models/IPart";
 
 interface IMapCard {
   errend: IShowParts[];
+  showRequests(requests: IShowParts): void;
 }
 
 const MapCard = (props: IMapCard) => {
@@ -16,8 +17,12 @@ const MapCard = (props: IMapCard) => {
     <>
       <div className="section-card-wrapper">
         {props.errend.map((p: IShowParts, i: number) => {
-          return (
-            <div key={i} className="section-card-border">
+          return p.requests.filter((r) => r.approved === false).length > 0 ? (
+            <div
+              key={i}
+              className="section-card-border"
+              onClick={() => props.showRequests(p)}
+            >
               <div className="section-title">{p.part}</div>
               <div className="amout">
                 {p.requests.filter((r) => r.approved === false).length}
@@ -38,6 +43,8 @@ const MapCard = (props: IMapCard) => {
                 )}
               </div>
             </div>
+          ) : (
+            <></>
           );
         })}
       </div>

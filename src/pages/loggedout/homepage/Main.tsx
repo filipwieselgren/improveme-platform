@@ -8,7 +8,7 @@ const Main = () => {
       <div className="main-wrapper">
         <h1 className="txt-200 main-h1">
           Take controll over your user feedback{" "}
-          <span className="line-h1 txt-400">|</span> develop better products
+          <span className="line-h1 txt-400">|</span> Develop better products
         </h1>
         <section className="section-one">
           Make it easy for your users to provide your development team with

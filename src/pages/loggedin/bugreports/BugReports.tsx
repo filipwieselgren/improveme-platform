@@ -13,7 +13,8 @@ interface IProp {
     status: string,
     errandId: string,
     endpoint: string,
-    section: string
+    section: string,
+    approved: Boolean
   ): void;
   deleteRequest(
     errend: IFeatureRequest | IGeneralImprovements | IBugReport,

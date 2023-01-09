@@ -12,11 +12,12 @@ router.patch("/featurerequest/:id", async (req, res) => {
 
   const assignedTo = req.body.assignedTo;
   const status = req.body.status;
+  const approved = req.body.approved;
   const updateRequest = await FeatureRequestModel.findByIdAndUpdate(
     {
       _id: user_id,
     },
-    { $set: { assignedTo, status: status } }
+    { $set: { assignedTo, status: status, approved: approved } }
   );
 
   res.status(200).send(updateRequest);
