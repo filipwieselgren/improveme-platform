@@ -19,7 +19,6 @@ import activeFr from "../../assets/newFeature.png";
 import IFeatureRequest from "../../models/IFeatureRequest";
 import IGeneralImprovements from "../../models/IGeneralImprovements";
 import { IBugReport } from "../../models/IBugReport";
-import { idText } from "typescript";
 
 const LoggedinMain = () => {
   const navigate = useNavigate();
@@ -31,6 +30,8 @@ const LoggedinMain = () => {
     getCountFeatureRequests: [],
     getCountBugReports: [],
     getCountGeneralImprovements: [],
+    featureRequestSections: [],
+    generalImprovementSections: [],
   });
 
   const [createPart, setCreatePart] = useState<boolean>(false);
@@ -102,8 +103,6 @@ const LoggedinMain = () => {
     errend: IFeatureRequest | IGeneralImprovements | IBugReport,
     endpoint: string
   ) => {
-    console.log("trigger");
-
     await fetch(`http://localhost:8000/api/v1/${endpoint}/${errend._id}`, {
       method: "DELETE",
       headers: {
@@ -146,6 +145,8 @@ const LoggedinMain = () => {
   const openMenu = () => {
     setMenu(!menu);
   };
+
+  console.log("errend:", errend.featureRequestSections);
 
   return (
     <>
@@ -230,6 +231,7 @@ const LoggedinMain = () => {
                 errend={errend}
                 patchList={patchList}
                 deleteRequest={deleteRequest}
+                setRenderPage={setRenderPage}
               />
             ) : location.pathname === "/general-improvements" ? (
               <GeneralImprovements
@@ -237,6 +239,7 @@ const LoggedinMain = () => {
                 errend={errend}
                 patchList={patchList}
                 deleteRequest={deleteRequest}
+                setRenderPage={setRenderPage}
               />
             ) : location.pathname === "/bug-reports" ? (
               <BugReports

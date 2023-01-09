@@ -1,5 +1,5 @@
 import LoggedinMain from "../../../components/pages/LoggedinMain";
-import { IGetParts, IParts, showParts } from "../../../models/IPart";
+import { IGetParts, IParts, IShowParts } from "../../../models/IPart";
 import fr from "../../../assets/newFeature.png";
 import PageTitle from "../../../components/wrappers/PageTitle";
 import TicketList from "../../../components/lists/TicketList";
@@ -24,57 +24,14 @@ interface IProp {
     errend: IFeatureRequest | IGeneralImprovements | IBugReport,
     endpoint: string
   ): void;
+  setRenderPage: React.Dispatch<
+    React.SetStateAction<{
+      render: string;
+    }>
+  >;
 }
 
 const FeatureRequests = (props: IProp) => {
-  const [section, setSection] = useState<showParts[]>([
-    {
-      part: "",
-      requests: [
-        {
-          _id: "",
-          description: "",
-          solvesWhat: "",
-          part: "",
-          email: "",
-          approved: false,
-          status: "",
-          assignedTo: "",
-        },
-      ],
-    },
-  ]);
-
-  useEffect(() => {
-    groupByPart(props.errend.getFeatureRequests);
-  }, []);
-
-  const groupByPart = (
-    items: {
-      _id: string;
-      description: string;
-      solvesWhat: string;
-      part: string;
-      email: string;
-      approved: boolean;
-      status: string;
-      assignedTo: string;
-    }[]
-  ) => {
-    const groups: showParts[] = [];
-
-    items.forEach((item) => {
-      const group = groups.find((g) => g.part === item.part);
-      if (group) {
-        group.requests.push(item);
-      } else {
-        groups.push({ part: item.part, requests: [item] });
-      }
-    });
-
-    setSection(groups);
-  };
-
   return (
     <>
       <div>
@@ -91,7 +48,7 @@ const FeatureRequests = (props: IProp) => {
 
           <h4 className="unapproved-h4">Unapproved</h4>
 
-          <MapCard parts={section} errend={props.errend.getFeatureRequests} />
+          <MapCard errend={props.errend.featureRequestSections} />
         </div>
       </div>
     </>

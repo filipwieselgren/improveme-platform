@@ -19,6 +19,27 @@ router.get("/errend", async (req, res) => {
   const getCountBugReports = await CountBugReportModel.find();
   const getCountGeneralImprovements = await CountGeneralImprovementModel.find();
 
+  const featureRequestSections = [];
+  const generalImprovementSections = [];
+
+  getFeatureRequests.forEach((item) => {
+    const group = featureRequestSections.find((g) => g.part === item.part);
+    if (group) {
+      group.requests.push(item);
+    } else {
+      featureRequestSections.push({ part: item.part, requests: [item] });
+    }
+  });
+
+  getGeneralImprovements.forEach((item) => {
+    const group = generalImprovementSections.find((g) => g.part === item.part);
+    if (group) {
+      group.requests.push(item);
+    } else {
+      generalImprovementSections.push({ part: item.part, requests: [item] });
+    }
+  });
+
   const errend = {
     getFeatureRequests,
     getBugReports,
@@ -26,6 +47,8 @@ router.get("/errend", async (req, res) => {
     getCountFeatureRequests,
     getCountBugReports,
     getCountGeneralImprovements,
+    featureRequestSections,
+    generalImprovementSections,
   };
 
   res.status(200).send(errend);

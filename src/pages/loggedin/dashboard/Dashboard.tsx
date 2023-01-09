@@ -44,8 +44,6 @@ const Dashboard = (props: IDashboard) => {
 
     // Count fixed Bug Reports
 
-    console.log(props.errend.getCountBugReports);
-
     const getFixedBugReports = props.errend.getBugReports.filter(
       (br: IBugReport) => br.status === "Done"
     );

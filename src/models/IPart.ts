@@ -22,7 +22,7 @@ export interface IGetParts {
   genralImprovments: IGeneralImprovements[];
 }
 
-export interface showParts {
+export interface IShowParts {
   part: string;
   requests: [
     {

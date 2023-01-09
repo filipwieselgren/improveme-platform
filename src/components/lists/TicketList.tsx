@@ -27,9 +27,6 @@ interface ITicketList {
 
 const TicketList = (props: ITicketList) => {
   const [user, setUser] = useState<IUser[]>(users);
-  const [email, setEmail] = useState<string>("");
-  const [showUserDropdown, setShowUserDropdown] = useState(false);
-  const [showStatusDropdown, setShowStatusDropdown] = useState(false);
 
   const [statusOptions, setStatusOptions] = useState([
     {
