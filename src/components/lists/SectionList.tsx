@@ -86,7 +86,13 @@ const SectionList = (props: ISectionList) => {
                 </td>
                 <td className="td">{e.description}</td>
                 <td className="td request">{e.solvesWhat}</td>
-                <td className="td email">{e.email}</td>
+
+                <td className="td email">
+                  <a href={`mailto:${e.email}`} target="_blank">
+                    {e.email}{" "}
+                  </a>
+                </td>
+
                 <td
                   className="td approve"
                   onClick={() =>
