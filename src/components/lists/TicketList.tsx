@@ -62,6 +62,18 @@ const TicketList = (props: ITicketList) => {
     setIsStatusOpen(i);
   };
 
+  useEffect(() => {
+    setUser([
+      {
+        id: "0",
+        email: "Not assigned",
+        userName: "",
+        password: "tes123",
+      },
+      ...user,
+    ]);
+  }, []);
+
   return (
     <>
       <div className="outer-wrapper">

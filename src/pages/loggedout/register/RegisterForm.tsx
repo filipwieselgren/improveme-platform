@@ -1,37 +1,99 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { AiOutlineCheckCircle, AiOutlineInfoCircle } from "react-icons/ai";
+import { FaRegTimesCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import logo from "../../../assets/ImproveMe.png";
 import logoConfirm from "../../../assets/ImproveMe.png";
 
-const LoginForm = () => {
-  const navigate = useNavigate();
-  const [user, setUser] = useState({
-    fullName: "",
-    userName: "",
-    password: "",
-  });
+//Validates the userName
+const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 
-  const registerState = (name: string, userName: string, password: string) => {
-    setUser({
-      fullName: name,
-      userName: userName,
-      password: password,
-    });
-  };
-  const [success, setSuccess] = useState<boolean>(false);
-  const registerUser = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+// Validates the password
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+
+const RegisterForm = () => {
+  const navigate = useNavigate();
+  const userRef = useRef<HTMLInputElement>(null);
+  const errRef = useRef<HTMLParagraphElement>(null);
+
+  const [userName, setUserName] = useState("");
+
+  const [validName, setValidName] = useState(false);
+  const [userFocus, setUserNameFocus] = useState(false);
+
+  const [pwd, setPwd] = useState("");
+  const [validPwd, setValidPwd] = useState(false);
+  const [pwdFocus, setPwdFocus] = useState(false);
+
+  const [matchPwd, setMatchPwd] = useState("");
+  const [validMatch, setValidMatch] = useState(false);
+  const [matchFocus, setMatchFocus] = useState(false);
+
+  const [errMsg, setErrMsg] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    if (userRef.current != null) {
+      console.log("trigger");
+
+      userRef.current.focus();
+    }
+  }, []);
+
+  useEffect(() => {
+    const result = USER_REGEX.test(userName);
+    console.log(result);
+    console.log(userName);
+    setValidName(result);
+  }, [userName]);
+
+  useEffect(() => {
+    const result = PWD_REGEX.test(pwd);
+    console.log(result);
+    console.log(pwd);
+    setValidPwd(result);
+    const match = pwd === matchPwd;
+    setValidMatch(match);
+  }, [pwd, matchPwd]);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [userName, pwd, matchPwd]);
+
+  // const registerState = (name: string, userName: string, password: string) => {
+  //   setUserName({
+  //     fullName: name,
+  //     userName: userName,
+  //     password: password,
+  //   });
+  // };
+
+  const registerUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await fetch("http://localhost:8000/api/v1/register", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        mode: "no-cors",
-      },
-      body: JSON.stringify(user),
-    });
+
+    // const v1 = USER_REGEX.test(userName);
+    // const v2 = PWD_REGEX.test(pwd);
+    // if (!v1 || v2) {
+    //   setErrMsg("Invalid Entry");
+    //   return;
+    // }
+
+    try {
+      await fetch("http://localhost:8000/api/v1/register", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          mode: "no-cors",
+        },
+        body: JSON.stringify({ userName, pwd }),
+      });
+    } catch (error: any) {
+      if (error.status === 409) {
+        console.log("error:");
+      }
+      return;
+    }
 
     setSuccess(true);
 
@@ -54,39 +116,126 @@ const LoginForm = () => {
                   className="improveme-face"
                 />
               </h1>
-              <form>
-                <label htmlFor="username" className="form-label">
+              <p
+                ref={errRef}
+                className={errMsg ? "errMsg" : "offScreen"}
+                aria-live="assertive"
+              ></p>
+              <form onSubmit={(e) => registerUser(e)}>
+                {/* <label htmlFor="username" className="form-label">
                   Full name
                 </label>
-                <input
-                  id="fullname"
-                  type="text"
-                  required
-                  onChange={(e) => registerState(e.target.value, "", "")}
-                />
+                <input id="fullname" type="text" required /> */}
                 <label htmlFor="username" className="form-label">
-                  Username
+                  Username{" "}
+                  <span className={validName ? "valid" : "hide"}>
+                    <AiOutlineCheckCircle />
+                  </span>{" "}
+                  <span className={validName || !userName ? "hide" : "invalid"}>
+                    <FaRegTimesCircle />
+                  </span>
                 </label>
                 <input
-                  id="username"
                   type="text"
+                  id="username"
+                  ref={userRef}
+                  autoComplete="off"
+                  onChange={(e) => setUserName(e.target.value)}
                   required
-                  onChange={(e) =>
-                    registerState(user.fullName, e.target.value, "")
-                  }
+                  aria-invalid={validName ? "false" : "true"}
+                  aria-describedby="uidnote"
+                  onFocus={() => setUserNameFocus(true)}
+                  onBlur={() => setUserNameFocus(false)}
                 />
+                <p
+                  id="uidnote"
+                  className={
+                    userFocus && userName && !validName
+                      ? "instructions"
+                      : "offscreen"
+                  }
+                >
+                  <AiOutlineInfoCircle /> 4 to 24 characters. <br />
+                  Must begin with a letter. <br />
+                  Letters, numbers, underscores, hyphens allowed.
+                </p>
                 <label htmlFor="password" className="form-label">
                   Password
+                  <span className={validPwd ? "valid" : "hide"}>
+                    <AiOutlineCheckCircle />
+                  </span>{" "}
+                  <span className={validPwd || !pwd ? "hide" : "invalid"}>
+                    <FaRegTimesCircle />
+                  </span>
                 </label>
                 <input
-                  id="password"
                   type="password"
+                  id="password"
+                  onChange={(e) => setPwd(e.target.value)}
                   required
-                  onChange={(e) =>
-                    registerState(user.fullName, user.userName, e.target.value)
-                  }
+                  aria-invalid={validPwd ? "false" : "true"}
+                  aria-describedby="pwdnote"
+                  onFocus={() => setPwdFocus(true)}
+                  onBlur={() => setPwdFocus(false)}
                 />
-                <button type="submit" onClick={(e) => registerUser(e)}>
+                <p
+                  id="pwdnote"
+                  className={
+                    pwdFocus && !validPwd ? "instructions" : "offscreen"
+                  }
+                >
+                  <AiOutlineInfoCircle /> 8 to 24 characters. <br />
+                  Must include uppercase and lowercase letters, a number and a
+                  special character. <br />
+                  <br />
+                  Allowed special characters:{" "}
+                  <span aria-label="exclamation-mark">!</span>
+                  <span aria-label="at symbol">@</span>
+                  <span aria-label="hashtag">#</span>
+                  <span aria-label="dollar sign">$</span>
+                  <span aria-label="percent">%</span>
+                </p>
+
+                <label htmlFor="confirm_pwd" className="form-label">
+                  Confirm Password
+                  <span className={validMatch && matchPwd ? "valid" : "hide"}>
+                    <AiOutlineCheckCircle />
+                  </span>
+                  <span
+                    className={validMatch || !matchPwd ? "hide" : "invalid"}
+                  >
+                    <FaRegTimesCircle />
+                  </span>
+                </label>
+                <input
+                  type="password"
+                  id="confirm_pwd"
+                  onChange={(e) => setMatchPwd(e.target.value)}
+                  required
+                  aria-invalid={validMatch ? "false" : "true"}
+                  aria-describedby="confirmnote"
+                  onFocus={() => setMatchFocus(true)}
+                  onBlur={() => setMatchFocus(false)}
+                />
+                <p
+                  id="confirmnote"
+                  className={
+                    matchFocus && !validMatch ? "instructions" : "offscreen"
+                  }
+                >
+                  <AiOutlineInfoCircle /> Must match the first password input
+                  field.
+                </p>
+                <button
+                  disabled={
+                    !validName || !validPwd || !validMatch ? true : false
+                  }
+                  className={
+                    !validName || !validPwd || !validMatch
+                      ? "disabled-btn"
+                      : "active-btn"
+                  }
+                >
                   Create account
                 </button>
               </form>
@@ -95,7 +244,7 @@ const LoginForm = () => {
             <>
               <h3 className="success-header">Your account has been created</h3>
               <p className="success-ptag">
-                You will be directed to the login page
+                You will be redirected to the login page
               </p>
               <img src={logoConfirm} alt="Logo" className="success-img" />
             </>
@@ -106,4 +255,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

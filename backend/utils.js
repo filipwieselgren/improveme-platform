@@ -5,6 +5,13 @@ const hashedPassword = (password) => {
   return hashValue;
 };
 
+const comparePassword = (password, hash) => {
+  const correctPassword = bcrypt.compareSync(password, hash);
+
+  return correctPassword;
+};
+
 module.exports = {
   hashedPassword,
+  comparePassword,
 };
