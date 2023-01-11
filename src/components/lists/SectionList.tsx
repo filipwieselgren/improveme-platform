@@ -91,8 +91,8 @@ const SectionList = (props: ISectionList) => {
                     Open
                   </button>
                 </td>
-                <td className="td">{err.description}</td>
-                <td className="td request">{err.solvesWhat}</td>
+                <td className="td">{err.description.slice(0, 20)}</td>
+                <td className="td request">{err.solvesWhat.slice(0, 20)}</td>
 
                 <td className="td email">
                   <a href={`mailto:${err.email}`} target="_blank">

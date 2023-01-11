@@ -27,10 +27,12 @@ import { IErrendCard } from "../../models/IErrendCard";
 const LoggedinMain = () => {
   const navigate = useNavigate();
   const location = useLocation();
+
   const [createPart, setCreatePart] = useState(false);
   const [menu, setMenu] = useState(false);
   const [showSectionList, setShowSectionList] = useState(false);
   const [showErrendCard, setShowErrendCard] = useState(false);
+
   const [errend, setErrend] = useState<IErrends>({
     getBugReports: [],
     getFeatureRequests: [],
@@ -41,7 +43,6 @@ const LoggedinMain = () => {
     featureRequestSections: [],
     generalImprovementSections: [],
   });
-
   const [parts, setParts] = useState<IGetParts[]>([
     {
       _id: "",
@@ -51,14 +52,12 @@ const LoggedinMain = () => {
       genralImprovments: [],
     },
   ]);
-
   const [patch, setPatch] = useState({
     email: "",
     id: "",
     endpoint: "",
     status: "",
   });
-
   const [sectionList, setSectionList] = useState<IShowParts>({
     part: "",
     requests: [
@@ -89,7 +88,6 @@ const LoggedinMain = () => {
     reproduce: "",
     status: "",
   });
-
   const [renderPage, setRenderPage] = useState({
     render: "",
   });

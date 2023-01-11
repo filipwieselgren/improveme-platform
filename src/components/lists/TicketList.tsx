@@ -114,7 +114,7 @@ const TicketList = (props: ITicketList) => {
                     </button>
                   </td>
                   <td className="td">{err.part}</td>
-                  <td className="td request">{err.description}</td>
+                  <td className="td request">{err.description.slice(0, 20)}</td>
                   <td className="td email" onClick={() => toggle(i)}>
                     <div className="dropdown">
                       <button className="dropbtn">
