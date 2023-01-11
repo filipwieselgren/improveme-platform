@@ -35,7 +35,7 @@ const LoginForm = () => {
 
     setTimeout(() => {
       navigate("/dashboard");
-    }, 500);
+    }, 300);
   };
   return (
     <>
