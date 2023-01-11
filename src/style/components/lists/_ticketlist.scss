@@ -1,10 +1,12 @@
+.table-wrapper {
+  // overflow-x: scroll;
+}
+
 table {
-  min-width: max-content;
   min-width: 100%;
-  // margin-top: 2rem;
+
   font-size: 1.2rem;
   font-weight: 200;
-  overflow: scroll;
 
   tr > th {
     font-weight: 300;
@@ -15,18 +17,12 @@ table {
 }
 
 th {
-  // position: sticky;
-  // top: 0px;
   padding-bottom: 10px;
-}
-
-.td {
-  text-align: center;
-  padding: 1rem 0;
+  overflow: hidden;
 }
 
 .td-open-errend {
-  max-width: 40px;
+  padding: 0.5rem;
 }
 
 .td-id {
@@ -37,26 +33,16 @@ th {
   cursor: pointer;
 }
 
+.status {
+  overflow: visible;
+}
+
 .request,
 .email,
 .status {
   cursor: pointer;
 }
 
-.status {
-  min-width: 50px;
-  max-width: 50px;
-}
-
-.email {
-  min-width: 50px;
-  max-width: 50px;
-}
-
-.request {
-  min-width: 100px;
-  max-width: 100px;
-}
 .done {
   background-color: rgba(119, 189, 86, 0.62);
 }
@@ -93,10 +79,11 @@ th {
   background-color: #333;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+
   border: none;
   border-radius: 5px;
   padding: 0.5rem;
+  z-index: 20;
 
   cursor: pointer;
   position: absolute;

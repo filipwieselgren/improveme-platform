@@ -86,6 +86,11 @@ a {
   }
 }
 
+.td {
+  text-align: center;
+  padding: 1rem;
+  width: 200px;
+}
 .section-list-border {
   border: solid;
   border-radius: 5px;
@@ -96,10 +101,11 @@ a {
 
   .table-section-list {
     border-collapse: collapse;
+    overflow: scroll;
   }
-  .td-open-errend {
-    max-width: 40px;
-  }
+  // .td-open-errend {
+  //   max-width: 40px;
+  // }
   .section-list-header {
     display: flex;
     justify-content: space-between;

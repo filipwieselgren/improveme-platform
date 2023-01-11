@@ -298,6 +298,7 @@ const LoggedinMain = () => {
             errendCard={errendCard}
             setShowErrendCard={setShowErrendCard}
             showErrendCard={showErrendCard}
+            deleteRequest={deleteRequest}
           />
         ) : (
           <></>
