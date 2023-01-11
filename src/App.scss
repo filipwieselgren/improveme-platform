@@ -97,6 +97,9 @@ a {
   .table-section-list {
     border-collapse: collapse;
   }
+  .td-open-errend {
+    max-width: 40px;
+  }
   .section-list-header {
     display: flex;
     justify-content: space-between;
@@ -105,7 +108,7 @@ a {
     .close-section-list {
       background-color: #f8fafb;
       cursor: pointer;
-      padding: 1rem 4rem;
+      padding: 0.5rem 2rem;
       box-shadow: 1px 1px 2px #333;
       border-radius: 5px;
       border: none;
@@ -139,5 +142,66 @@ a {
 
   .tr {
     border-bottom: solid;
+  }
+}
+
+.oppen-errend-btn {
+  background-color: #f8fafb;
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+  box-shadow: 1px 1px 2px #333;
+  border-radius: 5px;
+  border: none;
+
+  &:hover {
+    box-shadow: 0.5px 0.5px 2px #333;
+    cursor: pointer;
+  }
+
+  &:active {
+    -webkit-box-shadow: inset 0px 0px 4px #c1c1c1;
+    -moz-box-shadow: inset 0px 0px 4px #c1c1c1;
+    box-shadow: inset 0px 0px 4px #c1c1c1;
+    outline: none;
+  }
+}
+
+.errend-card-border {
+  border: solid;
+  border-radius: 5px;
+  width: 80%;
+  background-color: #fff;
+  padding: 2rem;
+  min-height: 50%;
+
+  .delete-request {
+    text-align: center;
+  }
+
+  .section-list-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+
+    .close-section-list {
+      background-color: #f8fafb;
+      cursor: pointer;
+      padding: 0.5rem 2rem;
+      box-shadow: 1px 1px 2px #333;
+      border-radius: 5px;
+      border: none;
+
+      &:hover {
+        box-shadow: 0.5px 0.5px 2px #333;
+        cursor: pointer;
+      }
+
+      &:active {
+        -webkit-box-shadow: inset 0px 0px 4px #c1c1c1;
+        -moz-box-shadow: inset 0px 0px 4px #c1c1c1;
+        box-shadow: inset 0px 0px 4px #c1c1c1;
+        outline: none;
+      }
+    }
   }
 }

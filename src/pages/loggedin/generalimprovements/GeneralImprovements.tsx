@@ -31,6 +31,8 @@ interface IProp {
     }>
   >;
   showRequests(requests: IShowParts): void;
+
+  showErrend(err: IFeatureRequest | IGeneralImprovements | IBugReport): void;
 }
 
 const GeneralImprovements = (props: IProp) => {
@@ -45,11 +47,13 @@ const GeneralImprovements = (props: IProp) => {
           patchList={props.patchList}
           endpoint={"generalimprovement"}
           deleteRequest={props.deleteRequest}
+          showErrend={props.showErrend}
         />
         <h4 className="unapproved-h4">Unapproved</h4>
         <MapCard
           errend={props.errend.generalImprovementSections}
           showRequests={props.showRequests}
+          showErrend={props.showErrend}
         />
       </div>
     </div>

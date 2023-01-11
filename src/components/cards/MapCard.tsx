@@ -8,6 +8,7 @@ import { IGetParts, IParts, IShowParts } from "../../models/IPart";
 interface IMapCard {
   errend: IShowParts[];
   showRequests(requests: IShowParts): void;
+  showErrend(err: IFeatureRequest | IGeneralImprovements | IBugReport): void;
 }
 
 const MapCard = (props: IMapCard) => {

@@ -3,6 +3,7 @@ import { AiOutlineCheckCircle } from "react-icons/ai";
 import { BsCaretDown, BsTrash } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 import { IBugReport } from "../../models/IBugReport";
+import { IErrendCard } from "../../models/IErrendCard";
 import IFeatureRequest from "../../models/IFeatureRequest";
 import IGeneralImprovements from "../../models/IGeneralImprovements";
 import { IShowParts } from "../../models/IPart";
@@ -31,6 +32,7 @@ interface ISectionList {
     status: string;
   };
   setSection: React.Dispatch<React.SetStateAction<string>>;
+  showErrend(err: IFeatureRequest | IGeneralImprovements | IBugReport): void;
 }
 
 const SectionList = (props: ISectionList) => {
@@ -51,6 +53,8 @@ const SectionList = (props: ISectionList) => {
     ],
   });
 
+  const [section, setSection] = useState(props.sectionList.part);
+
   useEffect(() => {
     setList(props.sectionList);
   }, [props.patch]);
@@ -59,7 +63,7 @@ const SectionList = (props: ISectionList) => {
     <div className="CreatePartForm-wrapper">
       <div className="section-list-border">
         <div className="section-list-header">
-          {list.part}
+          {section}
           <button
             className="close-section-list"
             onClick={() => props.setShowSectionList(!props.showSectionList)}
@@ -76,18 +80,23 @@ const SectionList = (props: ISectionList) => {
             <th></th>
             <th></th>
           </tr>
-          {props.sectionList.requests.map((e, i) => {
-            return e.approved === false ? (
-              <tr className="tr" key={e._id} id={e._id}>
-                <td className="td td-checkbox">
-                  <input type="checkbox" className="checkbox" value={e._id} />
+          {props.sectionList.requests.map((err, i) => {
+            return err.approved === false && err._id !== "" ? (
+              <tr className="tr" key={err._id} id={err._id}>
+                <td className="td td-open-errend">
+                  <button
+                    className="oppen-errend-btn"
+                    onClick={() => props.showErrend(err)}
+                  >
+                    Open
+                  </button>
                 </td>
-                <td className="td">{e.description}</td>
-                <td className="td request">{e.solvesWhat}</td>
+                <td className="td">{err.description}</td>
+                <td className="td request">{err.solvesWhat}</td>
 
                 <td className="td email">
-                  <a href={`mailto:${e.email}`} target="_blank">
-                    {e.email}{" "}
+                  <a href={`mailto:${err.email}`} target="_blank">
+                    {err.email}{" "}
                   </a>
                 </td>
 
@@ -95,26 +104,26 @@ const SectionList = (props: ISectionList) => {
                   className="td approve"
                   onClick={() =>
                     props.patchList(
-                      e.assignedTo,
-                      e.status,
-                      e._id,
+                      err.assignedTo,
+                      err.status,
+                      err._id,
                       location.pathname === "/feature-requests"
                         ? "/featurerequest"
                         : "/generalimprovement",
-                      e.part,
+                      err.part,
                       true,
                       props.sectionList
                     )
                   }
                 >
                   <AiOutlineCheckCircle />{" "}
-                  <span className="approve-span"> Approve</span>
+                  <span className="approve-span"> Approve </span>
                 </td>
                 <td
                   className="delete-request"
                   onClick={() =>
                     props.deleteRequest(
-                      e,
+                      err,
                       location.pathname === "/feature-requests"
                         ? "/featurerequest"
                         : "/generalimprovement"

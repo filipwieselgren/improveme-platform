@@ -6,6 +6,7 @@ import { IBugReport } from "../../../models/IBugReport";
 import IFeatureRequest from "../../../models/IFeatureRequest";
 import IGeneralImprovements from "../../../models/IGeneralImprovements";
 import { IShowParts } from "../../../models/IPart";
+import { IErrendCard } from "../../../models/IErrendCard";
 
 interface IProp {
   errend: IErrends;
@@ -22,6 +23,7 @@ interface IProp {
     errend: IFeatureRequest | IGeneralImprovements | IBugReport,
     endpoint: string
   ): void;
+  showErrend(err: IFeatureRequest | IGeneralImprovements | IBugReport): void;
 }
 
 const BugReports = (props: IProp) => {
@@ -34,6 +36,7 @@ const BugReports = (props: IProp) => {
         patchList={props.patchList}
         endpoint={"bugreport"}
         deleteRequest={props.deleteRequest}
+        showErrend={props.showErrend}
       />
     </div>
   );

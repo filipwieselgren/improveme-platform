@@ -21,10 +21,16 @@ import IGeneralImprovements from "../../models/IGeneralImprovements";
 import { IBugReport } from "../../models/IBugReport";
 import SectionList from "../lists/SectionList";
 import { BsPersonCircle } from "react-icons/bs";
+import ErrendCard from "../cards/ErrendCard";
+import { IErrendCard } from "../../models/IErrendCard";
 
 const LoggedinMain = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [createPart, setCreatePart] = useState(false);
+  const [menu, setMenu] = useState(false);
+  const [showSectionList, setShowSectionList] = useState(false);
+  const [showErrendCard, setShowErrendCard] = useState(false);
   const [errend, setErrend] = useState<IErrends>({
     getBugReports: [],
     getFeatureRequests: [],
@@ -36,8 +42,6 @@ const LoggedinMain = () => {
     generalImprovementSections: [],
   });
 
-  const [createPart, setCreatePart] = useState<boolean>(false);
-  const [menu, setMenu] = useState(false);
   const [parts, setParts] = useState<IGetParts[]>([
     {
       _id: "",
@@ -55,11 +59,6 @@ const LoggedinMain = () => {
     status: "",
   });
 
-  const [renderPage, setRenderPage] = useState({
-    render: "",
-  });
-
-  const [showSectionList, setShowSectionList] = useState(false);
   const [sectionList, setSectionList] = useState<IShowParts>({
     part: "",
     requests: [
@@ -75,6 +74,26 @@ const LoggedinMain = () => {
       },
     ],
   });
+  const [errendCard, setErrendCard] = useState<
+    IFeatureRequest | IGeneralImprovements | IBugReport
+  >({
+    _id: "",
+    approved: false,
+    assignedTo: "",
+    description: "",
+    background: "",
+    files: [],
+    email: "",
+    part: "",
+    solvesWhat: "",
+    reproduce: "",
+    status: "",
+  });
+
+  const [renderPage, setRenderPage] = useState({
+    render: "",
+  });
+
   const [section, setSection] = useState("");
   const [page, setPage] = useState("");
 
@@ -96,17 +115,17 @@ const LoggedinMain = () => {
 
   useEffect(() => {
     if (page === "/featurerequest") {
-      for (let i = 0; i < errend.featureRequestSections.length; i++) {
-        if (errend.featureRequestSections[i].part === section) {
-          setSectionList(errend.featureRequestSections[i]);
+      errend.featureRequestSections.forEach((fr) => {
+        if (fr.part === section) {
+          setSectionList(fr);
         }
-      }
+      });
     } else {
-      for (let i = 0; i < errend.generalImprovementSections.length; i++) {
-        if (errend.generalImprovementSections[i].part === section) {
-          setSectionList(errend.generalImprovementSections[i]);
+      errend.generalImprovementSections.forEach((gi) => {
+        if (gi.part === section) {
+          setSectionList(gi);
         }
-      }
+      });
     }
   }, [errend]);
 
@@ -146,21 +165,64 @@ const LoggedinMain = () => {
   };
 
   const deleteRequest = async (
-    errend: IFeatureRequest | IGeneralImprovements | IBugReport,
+    err: IFeatureRequest | IGeneralImprovements | IBugReport,
     endpoint: string
   ) => {
-    await fetch(`http://localhost:8000/api/v1/${endpoint}/${errend._id}`, {
+    await fetch(`http://localhost:8000/api/v1/${endpoint}/${err._id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         mode: "no-cors",
       },
-      body: JSON.stringify({ _id: errend._id }),
+      body: JSON.stringify({ _id: err._id }),
     });
-    if (errend.status === "Done") {
-      postToStatistic(errend, endpoint);
+    if (err.status === "Done") {
+      postToStatistic(err, endpoint);
     }
+
+    errend.featureRequestSections.forEach((fr) => {
+      if (fr.part === err.part && fr.requests.length === 1) {
+        setSectionList({
+          part: "",
+          requests: [
+            {
+              _id: "",
+              description: "",
+              solvesWhat: "",
+              part: "",
+              email: "",
+              approved: false,
+              status: "",
+              assignedTo: "",
+            },
+          ],
+        });
+      }
+    });
+    errend.generalImprovementSections.forEach((gi) => {
+      if (gi.part === err.part && gi.requests.length === 1) {
+        setSectionList({
+          part: "",
+          requests: [
+            {
+              _id: "",
+              description: "",
+              solvesWhat: "",
+              part: "",
+              email: "",
+              approved: false,
+              status: "",
+              assignedTo: "",
+            },
+          ],
+        });
+      }
+    });
+
+    setSection(err.part);
+    setPage(endpoint);
+
     setPatch({
       email: "",
       id: "",
@@ -198,6 +260,13 @@ const LoggedinMain = () => {
     setSectionList(requests);
   };
 
+  const showErrend = (
+    err: IFeatureRequest | IGeneralImprovements | IBugReport
+  ) => {
+    setErrendCard(err);
+    setShowErrendCard(!showErrendCard);
+  };
+
   return (
     <>
       <div className="wrapper">
@@ -218,6 +287,17 @@ const LoggedinMain = () => {
             deleteRequest={deleteRequest}
             patch={patch}
             setSection={setSection}
+            showErrend={showErrend}
+          />
+        ) : (
+          <></>
+        )}
+
+        {showErrendCard ? (
+          <ErrendCard
+            errendCard={errendCard}
+            setShowErrendCard={setShowErrendCard}
+            showErrendCard={showErrendCard}
           />
         ) : (
           <></>
@@ -298,6 +378,7 @@ const LoggedinMain = () => {
                 deleteRequest={deleteRequest}
                 setRenderPage={setRenderPage}
                 showRequests={showRequests}
+                showErrend={showErrend}
               />
             ) : location.pathname === "/general-improvements" ? (
               <GeneralImprovements
@@ -307,12 +388,14 @@ const LoggedinMain = () => {
                 deleteRequest={deleteRequest}
                 setRenderPage={setRenderPage}
                 showRequests={showRequests}
+                showErrend={showErrend}
               />
             ) : location.pathname === "/bug-reports" ? (
               <BugReports
                 errend={errend}
                 patchList={patchList}
                 deleteRequest={deleteRequest}
+                showErrend={showErrend}
               />
             ) : (
               <></>

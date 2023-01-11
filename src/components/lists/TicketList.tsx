@@ -8,6 +8,7 @@ import IGeneralImprovements from "../../models/IGeneralImprovements";
 import { BsCaretDown } from "react-icons/bs";
 import { IBugReport } from "../../models/IBugReport";
 import { IShowParts } from "../../models/IPart";
+import { IErrendCard } from "../../models/IErrendCard";
 
 interface ITicketList {
   errend: IFeatureRequest[] | IGeneralImprovements[] | IBugReport[];
@@ -26,6 +27,7 @@ interface ITicketList {
     errend: IFeatureRequest | IGeneralImprovements | IBugReport,
     endpoint: string
   ): void;
+  showErrend(err: IFeatureRequest | IGeneralImprovements | IBugReport): void;
 }
 
 const TicketList = (props: ITicketList) => {
@@ -90,28 +92,35 @@ const TicketList = (props: ITicketList) => {
               <th></th>
             </tr>
 
-            {props.errend.map((e, i) => {
-              return e.approved === true ? (
+            {props.errend.map((err, i) => {
+              return err.approved === true ? (
                 <tr
-                  key={e._id}
+                  key={err._id}
                   className={
-                    e.status === "Done"
+                    err.status === "Done"
                       ? "tr-main done"
-                      : e.status === "In progress"
+                      : err.status === "In progress"
                       ? "tr-main in-progress"
                       : "tr-main issue"
                   }
-                  id={e._id}
+                  id={err._id}
                 >
-                  <td className="td td-checkbox">
-                    <input type="checkbox" className="checkbox" value={e._id} />
+                  <td className="td td-open-errend">
+                    <button
+                      className="oppen-errend-btn"
+                      onClick={() => props.showErrend(err)}
+                    >
+                      Open
+                    </button>
                   </td>
-                  <td className="td">{e.part}</td>
-                  <td className="td request">{e.description}</td>
+                  <td className="td">{err.part}</td>
+                  <td className="td request">{err.description}</td>
                   <td className="td email" onClick={() => toggle(i)}>
                     <div className="dropdown">
                       <button className="dropbtn">
-                        {e.assignedTo === "" ? "Not assigned" : e.assignedTo}
+                        {err.assignedTo === ""
+                          ? "Not assigned"
+                          : err.assignedTo}
                       </button>
                       <BsCaretDown className="arrow-down" />
                       <div
@@ -129,11 +138,11 @@ const TicketList = (props: ITicketList) => {
                                 onClick={() =>
                                   props.patchList(
                                     u.email,
-                                    e.status,
-                                    e._id,
+                                    err.status,
+                                    err._id,
                                     props.endpoint,
-                                    e.part,
-                                    e.approved,
+                                    err.part,
+                                    err.approved,
                                     {
                                       part: "",
                                       requests: [
@@ -163,7 +172,7 @@ const TicketList = (props: ITicketList) => {
                   <td className="td status" onClick={() => toggleStatus(i)}>
                     <div className="dropdown">
                       <button className="dropbtn">
-                        {e.status === "" ? "Not started" : e.status}
+                        {err.status === "" ? "Not started" : err.status}
                       </button>
                       <BsCaretDown className="arrow-down" />
                       <div
@@ -181,12 +190,12 @@ const TicketList = (props: ITicketList) => {
                                 key={s.id}
                                 onClick={() =>
                                   props.patchList(
-                                    e.assignedTo,
+                                    err.assignedTo,
                                     s.option,
-                                    e._id,
+                                    err._id,
                                     props.endpoint,
-                                    e.part,
-                                    e.approved,
+                                    err.part,
+                                    err.approved,
                                     {
                                       part: "",
                                       requests: [
@@ -215,7 +224,7 @@ const TicketList = (props: ITicketList) => {
                   </td>
                   <td
                     className="td delete"
-                    onClick={() => props.deleteRequest(e, props.endpoint)}
+                    onClick={() => props.deleteRequest(err, props.endpoint)}
                   >
                     <BsTrash />
                   </td>
