@@ -75,11 +75,15 @@ const LoggedinMain = () => {
       },
     ],
   });
+  const [section, setSection] = useState("");
+  const [page, setPage] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:8000/api/v1/errend")
       .then((res) => res.json())
-      .then((data) => setErrend(data));
+      .then((data) => {
+        setErrend(data);
+      });
   }, [patch]);
 
   useEffect(() => {
@@ -90,13 +94,30 @@ const LoggedinMain = () => {
       });
   }, [renderPage]);
 
+  useEffect(() => {
+    if (page === "/featurerequest") {
+      for (let i = 0; i < errend.featureRequestSections.length; i++) {
+        if (errend.featureRequestSections[i].part === section) {
+          setSectionList(errend.featureRequestSections[i]);
+        }
+      }
+    } else {
+      for (let i = 0; i < errend.generalImprovementSections.length; i++) {
+        if (errend.generalImprovementSections[i].part === section) {
+          setSectionList(errend.generalImprovementSections[i]);
+        }
+      }
+    }
+  }, [errend]);
+
   const patchList = async (
     assignedTo: string,
     status: string,
     errandId: string,
     endpoint: string,
     section: string,
-    approved: Boolean
+    approved: Boolean,
+    sectionList: IShowParts
   ) => {
     await fetch(`http://localhost:8000/api/v1/${endpoint}/${errandId}`, {
       method: "PATCH",
@@ -112,6 +133,10 @@ const LoggedinMain = () => {
         approved: approved,
       }),
     });
+
+    setSection(sectionList.part);
+    setPage(endpoint);
+
     setPatch({
       email: "",
       id: "",
@@ -192,6 +217,7 @@ const LoggedinMain = () => {
             patchList={patchList}
             deleteRequest={deleteRequest}
             patch={patch}
+            setSection={setSection}
           />
         ) : (
           <></>

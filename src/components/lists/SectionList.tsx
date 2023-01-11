@@ -17,7 +17,8 @@ interface ISectionList {
     errandId: string,
     endpoint: string,
     section: string,
-    approved: Boolean
+    approved: Boolean,
+    sectionList: IShowParts
   ): void;
   deleteRequest(
     errend: IFeatureRequest | IGeneralImprovements | IBugReport,
@@ -29,6 +30,7 @@ interface ISectionList {
     endpoint: string;
     status: string;
   };
+  setSection: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const SectionList = (props: ISectionList) => {
@@ -50,12 +52,8 @@ const SectionList = (props: ISectionList) => {
   });
 
   useEffect(() => {
-    console.log("trigger");
-
     setList(props.sectionList);
   }, [props.patch]);
-
-  console.log("list:", list);
 
   return (
     <div className="CreatePartForm-wrapper">
@@ -78,7 +76,7 @@ const SectionList = (props: ISectionList) => {
             <th></th>
             <th></th>
           </tr>
-          {list.requests.map((e, i) => {
+          {props.sectionList.requests.map((e, i) => {
             return e.approved === false ? (
               <tr className="tr" key={e._id} id={e._id}>
                 <td className="td td-checkbox">
@@ -104,7 +102,8 @@ const SectionList = (props: ISectionList) => {
                         ? "/featurerequest"
                         : "/generalimprovement",
                       e.part,
-                      true
+                      true,
+                      props.sectionList
                     )
                   }
                 >

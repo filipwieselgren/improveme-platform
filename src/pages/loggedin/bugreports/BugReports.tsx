@@ -5,6 +5,7 @@ import IErrends from "../../../models/IErrends";
 import { IBugReport } from "../../../models/IBugReport";
 import IFeatureRequest from "../../../models/IFeatureRequest";
 import IGeneralImprovements from "../../../models/IGeneralImprovements";
+import { IShowParts } from "../../../models/IPart";
 
 interface IProp {
   errend: IErrends;
@@ -14,7 +15,8 @@ interface IProp {
     errandId: string,
     endpoint: string,
     section: string,
-    approved: Boolean
+    approved: Boolean,
+    sectionList: IShowParts
   ): void;
   deleteRequest(
     errend: IFeatureRequest | IGeneralImprovements | IBugReport,

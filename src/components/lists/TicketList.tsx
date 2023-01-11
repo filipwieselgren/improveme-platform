@@ -7,6 +7,7 @@ import IFeatureRequest from "../../models/IFeatureRequest";
 import IGeneralImprovements from "../../models/IGeneralImprovements";
 import { BsCaretDown } from "react-icons/bs";
 import { IBugReport } from "../../models/IBugReport";
+import { IShowParts } from "../../models/IPart";
 
 interface ITicketList {
   errend: IFeatureRequest[] | IGeneralImprovements[] | IBugReport[];
@@ -17,7 +18,8 @@ interface ITicketList {
     errandId: string,
     endpoint: string,
     section: string,
-    approved: Boolean
+    approved: Boolean,
+    sectionList: IShowParts
   ): void;
   endpoint: string;
   deleteRequest(
@@ -131,7 +133,22 @@ const TicketList = (props: ITicketList) => {
                                     e._id,
                                     props.endpoint,
                                     e.part,
-                                    e.approved
+                                    e.approved,
+                                    {
+                                      part: "",
+                                      requests: [
+                                        {
+                                          _id: "",
+                                          description: "",
+                                          solvesWhat: "",
+                                          part: "",
+                                          email: "",
+                                          approved: false,
+                                          status: "",
+                                          assignedTo: "",
+                                        },
+                                      ],
+                                    }
                                   )
                                 }
                               >
@@ -169,7 +186,22 @@ const TicketList = (props: ITicketList) => {
                                     e._id,
                                     props.endpoint,
                                     e.part,
-                                    e.approved
+                                    e.approved,
+                                    {
+                                      part: "",
+                                      requests: [
+                                        {
+                                          _id: "",
+                                          description: "",
+                                          solvesWhat: "",
+                                          part: "",
+                                          email: "",
+                                          approved: false,
+                                          status: "",
+                                          assignedTo: "",
+                                        },
+                                      ],
+                                    }
                                   )
                                 }
                               >
