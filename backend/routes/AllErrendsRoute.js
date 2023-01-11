@@ -29,8 +29,6 @@ router.get("/errend", async (req, res) => {
     } else {
       featureRequestSections.push({ part: item.part, requests: [item] });
     }
-
-    console.log("backend");
   });
 
   getGeneralImprovements.forEach((item) => {

@@ -35,7 +35,7 @@ const LoginForm = () => {
 
     setTimeout(() => {
       navigate("/dashboard");
-    }, 3000);
+    }, 500);
   };
   return (
     <>
@@ -43,7 +43,11 @@ const LoginForm = () => {
         <div className="form-wrapper">
           <h1 className="txt-300">
             Fill in the information to login
-            <img src={logo} alt="improveMe face" className="improveme-face" />
+            <img
+              src={logo}
+              alt="improveMe face"
+              className={success ? "improveme-face move" : "improveme-face"}
+            />
           </h1>
           <form>
             <label htmlFor="username" className="form-label">
