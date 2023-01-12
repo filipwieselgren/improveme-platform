@@ -23,16 +23,6 @@ const Dashboard = (props: IDashboard) => {
   const [fixedGeneralImprovements, setFixedGeneralImprovements] =
     useState<number>(0);
 
-  // const [data, setData] = useState({
-  //   labels: props.parts.map((part) => part._id),
-  //   datasets: [
-  //     {
-  //       label: "User Gained",
-  //       data: props.parts.map((part) => part.featureRequest.length),
-  //     },
-  //   ],
-  // });
-
   useEffect(() => {
     // Count fixed Features Requests
     const getFixedFeaturesRequests = props.errend.getFeatureRequests.filter(
@@ -106,11 +96,6 @@ const Dashboard = (props: IDashboard) => {
           />
         </div>
       </div>
-      {/* 
-      <div className="top-three-wrapper">
-        <h4>Top 3 parts that receives the most</h4>
-        <Bar data={data} />
-      </div> */}
     </div>
   );
 };

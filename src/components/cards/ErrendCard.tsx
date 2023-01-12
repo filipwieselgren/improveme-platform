@@ -89,17 +89,36 @@ const ErrendCard = (props: IErrend) => {
             </div>
             <div className="info-wrapper">
               <div className="info-border">
-                <h4>Description of bug</h4>
+                <h4>
+                  {" "}
+                  {location.pathname !== "/bug-reports"
+                    ? "Description"
+                    : "Description of bug"}
+                </h4>
                 <div className="info-txt">{props.errendCard.description}</div>
               </div>
               <div className="info-border">
-                <h4>Background information</h4>
-                <div className="info-txt">{props.errendCard.background}</div>
+                <h4>
+                  {" "}
+                  {location.pathname !== "/bug-reports"
+                    ? "What does it solve"
+                    : "Background information"}
+                </h4>
+                <div className="info-txt">
+                  {location.pathname !== "/bug-reports"
+                    ? props.errendCard.solvesWhat
+                    : props.errendCard.background}
+                </div>
               </div>
-              <div className="info-border">
-                <h4>How to reproduce the bug</h4>
-                <div className="info-txt">{props.errendCard.reproduce}</div>
-              </div>
+              {location.pathname !== "/bug-reports" ? (
+                <></>
+              ) : (
+                <div className="info-border">
+                  <h4>How to reproduce the bug</h4>
+                  <div className="info-txt">{props.errendCard.reproduce}</div>
+                </div>
+              )}
+
               {/* <div className="info-border">
                 <h4>Image/video/screenshot of the bug</h4>
                 <div className="info-txt">{props.errendCard.}</div>
