@@ -73,9 +73,7 @@ const LoggedinMain = () => {
       },
     ],
   });
-  const [errendCard, setErrendCard] = useState<
-    IFeatureRequest | IGeneralImprovements | IBugReport
-  >({
+  const [errendCard, setErrendCard] = useState<IErrendCard>({
     _id: "",
     approved: false,
     assignedTo: "",
@@ -95,20 +93,31 @@ const LoggedinMain = () => {
   const [section, setSection] = useState("");
   const [page, setPage] = useState("");
 
+  // useEffect(() => {
+  //   fetch("http://localhost:8000/api/v1/errend")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setErrend(data);
+  //     });
+  // }, [patch]);
   useEffect(() => {
-    fetch("http://localhost:8000/api/v1/errend")
-      .then((res) => res.json())
-      .then((data) => {
-        setErrend(data);
-      });
+    const fetchData = async () => {
+      const res = await fetch("http://localhost:8000/api/v1/errend");
+      const data = await res.json();
+      setErrend(data);
+    };
+
+    fetchData();
   }, [patch]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/v1/section")
-      .then((res) => res.json())
-      .then((data) => {
-        setParts(data);
-      });
+    const fetchData = async () => {
+      const res = await fetch("http://localhost:8000/api/v1/section");
+      const data = await res.json();
+      setParts(data);
+    };
+
+    fetchData();
   }, [renderPage]);
 
   useEffect(() => {
@@ -258,9 +267,7 @@ const LoggedinMain = () => {
     setSectionList(requests);
   };
 
-  const showErrend = (
-    err: IFeatureRequest | IGeneralImprovements | IBugReport
-  ) => {
+  const showErrend = (err: IErrendCard) => {
     setErrendCard(err);
     setShowErrendCard(!showErrendCard);
   };

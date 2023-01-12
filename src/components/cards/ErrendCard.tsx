@@ -6,7 +6,7 @@ import IFeatureRequest from "../../models/IFeatureRequest";
 import IGeneralImprovements from "../../models/IGeneralImprovements";
 
 interface IErrend {
-  errendCard: IFeatureRequest | IGeneralImprovements | IBugReport;
+  errendCard: IErrendCard;
   setShowErrendCard: React.Dispatch<React.SetStateAction<boolean>>;
   showErrendCard: boolean;
   deleteRequest(
@@ -80,6 +80,31 @@ const ErrendCard = (props: IErrend) => {
                 </td>
               </tr>
             </table>
+            <div className="sent-by-wrapper">
+              <h4>Sent by</h4>
+              <a href={`mailto:${props.errendCard.email}`} target="_blank">
+                {" "}
+                <div className="sent-by-email">{props.errendCard.email}</div>
+              </a>
+            </div>
+            <div className="info-wrapper">
+              <div className="info-border">
+                <h4>Description of bug</h4>
+                <div className="info-txt">{props.errendCard.description}</div>
+              </div>
+              <div className="info-border">
+                <h4>Background information</h4>
+                <div className="info-txt">{props.errendCard.background}</div>
+              </div>
+              <div className="info-border">
+                <h4>How to reproduce the bug</h4>
+                <div className="info-txt">{props.errendCard.reproduce}</div>
+              </div>
+              {/* <div className="info-border">
+                <h4>Image/video/screenshot of the bug</h4>
+                <div className="info-txt">{props.errendCard.}</div>
+              </div> */}
+            </div>
           </div>
         </div>
       </div>

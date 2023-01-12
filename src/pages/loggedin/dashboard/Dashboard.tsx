@@ -106,11 +106,11 @@ const Dashboard = (props: IDashboard) => {
           />
         </div>
       </div>
-
+      {/* 
       <div className="top-three-wrapper">
         <h4>Top 3 parts that receives the most</h4>
-        {/* <Bar data={data} /> */}
-      </div>
+        <Bar data={data} />
+      </div> */}
     </div>
   );
 };

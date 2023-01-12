@@ -179,6 +179,8 @@ a {
   background-color: #fff;
   padding: 2rem;
   min-height: 50%;
+  max-height: 90%;
+  overflow: scroll;
 
   .delete-request {
     text-align: center;
@@ -207,6 +209,50 @@ a {
         -moz-box-shadow: inset 0px 0px 4px #c1c1c1;
         box-shadow: inset 0px 0px 4px #c1c1c1;
         outline: none;
+      }
+    }
+  }
+
+  .sent-by-wrapper {
+    padding: 2rem 0 0 5rem;
+    font-size: 1.2rem;
+
+    h4 {
+      font-weight: 400;
+    }
+
+    h4,
+    .sent-by-email {
+      padding: 0.2rem 1rem;
+    }
+
+    .sent-by-email {
+      font-weight: 300;
+    }
+  }
+
+  .info-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+    padding: 2rem 5rem 5rem 5rem;
+    gap: 15px;
+
+    h4 {
+      padding: 0.2rem 1rem;
+      font-weight: 400;
+    }
+    .info-border {
+      width: 45%;
+      max-height: 50vh;
+      overflow: scroll;
+      font-weight: 200;
+      font-size: 1.2rem;
+
+      .info-txt {
+        padding: 1rem;
+        border: 1px solid rgba(119, 189, 86, 0.62);
+        border-radius: 5px;
       }
     }
   }
