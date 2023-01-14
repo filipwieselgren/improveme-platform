@@ -131,7 +131,9 @@ const SectionList = (props: ISectionList) => {
                   }
                 >
                   {" "}
-                  <BsTrash />
+                  <button className="delete-btn">
+                    <BsTrash />
+                  </button>
                 </td>
               </tr>
             ) : (

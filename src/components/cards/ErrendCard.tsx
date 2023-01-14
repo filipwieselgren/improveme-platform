@@ -76,7 +76,9 @@ const ErrendCard = (props: IErrend) => {
                   }
                 >
                   {" "}
-                  <BsTrash />
+                  <button className="delete-btn">
+                    <BsTrash />
+                  </button>
                 </td>
               </tr>
             </table>
