@@ -1,8 +1,18 @@
-.table-wrapper {
-  // border: 0.1px solid #333;
+.table-wrapper-card {
   padding: 1rem;
   border-radius: 2px;
   box-shadow: 1.5px 1.5px 5px rgba(51, 51, 51, 0.2);
+  overflow: scroll;
+  width: 100%;
+}
+
+.table-wrapper {
+  max-height: 200px;
+  padding: 1rem;
+  border-radius: 2px;
+  box-shadow: 1.5px 1.5px 5px rgba(51, 51, 51, 0.2);
+  overflow: scroll;
+  width: 100%;
 }
 
 table {

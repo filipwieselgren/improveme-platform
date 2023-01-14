@@ -175,6 +175,8 @@ const LoggedinMain = () => {
     err: IFeatureRequest | IGeneralImprovements | IBugReport,
     endpoint: string
   ) => {
+    console.log("delete");
+
     await fetch(`http://localhost:8000/api/v1/${endpoint}/${err._id}`, {
       method: "DELETE",
       headers: {
@@ -268,6 +270,8 @@ const LoggedinMain = () => {
   };
 
   const showErrend = (err: IErrendCard) => {
+    console.log("err:", err);
+
     setErrendCard(err);
     setShowErrendCard(!showErrendCard);
   };

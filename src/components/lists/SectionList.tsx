@@ -83,14 +83,7 @@ const SectionList = (props: ISectionList) => {
           {props.sectionList.requests.map((err, i) => {
             return err.approved === false && err._id !== "" ? (
               <tr className="tr" key={err._id} id={err._id}>
-                <td className="td td-open-errend">
-                  <button
-                    className="oppen-errend-btn"
-                    onClick={() => props.showErrend(err)}
-                  >
-                    Open
-                  </button>
-                </td>
+                <td className="td td-open-errend"></td>
                 <td className="td">{err.description.slice(0, 20)}</td>
                 <td className="td request">{err.solvesWhat.slice(0, 20)}</td>
 
@@ -119,19 +112,24 @@ const SectionList = (props: ISectionList) => {
                   <AiOutlineCheckCircle />{" "}
                   <span className="approve-span"> Approve </span>
                 </td>
-                <td
-                  className="delete-request"
-                  onClick={() =>
-                    props.deleteRequest(
-                      err,
-                      location.pathname === "/feature-requests"
-                        ? "/featurerequest"
-                        : "/generalimprovement"
-                    )
-                  }
-                >
-                  {" "}
-                  <button className="delete-btn">
+                <td className="td delete">
+                  <button
+                    className="oppen-errend-btn"
+                    onClick={() => props.showErrend(err)}
+                  >
+                    Open
+                  </button>{" "}
+                  <button
+                    className="delete-btn"
+                    onClick={() =>
+                      props.deleteRequest(
+                        err,
+                        location.pathname === "/feature-requests"
+                          ? "/featurerequest"
+                          : "/generalimprovement"
+                      )
+                    }
+                  >
                     <BsTrash />
                   </button>
                 </td>

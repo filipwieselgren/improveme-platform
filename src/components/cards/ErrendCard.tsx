@@ -30,7 +30,7 @@ const ErrendCard = (props: IErrend) => {
               Close
             </button>
           </div>
-          <div className="table-wrapper">
+          <div className="table-wrapper-card">
             <table className="table-section-list">
               <tr className="tr-title">
                 <th>Errend id</th>

@@ -23,7 +23,6 @@ html {
 body {
   font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
-  background-color: #fefaf4;
 }
 
 li {
@@ -90,7 +89,8 @@ a {
 .td {
   text-align: center;
   padding: 1rem;
-  // width: 200px;
+  min-height: 40px;
+  max-height: 40px;
   border-bottom: 0.1px solid;
 }
 .td-open-errend {
@@ -115,12 +115,12 @@ a {
     padding: 1rem;
 
     .close-section-list {
-      background-color: #f8fafb;
+      background-color: #fefaf4;
       cursor: pointer;
       padding: 0.5rem 2rem;
       box-shadow: 1px 1px 2px #333;
       border-radius: 2px;
-      border: none;
+      border: 0.5px solid;
 
       &:hover {
         box-shadow: 0.5px 0.5px 2px #333;
@@ -200,12 +200,12 @@ a {
     padding: 1rem;
 
     .close-section-list {
-      background-color: #f8fafb;
+      background-color: #fefaf4;
       cursor: pointer;
       padding: 0.5rem 2rem;
       box-shadow: 1px 1px 2px #333;
       border-radius: 2px;
-      border: none;
+      border: 0.5px solid;
 
       &:hover {
         box-shadow: 0.5px 0.5px 2px #333;

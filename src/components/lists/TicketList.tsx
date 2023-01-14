@@ -224,17 +224,17 @@ const TicketList = (props: ITicketList) => {
                       </div>
                     </div>
                   </td>
-                  <td
-                    className="td delete"
-                    onClick={() => props.deleteRequest(err, props.endpoint)}
-                  >
+                  <td className="td delete">
                     <button
                       className="oppen-errend-btn"
                       onClick={() => props.showErrend(err)}
                     >
                       <AiOutlineInfoCircle /> Open
                     </button>
-                    <button className="delete-btn">
+                    <button
+                      className="delete-btn"
+                      onClick={() => props.deleteRequest(err, props.endpoint)}
+                    >
                       {" "}
                       <BsTrash />
                     </button>
