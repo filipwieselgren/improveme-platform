@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const countGeneralImprovmentSchema = new mongoose.Schema({
   description: { type: String, required: true },
-  reason: { type: String, required: true },
+  reason: String,
   part: { type: String, required: true },
   email: { type: String, required: false },
   approved: Boolean,

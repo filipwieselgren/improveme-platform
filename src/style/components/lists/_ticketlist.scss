@@ -1,11 +1,14 @@
 .table-wrapper {
-  // overflow-x: scroll;
+  // border: 0.1px solid #333;
+  padding: 1rem;
+  border-radius: 2px;
+  box-shadow: 1.5px 1.5px 5px rgba(51, 51, 51, 0.2);
 }
 
 table {
   min-width: 100%;
-
-  font-size: 1.2rem;
+  border-collapse: collapse;
+  font-size: 1rem;
   font-weight: 200;
 
   tr > th {
@@ -30,7 +33,8 @@ th {
 }
 
 .delete {
-  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
 }
 
 .status {
@@ -44,15 +48,31 @@ th {
 }
 
 .done {
+  // background-color: rgba(119, 189, 86, 0.62);
+  box-shadow: -10px 0px 0px 0px rgba(119, 189, 86, 0.62);
+}
+
+.done-td {
   background-color: rgba(119, 189, 86, 0.62);
+  width: 25px;
 }
 
 .in-progress {
+  box-shadow: -10px 0px 0px 0px rgba(235, 214, 119, 0.62);
+}
+
+.in-progress-td {
   background-color: rgba(235, 214, 119, 0.62);
+  width: 25px;
 }
 
 .issue {
+  box-shadow: -10px 0px 0px 0px rgba(197, 107, 102, 0.62);
+}
+
+.issue-td {
   background-color: rgba(197, 107, 102, 0.62);
+  width: 25px;
 }
 
 .dropbtn {
@@ -121,4 +141,15 @@ th {
 }
 .status:hover .arrow-down {
   display: block;
+}
+
+.delete-btn {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  border: solid 0.2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }

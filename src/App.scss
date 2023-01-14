@@ -23,6 +23,7 @@ html {
 body {
   font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
+  background-color: #fefaf4;
 }
 
 li {
@@ -89,7 +90,11 @@ a {
 .td {
   text-align: center;
   padding: 1rem;
-  width: 200px;
+  // width: 200px;
+  border-bottom: 0.1px solid;
+}
+.td-open-errend {
+  background-color: #fefaf4;
 }
 .section-list-border {
   border: solid;
@@ -103,9 +108,7 @@ a {
     border-collapse: collapse;
     overflow: scroll;
   }
-  // .td-open-errend {
-  //   max-width: 40px;
-  // }
+
   .section-list-header {
     display: flex;
     justify-content: space-between;
@@ -152,12 +155,17 @@ a {
 }
 
 .oppen-errend-btn {
-  background-color: #f8fafb;
+  background-color: #ffffff00;
   cursor: pointer;
   padding: 0.5rem 2rem;
-  box-shadow: 1px 1px 2px #333;
-  border-radius: 5px;
-  border: none;
+  // box-shadow: 1px 1px 5px rgba(51, 51, 51, 0.2);
+  border-radius: 2px;
+  border: 0.5px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  gap: 2px;
 
   &:hover {
     box-shadow: 0.5px 0.5px 2px #333;

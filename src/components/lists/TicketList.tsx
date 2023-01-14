@@ -9,6 +9,7 @@ import { BsCaretDown } from "react-icons/bs";
 import { IBugReport } from "../../models/IBugReport";
 import { IShowParts } from "../../models/IPart";
 import { IErrendCard } from "../../models/IErrendCard";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 
 interface ITicketList {
   errend: IFeatureRequest[] | IGeneralImprovements[] | IBugReport[];
@@ -105,14 +106,15 @@ const TicketList = (props: ITicketList) => {
                   }
                   id={err._id}
                 >
-                  <td className="td td-open-errend">
-                    <button
-                      className="oppen-errend-btn"
-                      onClick={() => props.showErrend(err)}
-                    >
-                      Open
-                    </button>
-                  </td>
+                  <td
+                    className={
+                      err.status === "Done"
+                        ? "td tr-main done-td"
+                        : err.status === "In progress"
+                        ? "td tr-main in-progress-td"
+                        : "td tr-main issue-td"
+                    }
+                  ></td>
                   <td className="td">{err.part}</td>
                   <td className="td request">{err.description.slice(0, 20)}</td>
                   <td className="td email" onClick={() => toggle(i)}>
@@ -226,7 +228,16 @@ const TicketList = (props: ITicketList) => {
                     className="td delete"
                     onClick={() => props.deleteRequest(err, props.endpoint)}
                   >
-                    <BsTrash />
+                    <button
+                      className="oppen-errend-btn"
+                      onClick={() => props.showErrend(err)}
+                    >
+                      <AiOutlineInfoCircle /> Open
+                    </button>
+                    <button className="delete-btn">
+                      {" "}
+                      <BsTrash />
+                    </button>
                   </td>
                 </tr>
               ) : (

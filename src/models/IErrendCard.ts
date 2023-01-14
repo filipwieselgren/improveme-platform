@@ -4,7 +4,7 @@ export interface IErrendCard {
   assignedTo: string;
   description: string;
   background: string;
-  files: File[] | undefined;
+  files: string[];
   email: string;
   part: string;
   solvesWhat: string;

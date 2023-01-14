@@ -272,6 +272,22 @@ const LoggedinMain = () => {
     setShowErrendCard(!showErrendCard);
   };
 
+  const changePage = (url: string) => {
+    if (url === "/feature-requests") {
+      navigate("/feature-requests");
+    } else if (url === "/general-improvements") {
+      navigate("/general-improvements");
+    } else if (url === "/bug-reports") {
+      navigate("/bug-reports");
+    }
+    setPatch({
+      email: "",
+      id: "",
+      endpoint: "",
+      status: "",
+    });
+  };
+
   return (
     <>
       <div className="wrapper">
@@ -322,7 +338,7 @@ const LoggedinMain = () => {
             <ul>
               <div
                 className="li-wrapper"
-                onClick={() => navigate("/feature-requests")}
+                onClick={() => changePage("/feature-requests")}
               >
                 <img
                   src={
@@ -334,7 +350,7 @@ const LoggedinMain = () => {
               </div>
               <div
                 className="li-wrapper"
-                onClick={() => navigate("/general-improvements")}
+                onClick={() => changePage("/general-improvements")}
               >
                 <img
                   src={
@@ -348,7 +364,7 @@ const LoggedinMain = () => {
               </div>
               <div
                 className="li-wrapper"
-                onClick={() => navigate("/bug-reports")}
+                onClick={() => changePage("/bug-reports")}
               >
                 <img
                   src={location.pathname === "/bug-reports" ? bug : bee}
