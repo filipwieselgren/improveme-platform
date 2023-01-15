@@ -1,4 +1,3 @@
-import IErrends from "../../models/IErrends";
 import { BsTrash } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { IUser } from "../../models/IUser";
@@ -8,7 +7,6 @@ import IGeneralImprovements from "../../models/IGeneralImprovements";
 import { BsCaretDown } from "react-icons/bs";
 import { IBugReport } from "../../models/IBugReport";
 import { IShowParts } from "../../models/IPart";
-import { IErrendCard } from "../../models/IErrendCard";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 
 interface ITicketList {

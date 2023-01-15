@@ -52,12 +52,13 @@
   flex-direction: column;
   align-items: center;
   z-index: 10;
-  min-width: 150px;
+  min-width: 120px;
   max-width: 150px;
 
   .face {
     width: 5rem;
     cursor: pointer;
+    padding-top: 5px;
   }
 
   .list-wrapper {
@@ -71,11 +72,11 @@
       margin-top: 5rem;
       cursor: pointer;
       img {
-        width: 3rem;
+        width: 2.5rem;
         margin: auto 0;
       }
       .side-li {
-        font-size: 1.2rem;
+        font-size: 1rem;
         font-weight: 300;
         padding-top: 0.5rem;
         text-align: center;

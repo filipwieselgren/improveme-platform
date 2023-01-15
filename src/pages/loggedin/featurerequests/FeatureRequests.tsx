@@ -42,6 +42,13 @@ const FeatureRequests = (props: IProp) => {
       <div>
         <PageTitle text={"Feature Requests"} img={fr} />
         <div className="second-title-wrapper">
+          <h4 className="unapproved-h4">Unapproved</h4>
+
+          <MapCard
+            errend={props.errend.featureRequestSections}
+            showRequests={props.showRequests}
+            showErrend={props.showErrend}
+          />
           <h4>Approved</h4>
           <TicketList
             errend={props.errend.getFeatureRequests}
@@ -49,13 +56,6 @@ const FeatureRequests = (props: IProp) => {
             patchList={props.patchList}
             endpoint={"featurerequest"}
             deleteRequest={props.deleteRequest}
-            showErrend={props.showErrend}
-          />
-          <h4 className="unapproved-h4">Unapproved</h4>
-
-          <MapCard
-            errend={props.errend.featureRequestSections}
-            showRequests={props.showRequests}
             showErrend={props.showErrend}
           />
         </div>

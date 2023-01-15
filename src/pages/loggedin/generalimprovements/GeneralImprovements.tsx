@@ -40,6 +40,12 @@ const GeneralImprovements = (props: IProp) => {
     <div>
       <PageTitle text={"General Improvements"} img={gi} />
       <div className="second-title-wrapper">
+        <h4 className="unapproved-h4">Unapproved</h4>
+        <MapCard
+          errend={props.errend.generalImprovementSections}
+          showRequests={props.showRequests}
+          showErrend={props.showErrend}
+        />
         <h4>Approved</h4>
         <TicketList
           errend={props.errend.getGeneralImprovements}
@@ -47,12 +53,6 @@ const GeneralImprovements = (props: IProp) => {
           patchList={props.patchList}
           endpoint={"generalimprovement"}
           deleteRequest={props.deleteRequest}
-          showErrend={props.showErrend}
-        />
-        <h4 className="unapproved-h4">Unapproved</h4>
-        <MapCard
-          errend={props.errend.generalImprovementSections}
-          showRequests={props.showRequests}
           showErrend={props.showErrend}
         />
       </div>
