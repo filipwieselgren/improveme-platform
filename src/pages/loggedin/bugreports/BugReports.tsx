@@ -30,6 +30,50 @@ const BugReports = (props: IProp) => {
   return (
     <div>
       <PageTitle text={"Bug Reports"} img={br} />
+      <div className="bug-list-stats">
+        <div className="bug-list-title-wrapper">
+          <h4>Status amount</h4>
+        </div>
+        <div className="stats-wrapper">
+          <div>
+            {
+              props.errend.getBugReports.filter(
+                (report) => report.status === "Done"
+              ).length
+            }{" "}
+            done bug reports
+          </div>
+          <div>
+            {
+              props.errend.getBugReports.filter(
+                (report) => report.status === "In progress"
+              ).length
+            }{" "}
+            bug{" "}
+            {props.errend.getBugReports.filter(
+              (report) => report.status === "In progress"
+            ).length === 1
+              ? "report"
+              : "reports"}{" "}
+            in progress
+          </div>
+          <div>
+            {
+              props.errend.getBugReports.filter(
+                (report) =>
+                  report.status === "" || report.status === "Not started"
+              ).length
+            }{" "}
+            {props.errend.getBugReports.filter(
+              (report) =>
+                report.status === "" || report.status === "Not started"
+            ).length === 1
+              ? "report"
+              : "reports"}{" "}
+            not started
+          </div>
+        </div>
+      </div>
       <TicketList
         errend={props.errend.getBugReports}
         errendTxt={"Bug"}

@@ -9,6 +9,7 @@
 @use "./style/components/wrappers/createpartform";
 @use "./pages/loggedin/featurerequests/style/featurerequests";
 @use "./style/components/lists/ticketlist";
+@use "./pages/loggedin/bugreports/style/bugreport";
 
 * {
   margin: 0;
@@ -261,6 +262,7 @@ a {
         border: 1px solid rgba(119, 189, 86, 0.62);
         border-radius: 5px;
         min-height: 50px;
+        word-break: break-all;
       }
 
       .info-txt-img {
