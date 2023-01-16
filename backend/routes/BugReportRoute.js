@@ -3,6 +3,9 @@ const router = express.Router();
 const app = express();
 const cors = require("cors");
 app.use(cors());
+const bodyParser = require("body-parser");
+app.use(bodyParser.json({ limit: "10mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
 const BugReportModel = require("../models/BugReport.js");
 const CountBugReportModel = require("../models/CountBugReport");
