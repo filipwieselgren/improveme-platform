@@ -4,10 +4,14 @@ export interface IErrendCard {
   assignedTo: string;
   description: string;
   background: string;
-  files: string[];
+  files: IFile[];
   email: string;
   part: string;
   solvesWhat: string;
   reproduce: string;
   status: string;
+}
+
+export interface IFile {
+  file: string;
 }

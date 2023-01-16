@@ -17,8 +17,6 @@ interface IErrend {
 const ErrendCard = (props: IErrend) => {
   const location = useLocation();
 
-  console.log(props.errendCard.files);
-
   return (
     <>
       <div className="CreatePartForm-wrapper">
@@ -130,10 +128,12 @@ const ErrendCard = (props: IErrend) => {
 
                   {props.errendCard.files.length > 0 ? (
                     props.errendCard.files.map((file) => {
-                      return (
+                      return file.file !== "" ? (
                         <div className="info-txt-img">
-                          <img src={file} alt="" />
+                          <img src={file.file} alt="" />
                         </div>
+                      ) : (
+                        <></>
                       );
                     })
                   ) : (
