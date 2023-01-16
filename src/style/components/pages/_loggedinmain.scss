@@ -13,6 +13,8 @@
   justify-content: flex-end;
   align-items: center;
   background-color: #fff;
+  position: fixed;
+  width: 100%;
 
   .profile-nav {
     margin-right: 5%;
@@ -22,12 +24,9 @@
 }
 
 .loggedin-main-wrapper {
-  height: 100%;
-  padding: 0 5%;
-  // background: linear-gradient(#f4d8b6, #fff);
+  min-height: 100vh;
+  padding: 5% 10% 5% 15%;
   background-color: #fefaf4;
-
-  // background-color: rgba(254, 225, 188, 0.3);
 }
 
 .nav-logo {
@@ -37,8 +36,6 @@
 
 .wrapper {
   display: flex;
-
-  // height: 100vh;
 }
 
 .side-nav {
@@ -52,8 +49,7 @@
   flex-direction: column;
   align-items: center;
   z-index: 10;
-  // min-width: 120px;
-  // max-width: 120px;
+  position: fixed;
 
   .face {
     width: 5rem;
