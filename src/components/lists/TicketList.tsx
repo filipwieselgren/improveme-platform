@@ -49,6 +49,21 @@ const TicketList = (props: ITicketList) => {
 
   const [isOpen, setIsOpen] = useState<number | null>(null);
   const [isStausOpen, setIsStatusOpen] = useState<number | null>(null);
+  const [section, setSection] = useState<IShowParts>({
+    part: "",
+    requests: [
+      {
+        _id: "",
+        description: "",
+        solvesWhat: "",
+        part: "",
+        email: "",
+        approved: false,
+        status: "",
+        assignedTo: "",
+      },
+    ],
+  });
 
   const toggle = (i: number) => {
     if (isOpen === i) {
@@ -79,18 +94,19 @@ const TicketList = (props: ITicketList) => {
 
   return (
     <>
-      <div className="outer-wrapper">
-        <div className="table-wrapper">
-          <table>
+      <div className="table-wrapper">
+        <table>
+          <thead>
             <tr className="tr-title">
-              <th></th>
+              <th className="first-child-th"></th>
               <th>Section</th>
               <th>{props.errendTxt}</th>
               <th>Assigned to</th>
               <th>Status</th>
               <th></th>
             </tr>
-
+          </thead>
+          <tbody>
             {props.errend.map((err, i) => {
               return err.approved === true ? (
                 <tr
@@ -107,10 +123,10 @@ const TicketList = (props: ITicketList) => {
                   <td
                     className={
                       err.status === "Done"
-                        ? "td tr-main done-td"
+                        ? "td tr-main done-td first-child-td"
                         : err.status === "In progress"
-                        ? "td tr-main in-progress-td"
-                        : "td tr-main issue-td"
+                        ? "td tr-main in-progress-td first-child-td"
+                        : "td tr-main issue-td first-child-td"
                     }
                   ></td>
                   <td className="td">{err.part}</td>
@@ -143,21 +159,7 @@ const TicketList = (props: ITicketList) => {
                                     props.endpoint,
                                     err.part,
                                     err.approved,
-                                    {
-                                      part: "",
-                                      requests: [
-                                        {
-                                          _id: "",
-                                          description: "",
-                                          solvesWhat: "",
-                                          part: "",
-                                          email: "",
-                                          approved: false,
-                                          status: "",
-                                          assignedTo: "",
-                                        },
-                                      ],
-                                    }
+                                    section
                                   )
                                 }
                               >
@@ -242,8 +244,8 @@ const TicketList = (props: ITicketList) => {
                 <></>
               );
             })}
-          </table>
-        </div>
+          </tbody>
+        </table>
       </div>
     </>
   );

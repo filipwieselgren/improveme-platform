@@ -13,3 +13,9 @@
     padding-top: 8px;
   }
 }
+
+@media (max-width: 510px) {
+  .page-title-wrapper {
+    padding: 0 0 0 1rem;
+  }
+}

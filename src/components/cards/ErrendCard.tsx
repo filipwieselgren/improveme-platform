@@ -32,55 +32,57 @@ const ErrendCard = (props: IErrend) => {
           </div>
           <div className="table-wrapper-card">
             <table className="table-section-list">
-              <tr className="tr-title">
-                <th>Errend id</th>
-                <th>Section</th>
-                <th>Assigned to</th>
-                <th>Status</th>
-                <th></th>
-              </tr>
-              <tr
-                className={
-                  props.errendCard.status === "Done"
-                    ? "tr-main done"
-                    : props.errendCard.status === "In progress"
-                    ? "tr-main in-progress"
-                    : "tr-main issue"
-                }
-              >
-                <td className="td td-id"># {props.errendCard._id}</td>
-                <td className="td section">{props.errendCard.part}</td>
-
-                <td className="td email">
-                  {props.errendCard.assignedTo === ""
-                    ? "Not assigned"
-                    : props.errendCard.assignedTo}{" "}
-                </td>
-
-                <td className="td status">
-                  {props.errendCard.status === ""
-                    ? "Not started"
-                    : props.errendCard.status}
-                </td>
-                <td
-                  className="delete-request"
-                  onClick={() =>
-                    props.deleteRequest(
-                      props.errendCard,
-                      location.pathname === "/feature-requests"
-                        ? "/featurerequest"
-                        : location.pathname === "/general-improvements"
-                        ? "/generalimprovement"
-                        : "/bugreport"
-                    )
+              <thead>
+                <tr className="tr-title">
+                  <th>Errend id</th>
+                  <th>Section</th>
+                  <th>Assigned to</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  className={
+                    props.errendCard.status === "Done"
+                      ? "tr-main done"
+                      : props.errendCard.status === "In progress"
+                      ? "tr-main in-progress"
+                      : "tr-main issue"
                   }
                 >
-                  {" "}
-                  <button className="delete-btn">
-                    <BsTrash />
-                  </button>
-                </td>
-              </tr>
+                  <td className="td td-id"># {props.errendCard._id}</td>
+                  <td className="td section">{props.errendCard.part}</td>
+                  <td className="td email">
+                    {props.errendCard.assignedTo === ""
+                      ? "Not assigned"
+                      : props.errendCard.assignedTo}{" "}
+                  </td>
+                  <td className="td status">
+                    {props.errendCard.status === ""
+                      ? "Not started"
+                      : props.errendCard.status}
+                  </td>
+                  <td
+                    className="delete-request"
+                    onClick={() =>
+                      props.deleteRequest(
+                        props.errendCard,
+                        location.pathname === "/feature-requests"
+                          ? "/featurerequest"
+                          : location.pathname === "/general-improvements"
+                          ? "/generalimprovement"
+                          : "/bugreport"
+                      )
+                    }
+                  >
+                    {" "}
+                    <button className="delete-btn">
+                      <BsTrash />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
             </table>
             <div className="sent-by-wrapper">
               <h4>Sent by</h4>
@@ -126,14 +128,12 @@ const ErrendCard = (props: IErrend) => {
                 <div className="info-border">
                   <h4>Image of the bug</h4>
 
-                  {props.errendCard.files.length > 0 ? (
+                  {props.errendCard.files.length > 1 ? (
                     props.errendCard.files.map((file) => {
-                      return file.file !== "" ? (
+                      return (
                         <div className="info-txt-img">
                           <img src={file.file} alt="" />
                         </div>
-                      ) : (
-                        <></>
                       );
                     })
                   ) : (
