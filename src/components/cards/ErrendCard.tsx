@@ -1,5 +1,5 @@
 import { BsTrash } from "react-icons/bs";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IBugReport } from "../../models/IBugReport";
 import { IErrendCard } from "../../models/IErrendCard";
 import IFeatureRequest from "../../models/IFeatureRequest";
@@ -16,6 +16,7 @@ interface IErrend {
 }
 const ErrendCard = (props: IErrend) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -130,10 +131,21 @@ const ErrendCard = (props: IErrend) => {
 
                   {props.errendCard.files.length > 1 ? (
                     props.errendCard.files.map((file) => {
-                      return (
+                      console.log(file.file);
+
+                      return file.file !== "" ? (
                         <div className="info-txt-img">
                           <img src={file.file} alt="" />
+
+                          {/* <button
+                            className="open-img-btn"
+                            onClick={() => navigate(file.file)}
+                          >
+                            Open image
+                          </button> */}
                         </div>
+                      ) : (
+                        <></>
                       );
                     })
                   ) : (
