@@ -95,6 +95,10 @@ a {
     border-collapse: collapse;
     font-size: 1rem;
     font-weight: 200;
+
+    // thead > tr > th {
+    //   width: 200px;
+    // }
   }
 
   .section-list-header {
@@ -140,6 +144,9 @@ a {
   .tr {
     border-bottom: solid;
   }
+}
+.scroll-wrapper {
+  overflow: scroll;
 }
 
 .errend-card-border {

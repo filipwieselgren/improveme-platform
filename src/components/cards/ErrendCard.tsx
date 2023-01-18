@@ -32,59 +32,61 @@ const ErrendCard = (props: IErrend) => {
             </button>
           </div>
           <div className="table-wrapper-card">
-            <table className="table-section-list">
-              <thead>
-                <tr className="tr-title">
-                  <th>Errend id</th>
-                  <th>Section</th>
-                  <th>Assigned to</th>
-                  <th>Status</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  className={
-                    props.errendCard.status === "Done"
-                      ? "tr-main done"
-                      : props.errendCard.status === "In progress"
-                      ? "tr-main in-progress"
-                      : "tr-main issue"
-                  }
-                >
-                  <td className="td td-id"># {props.errendCard._id}</td>
-                  <td className="td section">{props.errendCard.part}</td>
-                  <td className="td email">
-                    {props.errendCard.assignedTo === ""
-                      ? "Not assigned"
-                      : props.errendCard.assignedTo}{" "}
-                  </td>
-                  <td className="td status">
-                    {props.errendCard.status === ""
-                      ? "Not started"
-                      : props.errendCard.status}
-                  </td>
-                  <td
-                    className="delete-request"
-                    onClick={() =>
-                      props.deleteRequest(
-                        props.errendCard,
-                        location.pathname === "/feature-requests"
-                          ? "/featurerequest"
-                          : location.pathname === "/general-improvements"
-                          ? "/generalimprovement"
-                          : "/bugreport"
-                      )
+            <div className="scroll-wrapper">
+              <table className="table-section-list">
+                <thead>
+                  <tr className="tr-title">
+                    <th>Errend id</th>
+                    <th>Section</th>
+                    <th>Assigned to</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    className={
+                      props.errendCard.status === "Done"
+                        ? "tr-main done"
+                        : props.errendCard.status === "In progress"
+                        ? "tr-main in-progress"
+                        : "tr-main issue"
                     }
                   >
-                    {" "}
-                    <button className="delete-btn">
-                      <BsTrash />
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                    <td className="td td-id"># {props.errendCard._id}</td>
+                    <td className="td section">{props.errendCard.part}</td>
+                    <td className="td email">
+                      {props.errendCard.assignedTo === ""
+                        ? "Not assigned"
+                        : props.errendCard.assignedTo}{" "}
+                    </td>
+                    <td className="td status">
+                      {props.errendCard.status === ""
+                        ? "Not started"
+                        : props.errendCard.status}
+                    </td>
+                    <td
+                      className="delete-request"
+                      onClick={() =>
+                        props.deleteRequest(
+                          props.errendCard,
+                          location.pathname === "/feature-requests"
+                            ? "/featurerequest"
+                            : location.pathname === "/general-improvements"
+                            ? "/generalimprovement"
+                            : "/bugreport"
+                        )
+                      }
+                    >
+                      {" "}
+                      <button className="delete-btn">
+                        <BsTrash />
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
             <div className="sent-by-wrapper">
               <h4>Sent by</h4>
               <a href={`mailto:${props.errendCard.email}`} target="_blank">

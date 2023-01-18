@@ -71,78 +71,82 @@ const SectionList = (props: ISectionList) => {
             Close
           </button>
         </div>
-        <table className="table-section-list">
-          <thead>
-            <tr className="tr-title">
-              <th className="first-child-th"></th>
-              <th>Description</th>
-              <th>Problem that it solves</th>
-              <th>Sent by</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {props.sectionList.requests.map((err, i) => {
-              return err.approved === false && err._id !== "" ? (
-                <tr className="tr" key={err._id} id={err._id}>
-                  <td className="first-child-td"></td>
-                  <td className="td">{err.description.slice(0, 20)}</td>
-                  <td className="td request">{err.solvesWhat.slice(0, 20)}</td>
+        <div className="scroll-wrapper">
+          <table className="table-section-list">
+            <thead>
+              <tr className="tr-title">
+                <th className="first-child-th"></th>
+                <th>Description</th>
+                <th>Problem that it solves</th>
+                <th>Sent by</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {props.sectionList.requests.map((err, i) => {
+                return err.approved === false && err._id !== "" ? (
+                  <tr className="tr" key={err._id} id={err._id}>
+                    <td className="first-child-td"></td>
+                    <td className="td">{err.description.slice(0, 20)}</td>
+                    <td className="td request">
+                      {err.solvesWhat.slice(0, 20)}
+                    </td>
 
-                  <td className="td email">
-                    <a href={`mailto:${err.email}`} target="_blank">
-                      {err.email}{" "}
-                    </a>
-                  </td>
+                    <td className="td email">
+                      <a href={`mailto:${err.email}`} target="_blank">
+                        {err.email}{" "}
+                      </a>
+                    </td>
 
-                  <td
-                    className="td approve"
-                    onClick={() =>
-                      props.patchList(
-                        err.assignedTo,
-                        err.status,
-                        err._id,
-                        location.pathname === "/feature-requests"
-                          ? "/featurerequest"
-                          : "/generalimprovement",
-                        err.part,
-                        true,
-                        props.sectionList
-                      )
-                    }
-                  >
-                    <AiOutlineCheckCircle />{" "}
-                    <span className="approve-span"> Approve </span>
-                  </td>
-                  <td className="td delete">
-                    <button
-                      className="oppen-errend-btn"
-                      onClick={() => props.showErrend(err)}
-                    >
-                      Open
-                    </button>{" "}
-                    <button
-                      className="delete-btn"
+                    <td
+                      className="td approve"
                       onClick={() =>
-                        props.deleteRequest(
-                          err,
+                        props.patchList(
+                          err.assignedTo,
+                          err.status,
+                          err._id,
                           location.pathname === "/feature-requests"
                             ? "/featurerequest"
-                            : "/generalimprovement"
+                            : "/generalimprovement",
+                          err.part,
+                          true,
+                          props.sectionList
                         )
                       }
                     >
-                      <BsTrash />
-                    </button>
-                  </td>
-                </tr>
-              ) : (
-                <></>
-              );
-            })}
-          </tbody>
-        </table>
+                      <AiOutlineCheckCircle />{" "}
+                      <span className="approve-span"> Approve </span>
+                    </td>
+                    <td className="td delete">
+                      <button
+                        className="oppen-errend-btn"
+                        onClick={() => props.showErrend(err)}
+                      >
+                        Open
+                      </button>{" "}
+                      <button
+                        className="delete-btn"
+                        onClick={() =>
+                          props.deleteRequest(
+                            err,
+                            location.pathname === "/feature-requests"
+                              ? "/featurerequest"
+                              : "/generalimprovement"
+                          )
+                        }
+                      >
+                        <BsTrash />
+                      </button>
+                    </td>
+                  </tr>
+                ) : (
+                  <></>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
