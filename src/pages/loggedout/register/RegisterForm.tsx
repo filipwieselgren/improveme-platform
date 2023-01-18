@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { AiOutlineCheckCircle, AiOutlineInfoCircle } from "react-icons/ai";
 import { FaRegTimesCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { FALSE } from "sass";
 import logo from "../../../assets/ImproveMe.png";
 import logoConfirm from "../../../assets/ImproveMe.png";
 
@@ -31,26 +32,23 @@ const RegisterForm = () => {
 
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+  const [userExist, setUserExist] = useState(false);
 
   useEffect(() => {
     if (userRef.current != null) {
-      console.log("trigger");
-
       userRef.current.focus();
     }
   }, []);
 
   useEffect(() => {
     const result = USER_REGEX.test(userName);
-    console.log(result);
-    console.log(userName);
+
     setValidName(result);
   }, [userName]);
 
   useEffect(() => {
     const result = PWD_REGEX.test(pwd);
-    console.log(result);
-    console.log(pwd);
+
     setValidPwd(result);
     const match = pwd === matchPwd;
     setValidMatch(match);
@@ -68,6 +66,13 @@ const RegisterForm = () => {
   //   });
   // };
 
+  const setState = (name: string, pass1: string, pass2: string) => {
+    setUserExist(false);
+    setUserName(name);
+    setPwd(pass1);
+    setMatchPwd(pass2);
+  };
+
   const registerUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -78,28 +83,26 @@ const RegisterForm = () => {
     //   return;
     // }
 
-    try {
-      await fetch("http://localhost:8000/api/v1/register", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          mode: "no-cors",
-        },
-        body: JSON.stringify({ userName, pwd }),
-      });
-    } catch (error: any) {
-      if (error.status === 409) {
-        console.log("error:");
+    await fetch("http://localhost:8000/api/v1/register", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        mode: "no-cors",
+      },
+      body: JSON.stringify({ userName, pwd }),
+    }).then((response) => {
+      if (response.status === 409) {
+        setUserExist(true);
+        return;
+      } else {
+        setUserExist(false);
+        setSuccess(true);
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
       }
-      return;
-    }
-
-    setSuccess(true);
-
-    setTimeout(() => {
-      navigate("/login");
-    }, 3000);
+    });
   };
 
   return (
@@ -140,13 +143,21 @@ const RegisterForm = () => {
                   id="username"
                   ref={userRef}
                   autoComplete="off"
-                  onChange={(e) => setUserName(e.target.value)}
+                  onChange={(e) => setState(e.target.value, pwd, matchPwd)}
                   required
                   aria-invalid={validName ? "false" : "true"}
                   aria-describedby="uidnote"
                   onFocus={() => setUserNameFocus(true)}
                   onBlur={() => setUserNameFocus(false)}
+                  className={
+                    userExist ? "username-input user-exist" : "username-input"
+                  }
                 />
+                {userExist ? (
+                  <p>Username is already taken. Try another one.</p>
+                ) : (
+                  <></>
+                )}
                 <p
                   id="uidnote"
                   className={
@@ -171,7 +182,7 @@ const RegisterForm = () => {
                 <input
                   type="password"
                   id="password"
-                  onChange={(e) => setPwd(e.target.value)}
+                  onChange={(e) => setState(userName, e.target.value, matchPwd)}
                   required
                   aria-invalid={validPwd ? "false" : "true"}
                   aria-describedby="pwdnote"
@@ -210,7 +221,7 @@ const RegisterForm = () => {
                 <input
                   type="password"
                   id="confirm_pwd"
-                  onChange={(e) => setMatchPwd(e.target.value)}
+                  onChange={(e) => setState(userName, pwd, e.target.value)}
                   required
                   aria-invalid={validMatch ? "false" : "true"}
                   aria-describedby="confirmnote"

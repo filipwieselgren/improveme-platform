@@ -30,6 +30,7 @@ router.post("/login", async (req, res) => {
   const { userName, password } = req.body;
 
   UserModel.findOne({ userName }, (err, user) => {
+    console.log("user", user);
     if (user && utils.comparePassword(password, user.hashedPassword)) {
       //Login correct
       const userData = {
@@ -40,8 +41,12 @@ router.post("/login", async (req, res) => {
       const accessToken = jwt.sign(userData, process.env.JWTSECRET);
       // res.cookie("token", accessToken);
       res.send(accessToken);
-    } else {
-      res.send("unauthorized");
+    } else if (!user) {
+      const wrongUser = { txt: "Username is incorrect." };
+      res.status(404).send(wrongUser);
+    } else if (!utils.comparePassword(password, user.hashedPassword)) {
+      const wrongPassword = { txt: "Password is incorrect." };
+      res.status(404).send(wrongPassword);
     }
   });
 });
@@ -56,7 +61,8 @@ router.post("/register", async (req, res) => {
   UserModel.findOne({ userName }, async (err, user) => {
     if (user) {
       console.log("Username already exists");
-      res.status(409).send("Username already exists");
+      const userExist = true;
+      res.status(409).send(userExist);
       return;
     } else {
       const newUser = new UserModel({

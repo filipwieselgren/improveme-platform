@@ -4,12 +4,17 @@ import logo from "../../../assets/ImproveMe.png";
 
 const LoginForm = () => {
   const navigate = useNavigate();
+
+  const [userExist, setUserExist] = useState(true);
+
   const [user, setUser] = useState({
     userName: "",
     password: "",
   });
 
+  const [errorMsg, setErrorMsg] = useState({ txt: "" });
   const registerState = (userName: string, password: string) => {
+    setUserExist(true);
     setUser({
       userName: userName,
       password: password,
@@ -17,7 +22,7 @@ const LoginForm = () => {
   };
   const [success, setSuccess] = useState<boolean>(false);
 
-  const registerUser = async (
+  const loginUser = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
@@ -29,14 +34,24 @@ const LoginForm = () => {
         mode: "no-cors",
       },
       body: JSON.stringify(user),
+    }).then((response) => {
+      if (response.status === 404) {
+        response.json().then((body) => {
+          setErrorMsg(body);
+          setUserExist(false);
+          return;
+        });
+      } else {
+        setUserExist(true);
+        setSuccess(true);
+
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 300);
+      }
     });
-
-    setSuccess(true);
-
-    setTimeout(() => {
-      navigate("/dashboard");
-    }, 300);
   };
+
   return (
     <>
       <main className="main-form">
@@ -57,7 +72,7 @@ const LoginForm = () => {
               id="username"
               type="text"
               required
-              onChange={(e) => registerState(e.target.value, "")}
+              onChange={(e) => registerState(e.target.value, user.password)}
             />
             <label htmlFor="password" className="form-label">
               Password
@@ -68,7 +83,12 @@ const LoginForm = () => {
               required
               onChange={(e) => registerState(user.userName, e.target.value)}
             />
-            <button type="submit" onClick={(e) => registerUser(e)}>
+            {userExist ? (
+              <></>
+            ) : (
+              <p className="user-incorrect">{errorMsg.txt}</p>
+            )}
+            <button type="submit" onClick={(e) => loginUser(e)}>
               Log in
             </button>
           </form>

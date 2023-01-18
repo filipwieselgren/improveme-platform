@@ -76,6 +76,11 @@
         outline: none;
       }
     }
+
+    .user-incorrect {
+      text-align: center;
+      color: red;
+    }
   }
 
   .active-btn:hover {
@@ -151,6 +156,10 @@
   .line {
     display: inline-block;
   }
+}
+
+.user-exist {
+  border: 0.5px solid red;
 }
 
 .success-header {
