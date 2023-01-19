@@ -23,6 +23,12 @@ const Dashboard = (props: IDashboard) => {
   const [fixedGeneralImprovements, setFixedGeneralImprovements] =
     useState<number>(0);
 
+  const [displayName, setDisplayName] = useState({
+    auth: true,
+    token: "",
+    userName: "",
+  });
+
   useEffect(() => {
     // Count fixed Features Requests
     const getFixedFeaturesRequests = props.errend.getFeatureRequests.filter(
@@ -65,7 +71,7 @@ const Dashboard = (props: IDashboard) => {
 
   return (
     <div className="dashboard-wrapper">
-      <PageTitle text={"Welcome Filip"} img={""} />
+      <PageTitle text={`Welcome Filip`} img={""} />
       <div className="card-wrapper-dashboard">
         <div className="second-title-wrapper">
           <h4>Your team has fixed</h4>

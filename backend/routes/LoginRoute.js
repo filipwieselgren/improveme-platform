@@ -25,22 +25,48 @@ const forceAuthorize = (req, res, next) => {
   //   }
 };
 
+const verifyJWT = (req, res, next) => {
+  const token = req.headers["x-access-token"];
+
+  if (!token) {
+    res.send("Token is not verified");
+  } else {
+    jwt.verify(token, process.env.JWTSECRET, (err, decoded) => {
+      if (err) {
+        console.log(err);
+        res.json({ auth: false, message: "Authentication faild" });
+      } else {
+        req.userId = decoded.id;
+        next();
+      }
+    });
+  }
+};
+
+router.get("/auth", verifyJWT, (req, res) => {
+  res.status(200).json("You are authenticated");
+});
+
 //LOGGA IN
 router.post("/login", async (req, res) => {
   const { userName, password } = req.body;
 
   UserModel.findOne({ userName }, (err, user) => {
-    console.log("user", user);
     if (user && utils.comparePassword(password, user.hashedPassword)) {
       //Login correct
+
+      const id = user._id;
       const userData = {
         userId: user._id,
         userName,
       };
 
-      const accessToken = jwt.sign(userData, process.env.JWTSECRET);
-      // res.cookie("token", accessToken);
-      res.send(accessToken);
+      console.log("process.env.JWTSECRET:", process.env.JWTSECRET);
+      const token = jwt.sign({ id: id }, process.env.JWTSECRET, {
+        expiresIn: 300,
+      });
+      // res.cookie("token", token);
+      res.status(200).json({ auth: true, token: token, userData: userData });
     } else if (!user) {
       const wrongUser = { txt: "Username is incorrect." };
       res.status(404).send(wrongUser);

@@ -32,6 +32,7 @@ const LoggedinMain = () => {
   const [menu, setMenu] = useState(false);
   const [showSectionList, setShowSectionList] = useState(false);
   const [showErrendCard, setShowErrendCard] = useState(false);
+  const [token, setToken] = useState({ loggedIn: true });
 
   const [errend, setErrend] = useState<IErrends>({
     getBugReports: [],
@@ -100,6 +101,13 @@ const LoggedinMain = () => {
   //       setErrend(data);
   //     });
   // }, [patch]);
+
+  useEffect(() => {
+    const tokenLocal = localStorage.getItem("token");
+
+    tokenLocal ? setToken({ loggedIn: true }) : setToken({ loggedIn: false });
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("http://localhost:8000/api/v1/errend");
@@ -292,6 +300,11 @@ const LoggedinMain = () => {
     });
   };
 
+  const logOut = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+
   return (
     <>
       <div className="wrapper">
@@ -380,53 +393,60 @@ const LoggedinMain = () => {
           </div>
         </nav>
         <div className="topnav-wrapper">
-          <nav className="top-nav">
-            <div className="open-menu" onClick={openMenu}>
-              <div className="line"></div>
-              <div className="line"></div>
-              <div className="line"></div>
-            </div>
+          <>
+            <nav className="top-nav">
+              <div className="open-menu" onClick={openMenu}>
+                <div className="line"></div>
+                <div className="line"></div>
+                <div className="line"></div>
+              </div>
 
-            <BsPersonCircle className="profile-nav" />
-          </nav>
-
-          <main className="loggedin-main-wrapper">
-            <div className="create-part-btn-wrapper">
-              <CreatePart tooglePart={tooglePart} />
-            </div>
-            {location.pathname === "/dashboard" ? (
-              <Dashboard errend={errend} parts={parts} />
-            ) : location.pathname === "/feature-requests" ? (
-              <FeatureRequests
-                parts={parts}
-                errend={errend}
-                patchList={patchList}
-                deleteRequest={deleteRequest}
-                setRenderPage={setRenderPage}
-                showRequests={showRequests}
-                showErrend={showErrend}
-              />
-            ) : location.pathname === "/general-improvements" ? (
-              <GeneralImprovements
-                parts={parts}
-                errend={errend}
-                patchList={patchList}
-                deleteRequest={deleteRequest}
-                setRenderPage={setRenderPage}
-                showRequests={showRequests}
-                showErrend={showErrend}
-              />
-            ) : location.pathname === "/bug-reports" ? (
-              <BugReports
-                errend={errend}
-                patchList={patchList}
-                deleteRequest={deleteRequest}
-                showErrend={showErrend}
-              />
+              <BsPersonCircle className="profile-nav" onClick={logOut} />
+            </nav>
+          </>
+          <>
+            {token.loggedIn ? (
+              <main className="loggedin-main-wrapper">
+                <div className="create-part-btn-wrapper">
+                  <CreatePart tooglePart={tooglePart} />
+                </div>
+                {location.pathname === "/dashboard" ? (
+                  <Dashboard errend={errend} parts={parts} />
+                ) : location.pathname === "/feature-requests" ? (
+                  <FeatureRequests
+                    parts={parts}
+                    errend={errend}
+                    patchList={patchList}
+                    deleteRequest={deleteRequest}
+                    setRenderPage={setRenderPage}
+                    showRequests={showRequests}
+                    showErrend={showErrend}
+                  />
+                ) : location.pathname === "/general-improvements" ? (
+                  <GeneralImprovements
+                    parts={parts}
+                    errend={errend}
+                    patchList={patchList}
+                    deleteRequest={deleteRequest}
+                    setRenderPage={setRenderPage}
+                    showRequests={showRequests}
+                    showErrend={showErrend}
+                  />
+                ) : location.pathname === "/bug-reports" ? (
+                  <BugReports
+                    errend={errend}
+                    patchList={patchList}
+                    deleteRequest={deleteRequest}
+                    showErrend={showErrend}
+                  />
+                ) : (
+                  <></>
+                )}
+              </main>
             ) : (
-              <></>
+              navigate("/")
             )}
-          </main>
+          </>
         </div>
       </div>
     </>

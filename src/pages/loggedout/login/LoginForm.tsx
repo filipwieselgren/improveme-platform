@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../../assets/ImproveMe.png";
 
@@ -22,6 +22,12 @@ const LoginForm = () => {
   };
   const [success, setSuccess] = useState<boolean>(false);
 
+  useEffect(() => {
+    const tokenLocal = localStorage.getItem("token");
+
+    tokenLocal ? navigate("/dashboard") : <></>;
+  }, []);
+
   const loginUser = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -37,17 +43,43 @@ const LoginForm = () => {
     }).then((response) => {
       if (response.status === 404) {
         response.json().then((body) => {
+          checkAuth();
+          console.log(body);
+
           setErrorMsg(body);
           setUserExist(false);
           return;
         });
       } else {
-        setUserExist(true);
-        setSuccess(true);
+        response.json().then((body) => {
+          localStorage.setItem("token", JSON.stringify(body.token));
+          checkAuth();
+          console.log(3);
+          console.log(body);
+          setUserExist(true);
+          setSuccess(true);
+          setTimeout(() => {
+            navigate("/dashboard");
+          }, 300);
+        });
+      }
+    });
+  };
 
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 300);
+  const checkAuth = async () => {
+    console.log(1);
+
+    await fetch("http://localhost:8000/api/v1/auth", {
+      headers: {
+        "x-access-token": JSON.parse(localStorage.getItem("token") || ""),
+      },
+    }).then(async (response) => {
+      try {
+        const data = await response.json();
+        console.log("response data?", data);
+      } catch (error) {
+        console.log("Error happened here!");
+        console.error(error);
       }
     });
   };

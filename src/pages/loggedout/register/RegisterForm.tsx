@@ -35,6 +35,12 @@ const RegisterForm = () => {
   const [userExist, setUserExist] = useState(false);
 
   useEffect(() => {
+    const tokenLocal = localStorage.getItem("token");
+
+    tokenLocal ? navigate("/dashboard") : <></>;
+  }, []);
+
+  useEffect(() => {
     if (userRef.current != null) {
       userRef.current.focus();
     }

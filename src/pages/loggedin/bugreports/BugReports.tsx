@@ -36,41 +36,29 @@ const BugReports = (props: IProp) => {
         </div>
         <div className="stats-wrapper">
           <div>
+            Done:{" "}
             {
               props.errend.getBugReports.filter(
                 (report) => report.status === "Done"
               ).length
-            }{" "}
-            done bug reports
+            }
           </div>
           <div>
+            In progress:{" "}
             {
               props.errend.getBugReports.filter(
                 (report) => report.status === "In progress"
               ).length
-            }{" "}
-            bug{" "}
-            {props.errend.getBugReports.filter(
-              (report) => report.status === "In progress"
-            ).length === 1
-              ? "report"
-              : "reports"}{" "}
-            in progress
+            }
           </div>
           <div>
+            Not started:{" "}
             {
               props.errend.getBugReports.filter(
                 (report) =>
                   report.status === "" || report.status === "Not started"
               ).length
-            }{" "}
-            {props.errend.getBugReports.filter(
-              (report) =>
-                report.status === "" || report.status === "Not started"
-            ).length === 1
-              ? "report"
-              : "reports"}{" "}
-            not started
+            }
           </div>
         </div>
       </div>
