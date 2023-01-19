@@ -11,6 +11,7 @@ import IGeneralImprovements from "../../../models/IGeneralImprovements";
 import { IGetParts } from "../../../models/IPart";
 import { Bar } from "react-chartjs-2";
 import Chart, { Chart as ChartJS, ChartType } from "chart.js/auto";
+import Bars from "../../../components/statistic/Bars";
 
 interface IDashboard {
   errend: IErrends;
@@ -160,29 +161,12 @@ const Dashboard = (props: IDashboard) => {
           />
         </div>
 
-        <div className="bars-full-wrapper">
-          <div className="bars-title-wrapper">
-            <h4 className="bars-title">Distribution of requests</h4>
-            <div className="box-wrapper">
-              <div className="fr-box box "></div> <span>Feature Requests</span>
-              <div className="gi-box box"></div>{" "}
-              <span>General Improvements</span>
-              <div className="br-box box"></div> <span>Bug Reports</span>
-            </div>
-          </div>
-          <div className="bars-wrapper">
-            <div className="bar fr-bar" style={{ height: `${frAmout}%` }}>
-              {Number.isNaN(frAmout) ? "0 %" : `${frAmout} %`}
-            </div>
-            <div className="bar gi-bar" style={{ height: `${brAmout}%` }}>
-              {Number.isNaN(brAmout) ? "0 %" : `${brAmout} %`}
-            </div>
-            <div className="bar br-bar" style={{ height: `${giAmout}%` }}>
-              {Number.isNaN(giAmout) ? "0 %" : `${giAmout} %`}
-            </div>
-          </div>
-          <div className="total-requests">Total requests: {allRequests}</div>
-        </div>
+        <Bars
+          frAmout={frAmout}
+          brAmout={brAmout}
+          giAmout={giAmout}
+          allRequests={allRequests}
+        />
       </div>
     </div>
   );
