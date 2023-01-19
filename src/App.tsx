@@ -7,6 +7,7 @@ import FeatureRequests from "./pages/loggedin/featurerequests/FeatureRequests";
 import Homepage from "./pages/loggedout/homepage/Homepage";
 import Login from "./pages/loggedout/login/Login";
 import Register from "./pages/loggedout/register/Register";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
         <Route path="/general-improvements" element={<LoggedinMain />}></Route>
         <Route path="/bug-reports" element={<LoggedinMain />}></Route>
         {/* </Route> */}
+
+        <Route path="/*" element={<NotFound />}></Route>
       </Routes>
     </BrowserRouter>
   );
