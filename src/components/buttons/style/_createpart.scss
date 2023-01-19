@@ -1,0 +1,13 @@
+@use "../../../style/mixins" as m;
+
+.create-part-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 5%;
+  margin: 2rem 0;
+  max-width: 1000px;
+
+  .create-part-btn {
+    @include m.btn-create-section;
+  }
+}

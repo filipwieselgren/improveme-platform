@@ -65,8 +65,6 @@ td {
   width: 200px;
   height: 40px;
   text-align: center;
-  // padding: 1rem;
-  // border-bottom: 0.1px solid;
 }
 
 tbody tr:hover {
@@ -74,8 +72,6 @@ tbody tr:hover {
 }
 
 .first-child-th {
-  // width: 160px;
-  // height: 20px;
   position: absolute;
   z-index: 10;
   padding: 10px;
@@ -83,10 +79,8 @@ tbody tr:hover {
 }
 
 .first-child-td {
-  // box-shadow: 2px 0 3px -2px #ccc;
   position: fixed;
   position: absolute;
-  // z-index: 1;
 }
 td:nth-child(2) {
   width: 200px;

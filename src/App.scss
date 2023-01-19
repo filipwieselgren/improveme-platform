@@ -1,16 +1,15 @@
 @use "./style/mixins" as m;
 @use "./pages/loggedout/homepage/style/homepage";
 @use "./pages/loggedout/login/style/login";
-@use "./style/components/buttons/createpart";
-@use "./style/components/cards/partcard";
-@use "./style/components/pages/loggedinmain";
+@use "./components/wrappers/style/createpartform";
+@use "./components/cards/style/partcard";
+@use "./components/pages/style/loggedinmain";
 @use "./pages/loggedin/dashboard/style/dashboard";
-@use "./style/components/wrappers/pagetitle";
-@use "./style/components/wrappers/createpartform";
-@use "./pages/loggedin/featurerequests/style/featurerequests";
-@use "./style/components/lists/ticketlist";
+@use "./components/wrappers/style/pagetitle";
+@use "./components/lists/style/ticketlist";
 @use "./pages/loggedin/bugreports/style/bugreport";
-@use "./style/components/dropsdowns/profileImgdropdown";
+@use "./components/dropdowns/style/profileImgdropdown";
+@use "./components/buttons/style/createpart";
 
 * {
   margin: 0;
@@ -96,10 +95,6 @@ a {
     border-collapse: collapse;
     font-size: 1rem;
     font-weight: 200;
-
-    // thead > tr > th {
-    //   width: 200px;
-    // }
   }
 
   .section-list-header {
@@ -108,24 +103,7 @@ a {
     padding: 1rem;
 
     .close-section-list {
-      background-color: #fefaf4;
-      cursor: pointer;
-      padding: 0.5rem 2rem;
-      box-shadow: 1px 1px 2px #333;
-      border-radius: 2px;
-      border: 0.5px solid;
-
-      &:hover {
-        box-shadow: 0.5px 0.5px 2px #333;
-        cursor: pointer;
-      }
-
-      &:active {
-        -webkit-box-shadow: inset 0px 0px 4px #c1c1c1;
-        -moz-box-shadow: inset 0px 0px 4px #c1c1c1;
-        box-shadow: inset 0px 0px 4px #c1c1c1;
-        outline: none;
-      }
+      @include m.btn-close;
     }
   }
 
@@ -248,31 +226,6 @@ a {
         img {
           width: 4rem;
           object-fit: contain;
-        }
-
-        .open-img-btn {
-          background-color: #fefaf4;
-          cursor: pointer;
-          padding: 0.5rem 2rem;
-          border-radius: 2px;
-          border: 0.5px solid;
-
-          &:hover {
-            box-shadow: 0.5px 0.5px 2px #333;
-            cursor: pointer;
-          }
-
-          &:active {
-            -webkit-box-shadow: inset 0px 0px 4px #c1c1c1;
-            -moz-box-shadow: inset 0px 0px 4px #c1c1c1;
-            box-shadow: inset 0px 0px 4px #c1c1c1;
-            outline: none;
-          }
-
-          button {
-            border: none;
-            background: transparent;
-          }
         }
       }
     }

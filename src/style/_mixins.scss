@@ -11,3 +11,67 @@
 @mixin txt-400 {
   font-weight: 400;
 }
+
+@mixin btn-close {
+  background-color: #fefaf4;
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+  box-shadow: 1px 1px 2px #333;
+  border-radius: 2px;
+  border: 0.5px solid;
+
+  &:hover {
+    box-shadow: 0.5px 0.5px 2px #333;
+    cursor: pointer;
+  }
+
+  &:active {
+    -webkit-box-shadow: inset 0px 0px 4px #c1c1c1;
+    -moz-box-shadow: inset 0px 0px 4px #c1c1c1;
+    box-shadow: inset 0px 0px 4px #c1c1c1;
+    outline: none;
+  }
+}
+@mixin btn-open {
+  background-color: rgba(255, 255, 255, 0);
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+  border-radius: 2px;
+  border: 0.5px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    box-shadow: 0.5px 0.5px 2px #333;
+    cursor: pointer;
+  }
+
+  &:active {
+    -webkit-box-shadow: inset 0px 0px 4px #c1c1c1;
+    -moz-box-shadow: inset 0px 0px 4px #c1c1c1;
+    box-shadow: inset 0px 0px 4px #c1c1c1;
+    outline: none;
+  }
+}
+@mixin btn-create-section {
+  background-color: rgba(248, 250, 251, 0);
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+  box-shadow: 1px 1px 2px #333;
+  border-radius: 2px;
+  border: 0.5px solid;
+  font-size: 1rem;
+
+  &:hover {
+    box-shadow: 0.5px 0.5px 2px #333;
+    cursor: pointer;
+  }
+
+  &:active {
+    -webkit-box-shadow: inset 0px 0px 4px #c1c1c1;
+    -moz-box-shadow: inset 0px 0px 4px #c1c1c1;
+    box-shadow: inset 0px 0px 4px #c1c1c1;
+    outline: none;
+  }
+}
