@@ -1,0 +1,45 @@
+@use "../../../style/mixins" as m;
+
+.section-list-border {
+  border: solid;
+  border-radius: 5px;
+  width: 80%;
+  background-color: #fefaf4;
+  padding: 2rem;
+  min-height: 50%;
+
+  .table-section-list {
+    text-align: left;
+    overflow-x: scroll;
+    border-collapse: collapse;
+    font-size: 1rem;
+    font-weight: 200;
+  }
+
+  .section-list-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+
+    .close-section-list {
+      @include m.btn-close;
+    }
+  }
+
+  .approve {
+    color: green;
+    cursor: pointer;
+
+    .approve-span {
+      color: black;
+    }
+  }
+
+  .delete-request {
+    cursor: pointer;
+  }
+
+  .tr {
+    border-bottom: solid;
+  }
+}
