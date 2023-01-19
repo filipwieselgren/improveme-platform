@@ -20,9 +20,11 @@ import IFeatureRequest from "../../models/IFeatureRequest";
 import IGeneralImprovements from "../../models/IGeneralImprovements";
 import { IBugReport } from "../../models/IBugReport";
 import SectionList from "../lists/SectionList";
-import { BsPersonCircle } from "react-icons/bs";
+import { BsCaretDown, BsPersonCircle } from "react-icons/bs";
+import { MdPlayArrow } from "react-icons/md";
 import ErrendCard from "../cards/ErrendCard";
 import { IErrendCard } from "../../models/IErrendCard";
+import ProfileImgDropdown from "../dropdowns/ProfileImgDropdown";
 
 const LoggedinMain = () => {
   const navigate = useNavigate();
@@ -32,6 +34,7 @@ const LoggedinMain = () => {
   const [menu, setMenu] = useState(false);
   const [showSectionList, setShowSectionList] = useState(false);
   const [showErrendCard, setShowErrendCard] = useState(false);
+  const [dropDown, setDropDown] = useState(false);
   const [token, setToken] = useState({ loggedIn: true });
 
   const [errend, setErrend] = useState<IErrends>({
@@ -105,7 +108,7 @@ const LoggedinMain = () => {
   useEffect(() => {
     const tokenLocal = localStorage.getItem("token");
 
-    tokenLocal ? setToken({ loggedIn: true }) : setToken({ loggedIn: false });
+    tokenLocal ? setToken({ loggedIn: true }) : navigate("/login");
   }, []);
 
   useEffect(() => {
@@ -300,11 +303,6 @@ const LoggedinMain = () => {
     });
   };
 
-  const logOut = () => {
-    localStorage.clear();
-    navigate("/");
-  };
-
   return (
     <>
       <div className="wrapper">
@@ -400,8 +398,14 @@ const LoggedinMain = () => {
                 <div className="line"></div>
                 <div className="line"></div>
               </div>
-
-              <BsPersonCircle className="profile-nav" onClick={logOut} />
+              <div
+                className="profile-img-wrapper"
+                onClick={() => setDropDown(!dropDown)}
+              >
+                <BsPersonCircle className="profile-nav" />{" "}
+                <MdPlayArrow className="arrow-down" />
+                {dropDown ? <ProfileImgDropdown /> : <></>}
+              </div>
             </nav>
           </>
           <>
@@ -444,7 +448,7 @@ const LoggedinMain = () => {
                 )}
               </main>
             ) : (
-              navigate("/")
+              <></>
             )}
           </>
         </div>

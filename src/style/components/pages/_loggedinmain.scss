@@ -21,6 +21,19 @@
     font-size: 2rem;
     cursor: pointer;
   }
+
+  .profile-img-wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+
+    .arrow-down {
+      width: 1.5rem;
+      color: rgba(51, 51, 51, 0.299);
+      transform: rotate(90deg);
+    }
+  }
 }
 
 .loggedin-main-wrapper {
