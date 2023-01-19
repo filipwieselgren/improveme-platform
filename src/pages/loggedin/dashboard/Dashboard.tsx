@@ -80,18 +80,21 @@ const Dashboard = (props: IDashboard) => {
   ]);
 
   useEffect(() => {
+    // Concats all Features requests
     const allFeaturesRequests = props.errend.getFeatureRequests;
 
     const allDoneFeaturesRequests = allFeaturesRequests.concat(
       props.errend.getCountFeatureRequests
     );
 
+    // Concats all Bug reports
     const allBugReports = props.errend.getBugReports;
 
     const allDoneBugReports = allBugReports.concat(
       props.errend.getCountBugReports
     );
 
+    // Concats all General improvements
     const allGeneralImprovements = props.errend.getGeneralImprovements;
 
     const allDoneGeneralImprovements = allGeneralImprovements.concat(
@@ -123,8 +126,6 @@ const Dashboard = (props: IDashboard) => {
     setGiAmout(Math.round(giProcent));
     setAllRequests(allRequests);
   }, [allFeaturesRequests, allBugReports, allGeneralImprovements]);
-
-  console.log("frAmout:", frAmout);
 
   return (
     <div className="dashboard-wrapper">
