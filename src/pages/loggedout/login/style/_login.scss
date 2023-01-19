@@ -1,6 +1,7 @@
 .navbar-login {
   padding: 3rem;
   background: linear-gradient(#ffc476, #fff);
+  cursor: pointer;
 }
 
 .main-form {
@@ -81,6 +82,14 @@
       text-align: center;
       color: red;
     }
+  }
+
+  .disabled-btn {
+    display: none;
+  }
+
+  .active-btn {
+    display: block;
   }
 
   .active-btn:hover {

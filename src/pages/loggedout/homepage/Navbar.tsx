@@ -12,7 +12,12 @@ const Navbar = () => {
   };
   return (
     <nav className="home-navbar">
-      <img src={logo} alt="logo" className="nav-logo" />
+      <img
+        src={logo}
+        alt="logo"
+        className="nav-logo"
+        onClick={() => navigate("/")}
+      />
       <button className="btn-login txt-200" onClick={checkToken}>
         Log in
       </button>
