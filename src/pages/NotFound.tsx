@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/improveMeLogo.png";
-import face from "../assets/ImproveMe.png";
+import face from "../assets/sadface.png";
 import { useEffect } from "react";
 
 const NotFound = () => {
