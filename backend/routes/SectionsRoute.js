@@ -14,8 +14,6 @@ router.post("/section", async (req, res) => {
 
   await createPart.save();
 
-  console.log(createPart);
-
   res.status(201).send(createPart);
 });
 router.get("/section", async (req, res) => {

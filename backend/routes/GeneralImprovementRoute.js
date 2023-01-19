@@ -42,18 +42,4 @@ router.post("/generalimprovement", async (req, res) => {
   res.status(201).send(countGeneralImprovementModel);
 });
 
-// router.patch("/approvefeaturerequest/:id", async (req, res) => {
-//   const user_id = req.params.id;
-//   const approved = true;
-//   const findRequest = await FeatureRequestModel.findByIdAndUpdate(
-//     {
-//       _id: user_id,
-//     },
-//     { $set: { approved } }
-//   );
-
-//   console.log("findRequest:", findRequest);
-//   res.status(200).send(findRequest);
-// });
-
 module.exports = router;

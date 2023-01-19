@@ -9,22 +9,6 @@ const jwt = require("jsonwebtoken");
 
 const UserModel = require("../models/User.js");
 
-//Om man inte är inloggad
-
-const forceAuthorize = (req, res, next) => {
-  //   console.log("forceAuthorize");
-  //   const { userName, password } = req.body;
-  //   const { token } = req.cookies;
-  //   if (
-  //     (token && jwt.verify(token, process.env.JWTSECRET)) ||
-  //     (userName && password)
-  //   ) {
-  //     next();
-  //   } else {
-  //     res.status(401).send("unauthorized");
-  //   }
-};
-
 const verifyJWT = (req, res, next) => {
   const token = req.headers["x-access-token"];
 
@@ -61,7 +45,6 @@ router.post("/login", async (req, res) => {
         userName,
       };
 
-      console.log("process.env.JWTSECRET:", process.env.JWTSECRET);
       const token = jwt.sign({ id: id }, process.env.JWTSECRET, {
         expiresIn: 300,
       });
@@ -81,12 +64,8 @@ router.post("/register", async (req, res) => {
   // const { fullName, userName, password } = req.body;
   const { userName, pwd } = req.body;
 
-  console.log("userName:", userName);
-  console.log("password:", pwd);
-
   UserModel.findOne({ userName }, async (err, user) => {
     if (user) {
-      console.log("Username already exists");
       const userExist = true;
       res.status(409).send(userExist);
       return;
