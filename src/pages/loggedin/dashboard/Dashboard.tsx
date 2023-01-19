@@ -122,7 +122,7 @@ const Dashboard = (props: IDashboard) => {
     setBrAmout(Math.round(brProcent));
     setGiAmout(Math.round(giProcent));
     setAllRequests(allRequests);
-  }, [allFeaturesRequests]);
+  }, [allFeaturesRequests, allBugReports, allGeneralImprovements]);
 
   console.log("frAmout:", frAmout);
 

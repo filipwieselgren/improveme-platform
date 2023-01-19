@@ -186,8 +186,6 @@ const LoggedinMain = () => {
     err: IFeatureRequest | IGeneralImprovements | IBugReport,
     endpoint: string
   ) => {
-    console.log("delete");
-
     await fetch(`http://localhost:8000/api/v1/${endpoint}/${err._id}`, {
       method: "DELETE",
       headers: {
@@ -200,6 +198,8 @@ const LoggedinMain = () => {
     if (err.status === "Done") {
       postToStatistic(err, endpoint);
     }
+
+    setShowErrendCard(false);
 
     errend.featureRequestSections.forEach((fr) => {
       if (fr.part === err.part && fr.requests.length === 1) {
