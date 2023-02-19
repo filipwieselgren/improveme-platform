@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const cors = require("cors");
 mongoose.set("strictQuery", false);
+
+app.use(cors());
 
 const DBKEY = process.env.MONGODBKEY;
 const port = 8000;
