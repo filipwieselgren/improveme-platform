@@ -22,3 +22,8 @@ app.use("/api/v1", patchFeatureRequest);
 app.use("/api/v1", patchGeneralImprovement);
 app.use("/api/v1", patchBugReport);
 app.use("/api/v1", login);
+
+const port = 8000;
+app.listen(port, () => {
+  console.log(`Running on port ${port}`);
+});
