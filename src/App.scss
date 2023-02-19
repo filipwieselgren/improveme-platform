@@ -1,5 +1,5 @@
 @use "./style/mixins" as m;
-@use "./pages/loggedout/homepage/style/homepage";
+@use "./pages/loggedout/homepage/style-home-page";
 @use "./pages/loggedout/login/style/login";
 @use "./pages/notfound";
 @use "./components/wrappers/style/createpartform";
@@ -7,11 +7,11 @@
 @use "./components/cards/style/errendcard";
 @use "./components/cards/style/mapcard";
 @use "./components/pages/style/loggedinmain";
-@use "./pages/loggedin/dashboard/style/dashboard";
+@use "./pages/loggedin/dashboard/style-dashboard";
 @use "./components/wrappers/style/pagetitle";
 @use "./components/lists/style/ticketlist";
 @use "./components/lists/style/sectionlist";
-@use "./pages/loggedin/bugreports/style/bugreport";
+@use "./pages/loggedin/bug-reports/style-bugreport";
 @use "./components/dropdowns/style/profileImgdropdown";
 @use "./components/buttons/style/createpart";
 

@@ -7,9 +7,6 @@ const hashedPassword = (password) => {
 
 const comparePassword = (password, hash) => {
   const correctPassword = bcrypt.compareSync(password, hash);
-
-  console.log("correctPassword:", correctPassword);
-
   return correctPassword;
 };
 

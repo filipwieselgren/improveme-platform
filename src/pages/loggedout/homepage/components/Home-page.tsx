@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import Main from "..";
 import Footer from "./Footer";
-import Main from "./Main";
+
 import Navbar from "./Navbar";
 
 const Homepage = () => {
