@@ -9,8 +9,6 @@ import { useEffect, useState } from "react";
 import { IBugReport } from "../../../models/IBugReport";
 import IGeneralImprovements from "../../../models/IGeneralImprovements";
 import { IGetParts } from "../../../models/IPart";
-import { Bar } from "react-chartjs-2";
-import Chart, { Chart as ChartJS, ChartType } from "chart.js/auto";
 import Bars from "../../../components/statistic/Bars";
 
 interface IDashboard {

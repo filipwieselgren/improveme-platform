@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import face from "../../assets/ImproveMe.png";
 import bee from "../../assets/bee.png";
 import fr from "../../assets/fr.png";
@@ -15,12 +16,12 @@ import { useEffect, useState } from "react";
 import IErrends from "../../models/IErrends";
 import CreatePartForm from "../wrappers/CreatePartForm";
 import { VscTriangleLeft } from "react-icons/vsc";
-import { IGetParts, IParts, IShowParts } from "../../models/IPart";
+import { IGetParts, IShowParts } from "../../models/IPart";
 import IFeatureRequest from "../../models/IFeatureRequest";
 import IGeneralImprovements from "../../models/IGeneralImprovements";
 import { IBugReport } from "../../models/IBugReport";
 import SectionList from "../lists/SectionList";
-import { BsCaretDown, BsPersonCircle } from "react-icons/bs";
+import { BsPersonCircle } from "react-icons/bs";
 import { MdPlayArrow } from "react-icons/md";
 import ErrendCard from "../cards/ErrendCard";
 import { IErrendCard } from "../../models/IErrendCard";
@@ -97,18 +98,11 @@ const LoggedinMain = () => {
   const [section, setSection] = useState("");
   const [page, setPage] = useState("");
 
-  // useEffect(() => {
-  //   fetch("http://localhost:8000/api/v1/errend")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setErrend(data);
-  //     });
-  // }, [patch]);
-
   useEffect(() => {
     const tokenLocal = localStorage.getItem("token");
 
     tokenLocal ? setToken({ loggedIn: true }) : navigate("/login");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

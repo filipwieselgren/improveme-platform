@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import logo from "../../../../assets/improveMeLogo.png";
 import { FiInstagram } from "react-icons/fi";
 import { AiOutlineFacebook } from "react-icons/ai";

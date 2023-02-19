@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../../../assets/ImproveMe.png";
+import logo from "../../../../assets/ImproveMe.png";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ const LoginForm = () => {
     const tokenLocal = localStorage.getItem("token");
 
     tokenLocal ? navigate("/dashboard") : <></>;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loginUser = async (

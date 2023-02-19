@@ -2,9 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { AiOutlineCheckCircle, AiOutlineInfoCircle } from "react-icons/ai";
 import { FaRegTimesCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { FALSE } from "sass";
-import logo from "../../../assets/ImproveMe.png";
-import logoConfirm from "../../../assets/ImproveMe.png";
+import logo from "../../../../assets/ImproveMe.png";
+import logoConfirm from "../../../../assets/ImproveMe.png";
 
 //Validates the userName
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
@@ -38,6 +37,7 @@ const RegisterForm = () => {
     const tokenLocal = localStorage.getItem("token");
 
     tokenLocal ? navigate("/dashboard") : <></>;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

@@ -1,5 +1,5 @@
-import RegisterForm from "./RegisterForm";
-import NavbarLogin from "./NavbarLogin";
+import RegisterForm from "./components/RegisterForm";
+import NavbarLogin from "./components/NavbarLogin";
 
 const Login = () => {
   return (

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import gi from "../../../assets/increase-color.png";
 import MapCard from "../../../components/cards/MapCard";
 import TicketList from "../../../components/lists/TicketList";

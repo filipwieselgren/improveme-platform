@@ -6,7 +6,6 @@ import { IBugReport } from "../../../models/IBugReport";
 import IFeatureRequest from "../../../models/IFeatureRequest";
 import IGeneralImprovements from "../../../models/IGeneralImprovements";
 import { IShowParts } from "../../../models/IPart";
-import { IErrendCard } from "../../../models/IErrendCard";
 
 interface IProp {
   errend: IErrends;

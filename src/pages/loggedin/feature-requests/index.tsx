@@ -1,11 +1,9 @@
-import LoggedinMain from "../../../components/pages/LoggedinMain";
-import { IGetParts, IParts, IShowParts } from "../../../models/IPart";
+import { IGetParts, IShowParts } from "../../../models/IPart";
 import fr from "../../../assets/newFeature.png";
 import PageTitle from "../../../components/wrappers/PageTitle";
 import TicketList from "../../../components/lists/TicketList";
 import IErrends from "../../../models/IErrends";
 import IFeatureRequest from "../../../models/IFeatureRequest";
-import { useEffect, useState } from "react";
 import MapCard from "../../../components/cards/MapCard";
 import { IBugReport } from "../../../models/IBugReport";
 import IGeneralImprovements from "../../../models/IGeneralImprovements";

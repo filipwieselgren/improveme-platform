@@ -1,11 +1,9 @@
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
 import LoggedinMain from "./components/pages/LoggedinMain";
-import Protected from "./components/pages/Protected";
 import Homepage from "./pages/loggedout/homepage/components/Home-page";
-import Login from "./pages/loggedout/login/Login";
-import Register from "./pages/loggedout/register/Register";
+import Login from "./pages/loggedout/login";
+import Register from "./pages/loggedout/register";
 import NotFound from "./pages/NotFound";
 
 function App() {

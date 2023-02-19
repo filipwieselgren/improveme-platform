@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Main from "..";
 import Footer from "./Footer";
 
@@ -12,6 +12,7 @@ const Homepage = () => {
     const tokenLocal = localStorage.getItem("token");
 
     tokenLocal ? navigate("/dashboard") : <></>;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
