@@ -1,9 +1,23 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
-const app = require("./app");
+const express = require("express");
+const app = express();
+mongoose.set("strictQuery", false);
 
 const DBKEY = process.env.MONGODBKEY;
+const port = 8000;
 
-mongoose.connect(DBKEY).then(() => {
-  console.log("DB connected");
-});
+const startServer = async () => {
+  try {
+    await mongoose.connect(DBKEY);
+    console.log("DB connected");
+
+    app.listen(port, () => {
+      console.log(`App running on port ${port}`);
+    });
+  } catch (error) {
+    console.log("ERROR MESSAGE:", error.message);
+  }
+};
+
+startServer();
