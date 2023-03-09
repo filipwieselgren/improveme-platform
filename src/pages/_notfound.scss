@@ -1,0 +1,13 @@
+.main-wrapper-notfound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+  .notfound-logo {
+    width: 6rem;
+  }
+
+  p {
+    margin-top: 10px;
+  }
+}
