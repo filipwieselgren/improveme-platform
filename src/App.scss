@@ -1,7 +1,7 @@
 @use "./style/mixins" as m;
 @use "./pages/loggedout/homepage/style-home-page";
 @use "./pages/loggedout/login/style-login.scss";
-@use "./pages/notfound";
+@use "./pages/notfound.scss";
 @use "./components/wrappers/style/createpartform";
 @use "./components/cards/style/partcard";
 @use "./components/cards/style/errendcard";
