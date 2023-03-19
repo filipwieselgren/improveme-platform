@@ -26,6 +26,7 @@ import { MdPlayArrow } from "react-icons/md";
 import ErrendCard from "../cards/ErrendCard";
 import { IErrendCard } from "../../models/IErrendCard";
 import ProfileImgDropdown from "../dropdowns/ProfileImgDropdown";
+import { getToken } from "../../utils/get-token";
 
 const LoggedinMain = () => {
   const navigate = useNavigate();
@@ -99,7 +100,7 @@ const LoggedinMain = () => {
   const [page, setPage] = useState("");
 
   useEffect(() => {
-    const tokenLocal = localStorage.getItem("token");
+    const tokenLocal = getToken();
 
     tokenLocal ? setToken({ loggedIn: true }) : navigate("/login");
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,7 +1,11 @@
 export const getToken = () => {
-  const token = JSON.parse(localStorage.getItem("token") || "");
-
-  console.log("token:", token);
-
-  return token;
+  const token = localStorage.getItem("token");
+  if (token) {
+    try {
+      return JSON.parse(token);
+    } catch (error) {
+      console.error("Error parsing token: ", error);
+    }
+  }
+  return null;
 };
