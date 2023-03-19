@@ -403,7 +403,7 @@ const LoggedinMain = () => {
             </nav>
           </>
           <>
-            {token.loggedIn ? (
+            {token.loggedIn && (
               <main className="loggedin-main-wrapper">
                 <div className="create-part-btn-wrapper">
                   <CreatePart tooglePart={tooglePart} />
@@ -441,8 +441,6 @@ const LoggedinMain = () => {
                   <></>
                 )}
               </main>
-            ) : (
-              <></>
             )}
           </>
         </div>
